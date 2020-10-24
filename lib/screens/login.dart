@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:khojgurbani_music/screens/create_account.dart';
 import 'package:khojgurbani_music/screens/sign_up.dart';
 import 'package:khojgurbani_music/service_locator.dart';
 import 'package:khojgurbani_music/services/loginAndRegistrationServices.dart';
@@ -94,7 +95,8 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.black,
                           iconSize: 30,
                           onPressed: () {
-                            Navigator.pushNamed(context, '/loginOrSingup');
+                            //Navigator.pushNamed(context, '/loginOrSingup');
+                            Navigator.of(context).pop();
                           },
                           icon: Icon(
                             Icons.chevron_left,
@@ -302,10 +304,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 FlatButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed('/forgot_password');
+                    Navigator.of(context).pushReplacementNamed('/forgotPassword');
                   },
                   child: Text(
-                    "Forget Password?",
+                    "Forgot Password?",
                     style: TextStyle(fontSize: 11),
                   ),
                 )
@@ -370,7 +372,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, new MaterialPageRoute(builder: (context) => SingupPage()));
+                  Navigator.push(context, new MaterialPageRoute(builder: (context) => CreateAccount()));
+
+                  //Navigator.push(context, new MaterialPageRoute(builder: (context) => SingupPage()));
                 },
                 child: Text(
                   "Sign up",

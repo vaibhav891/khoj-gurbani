@@ -90,7 +90,8 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
-                      Navigator.popAndPushNamed(context, '/login');
+                      //Navigator.popAndPushNamed(context, '/login');
+                      Navigator.push(context, new MaterialPageRoute(builder: (context) => SingupPage()));
                     },
                     child: Center(
                       child: Text(

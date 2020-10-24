@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:khojgurbani_music/screens/create_account.dart';
@@ -18,7 +20,13 @@ class _SingupPageState extends State<SingupPage> {
   }
 
   _userLoginGoogle() async {
-    service.loginWithGoogle();
+    await service.loginWithGoogle();
+
+    Navigator.pushNamedAndRemoveUntil(context, '/media', ModalRoute.withName('/media'));
+  }
+
+  _userLoginFacebook() async {
+    await service.facebookLogin();
 
     Navigator.pushNamedAndRemoveUntil(context, '/media', ModalRoute.withName('/media'));
   }
@@ -54,6 +62,7 @@ class _SingupPageState extends State<SingupPage> {
                           iconSize: 30,
                           onPressed: () {
                             Navigator.of(context, rootNavigator: true).pop(context);
+                            //Navigator.of(context).pop();
                           },
                           icon: Icon(
                             Icons.chevron_left,
@@ -105,31 +114,38 @@ class _SingupPageState extends State<SingupPage> {
           SizedBox(
             height: maxHeight * 0.060,
           ),
-          Container(
-            height: maxHeight * 0.067,
-            width: maxWidth / 1.11,
+          GestureDetector(
+            onTap: () {
+              _userLoginFacebook();
+            },
             child: Container(
-              padding: EdgeInsets.only(left: maxWidth * 0.060),
-              decoration: BoxDecoration(color: Color(0xff3B5998), borderRadius: BorderRadius.circular(6.0)),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    height: maxHeight * 0.090,
-                    width: maxWidth * 0.090,
-                    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-                    child: ImageIcon(
-                      AssetImage('assets/images/facebook.png'),
-                    ),
-                  ),
-                  SizedBox(width: maxWidth * 0.098),
-                  Center(
-                    child: Text(
-                      'Continue with Facebook',
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                  )
-                ],
+              height: maxHeight * 0.067,
+              width: maxWidth / 1.11,
+              child: Container(
+                padding: EdgeInsets.only(left: maxWidth * 0.060),
+                decoration: BoxDecoration(color: Color(0xff3B5998), borderRadius: BorderRadius.circular(6.0)),
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        height: maxHeight * 0.090,
+                        width: maxWidth * 0.090,
+                        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                        child: Image.asset('assets/images/facebook.png')
+
+                        // ImageIcon(
+                        //   AssetImage('assets/images/facebook.png'),
+                        // ),
+                        ),
+                    SizedBox(width: maxWidth * 0.098),
+                    Center(
+                      child: Text(
+                        'Continue with Facebook',
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -153,9 +169,11 @@ class _SingupPageState extends State<SingupPage> {
                       height: maxHeight * 0.090,
                       width: maxWidth * 0.090,
                       decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-                      child: ImageIcon(
-                        AssetImage('assets/images/google.png'),
-                      ),
+                      child: Image.asset('assets/images/google.png'),
+
+                      // ImageIcon(
+                      //   AssetImage('assets/images/google.png'),
+                      // ),
                     ),
                     SizedBox(width: maxWidth * 0.098),
                     Center(

@@ -249,6 +249,7 @@ class _MyAppState extends State<MyApp> {
       overlayEntry.remove();
     }
 
+    print('showOverlay attname -> $attachmentName');
     overlayEntry = OverlayEntry(
       builder: (context) => isRadio == null
           ? GestureDetector(
@@ -898,7 +899,7 @@ class _MyAppState extends State<MyApp> {
               currentSong: currentSong,
             ),
         '/createAccount': (BuildContext context) => CreateAccount(),
-        '/forgotPassowrd': (BuildContext context) => ForgotPassword(),
+        '/forgotPassword': (BuildContext context) => ForgotPassword(),
         '/forgotPasswordContinue': (BuildContext context) => ForgotPasswordContinue(),
         '/fullSizePlayer': (BuildContext context) => MusicPlayerFullSize(),
         '/subCategoryPage': (BuildContext context) => CategoryPage(),

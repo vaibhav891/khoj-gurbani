@@ -693,7 +693,7 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                                                                       print("error");
                                                                     }
                                                                   })(),
-                                                                  style: TextStyle(color: Colors.black, fontSize: 17),
+                                                                  style: TextStyle(color: Colors.black, fontSize: 18),
                                                                   textAlign: TextAlign.center,
                                                                 )
                                                               : Container(),
@@ -719,7 +719,7 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                                                                       print("error");
                                                                     }
                                                                   })(),
-                                                                  style: TextStyle(color: Colors.black, fontSize: 15),
+                                                                  style: TextStyle(color: Colors.black, fontSize: 18),
                                                                   textAlign: TextAlign.center,
                                                                 )
                                                               : Container(),
@@ -816,7 +816,7 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                                                                     }
                                                                   })(),
                                                                   textAlign: TextAlign.center,
-                                                                  style: TextStyle(height: 1.5),
+                                                                  style: TextStyle(height: 1.5, fontSize: 18),
                                                                 )
                                                               : Container(),
                                                         ],
@@ -935,6 +935,7 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                             EdgeInsets.only(left: maxWidth * 0.200, top: maxWidth * 0.0555, right: maxWidth * 0.0555),
                         child: InkWell(
                           onTap: () {
+                            print('inside ontap - attname -> ${widget.attachmentName}');
                             this.widget.is_media == 1
                                 ? Navigator.of(context).push(PageRouteBuilder(
                                     opaque: false,
@@ -984,6 +985,8 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                                       indexOfPodcast: this.widget.id,
                                       title: this.widget.title,
                                       id: this.widget.id,
+                                      attachmentName: this.widget.attachmentName,
+                                      image: this.widget.image,
                                     ),
                                     // transitionDuration: Duration(seconds: 1),
                                     transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
@@ -1025,7 +1028,7 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
               height: maxHeight * 0.047,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: maxWidth / 25),
+              padding: EdgeInsets.symmetric(horizontal: maxWidth * 0.01),
               child: Container(
                 height: maxHeight * 0.027,
                 child: SliderTheme(
@@ -1053,7 +1056,7 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
             Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: maxWidth / 11),
+                  padding: EdgeInsets.only(left: maxWidth / 17),
                   child: Container(
                     width: maxWidth / 5,
                     child: Text(position.inHours > 0
@@ -1062,7 +1065,7 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: maxWidth / 2.35),
+                  padding: EdgeInsets.only(left: maxWidth / 2.1),
                   child: Container(
                     alignment: Alignment.centerRight,
                     width: maxWidth / 5,

@@ -42,6 +42,7 @@ class SongOptions extends StatefulWidget {
   final int fromFullMusicPlayer;
   final Function setIsOpenFullScreen;
   bool isPlaying;
+  final bool isDownloaded;
 
   SongOptions({
     this.indexOfSong,
@@ -69,6 +70,7 @@ class SongOptions extends StatefulWidget {
     this.fromFullMusicPlayer,
     this.setIsOpenFullScreen,
     this.isPlaying,
+    this.isDownloaded = false,
   });
 
   @override
@@ -124,10 +126,16 @@ class _SongOptionsState extends State<SongOptions> {
     final String machineId = prefs.getString('machine_id');
 
     // final headers = {'Authorization': "Bearer " + token};
-    final res = await http.post('https://api.khojgurbani.org/api/v1/android/fav?',
-        body: {'media_id': json.encode(id), 'user_id': json.encode(userId), 'machine_id': machineId});
+    var body = {'media_id': json.encode(id), 'user_id': json.encode(userId), 'machine_id': machineId};
+    //var body = jsonEncode({'media_id': id, 'user_id': userId, 'machine_id': machineId});
+    print(body);
+    final res = await http.post('https://api.khojgurbani.org/api/v1/android/fav?', body: body);
     // headers: headers
-    final data = jsonDecode(res.body);
+    if (res.statusCode == 200)
+      final data = jsonDecode(res.body);
+    else
+      print('error from API call ${res.reasonPhrase}');
+
     if (!mounted) return;
     setState(() {
       service.getUserFavoriteMedia();
@@ -219,6 +227,11 @@ class _SongOptionsState extends State<SongOptions> {
             ),
           );
         });
+  }
+
+  _removeFromDownload(int id, String pathname) async {
+    await download.removeDownloadFile(pathname);
+    await DBProvider.db.deleteDownload(id);
   }
 
   @override
@@ -437,24 +450,33 @@ class _SongOptionsState extends State<SongOptions> {
                 child: InkWell(
                   onTap: () {
                     // mediaDownload(this.widget.id);
-                    download.downloadImage(this.widget.image, this.widget.title);
-                    download
-                        .downloadFile(
-                      this.widget.attachmentName,
-                      this.widget.title,
-                    )
-                        .whenComplete(() async {
-                      Downloads newDT = Downloads(
-                        title: this.widget.title,
-                        author: this.widget.artistName,
-                        attachmentName: download.pathName.toString(),
-                        image: download.imagePath.toString(),
-                        is_media: 1,
-                      );
-                      await DBProvider.db.newDownload(newDT);
-                    });
-                    Navigator.of(context).pop();
-                    downloading();
+                    if (!widget.isDownloaded) {
+                      print('inside download -> song name [${widget.title}]');
+                      print('inside download -> attachment name [${widget.attachmentName}]');
+                      print('inside download -> image path [${widget.image}]');
+
+                      download.downloadImage(this.widget.image, this.widget.title);
+                      download
+                          .downloadFile(
+                        this.widget.attachmentName,
+                        this.widget.title,
+                      )
+                          .whenComplete(() async {
+                        Downloads newDT = Downloads(
+                          title: this.widget.title,
+                          author: this.widget.artistName,
+                          attachmentName: download.pathName.toString(),
+                          image: download.imagePath.toString(),
+                          is_media: 1,
+                        );
+                        await DBProvider.db.newDownload(newDT);
+                      });
+                      Navigator.of(context).pop();
+                      downloading();
+                    } else {
+                      _removeFromDownload(widget.id, widget.attachmentName);
+                      Navigator.of(context).popAndPushNamed('/library');
+                    }
                   },
                   child: Container(
                     width: maxWidth * 0.4722,
@@ -468,7 +490,7 @@ class _SongOptionsState extends State<SongOptions> {
                           width: maxWidth * 0.044,
                         ),
                         Text(
-                          "Download",
+                          !widget.isDownloaded ? "Download" : 'Remove from downloads',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,

@@ -148,6 +148,7 @@ class _FeaturedPodcastCarouselState extends State<FeaturedPodcastCarousel> {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
+                  print('inside carousel -> attname [${widget.featuredPodcasts[index].attachmentName}]');
                   this.widget.showOverlay(
                         context,
                         this.widget.featuredPodcasts[index].title,

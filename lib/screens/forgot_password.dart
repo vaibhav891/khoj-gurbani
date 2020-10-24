@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:khojgurbani_music/screens/create_account.dart';
 
 class ForgotPassword extends StatefulWidget {
   get routeName => '/forgot_password';
@@ -194,7 +195,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushReplacementNamed('/create_account');
+                  Navigator.push(context, new MaterialPageRoute(builder: (context) => CreateAccount()));
+
+                  //Navigator.of(context).pushReplacementNamed('/create_account');
                 },
                 child: Text(
                   "Sign up",

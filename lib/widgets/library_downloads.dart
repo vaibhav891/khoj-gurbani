@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:khojgurbani_music/models/Downloads.dart';
+import 'package:khojgurbani_music/screens/podcast_on_three_dots.dart';
+import 'package:khojgurbani_music/screens/three_dots_on_song.dart';
 import 'package:khojgurbani_music/services/Database.dart';
 import 'dart:async';
 
@@ -327,6 +329,8 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                 // ),
                                 child: GestureDetector(
                                   onTap: () {
+                                    print('song title -> ${snapshot.data[index].title}');
+                                    print('attachment name -> ${snapshot.data[index].attachmentName}');
                                     this.widget.showOverlay(
                                         context,
                                         snapshot.data[index].title,
@@ -401,132 +405,100 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                   ),
                                 ),
                               ),
-                              // Padding(
-                              //   padding:
-                              //       EdgeInsets.only(right: maxWidth * 0.055555),
-                              //   child: Row(
-                              //     mainAxisAlignment: MainAxisAlignment.end,
-                              //     children: <Widget>[
-                              //       Column(
-                              //         crossAxisAlignment:
-                              //             CrossAxisAlignment.end,
-                              //         children: <Widget>[
-                              //           // Container(
-                              //           //   padding: EdgeInsets.only(
-                              //           //     top: maxHeight * 0.0167,
-                              //           //   ),
-                              //           //   child: Text(
-                              //           //     snapshot.data[index].duration,
-                              //           //     maxLines: 1,
-                              //           //     overflow: TextOverflow.clip,
-                              //           //     style: TextStyle(fontSize: 10),
-                              //           //   ),
-                              //           // ),
-                              //           Padding(
-                              //             padding: EdgeInsets.only(
-                              //                 top: maxHeight * 0.00675),
-                              //             child: GestureDetector(
-                              //               onTap: () {
-                              //                 snapshot.data[index].is_media == 1
-                              //                     ? Navigator.of(context)
-                              //                         .push(PageRouteBuilder(
-                              //                         opaque: false,
-                              //                         pageBuilder: (BuildContext
-                              //                                     context,
-                              //                                 animation,
-                              //                                 secondaryAnimation) =>
-                              //                             SongOptions(
-                              //                           indexOfSong: snapshot
-                              //                               .data[index].id,
-                              //                           title: snapshot
-                              //                               .data[index].title,
-                              //                           artistName: snapshot
-                              //                               .data[index].author,
-                              //                           id: snapshot
-                              //                               .data[index].id,
-                              //                           author_id: snapshot
-                              //                               .data[index]
-                              //                               .author_id,
-                              //                           image: snapshot
-                              //                               .data[index].image,
-                              //                         ),
-                              //                         // transitionDuration:
-                              //                         //     Duration(seconds: 1),
-                              //                         transitionsBuilder:
-                              //                             (ontext,
-                              //                                 animation,
-                              //                                 secondaryAnimation,
-                              //                                 child) {
-                              //                           var begin =
-                              //                               Offset(0.0, -1.0);
-                              //                           var end = Offset.zero;
-                              //                           var curve = Curves.ease;
+                              Padding(
+                                padding: EdgeInsets.only(right: maxWidth * 0.055555),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        // Container(
+                                        //   padding: EdgeInsets.only(
+                                        //     top: maxHeight * 0.0167,
+                                        //   ),
+                                        //   child: Text(
+                                        //     snapshot.data[index].duration,
+                                        //     maxLines: 1,
+                                        //     overflow: TextOverflow.clip,
+                                        //     style: TextStyle(fontSize: 10),
+                                        //   ),
+                                        // ),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: maxHeight * 0.00675),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              snapshot.data[index].is_media == 1
+                                                  ? Navigator.of(context).push(PageRouteBuilder(
+                                                      opaque: false,
+                                                      pageBuilder:
+                                                          (BuildContext context, animation, secondaryAnimation) =>
+                                                              SongOptions(
+                                                        indexOfSong: snapshot.data[index].id,
+                                                        title: snapshot.data[index].title,
+                                                        artistName: snapshot.data[index].author,
+                                                        id: snapshot.data[index].id,
+                                                        author_id: snapshot.data[index].author_id,
+                                                        image: snapshot.data[index].image,
+                                                        isDownloaded: true,
+                                                      ),
+                                                      // transitionDuration:
+                                                      //     Duration(seconds: 1),
+                                                      transitionsBuilder:
+                                                          (ontext, animation, secondaryAnimation, child) {
+                                                        var begin = Offset(0.0, -1.0);
+                                                        var end = Offset.zero;
+                                                        var curve = Curves.ease;
 
-                              //                           var tween = Tween(
-                              //                                   begin: begin,
-                              //                                   end: end)
-                              //                               .chain(CurveTween(
-                              //                                   curve: curve));
+                                                        var tween = Tween(begin: begin, end: end)
+                                                            .chain(CurveTween(curve: curve));
 
-                              //                           return SlideTransition(
-                              //                             position: animation
-                              //                                 .drive(tween),
-                              //                             child: child,
-                              //                           );
-                              //                         },
-                              //                       ))
-                              //                     : Navigator.of(context)
-                              //                         .push(PageRouteBuilder(
-                              //                         opaque: false,
-                              //                         pageBuilder: (BuildContext
-                              //                                     context,
-                              //                                 animation,
-                              //                                 secondaryAnimation) =>
-                              //                             PodcastThreeDots(
-                              //                           title: snapshot
-                              //                               .data[index].title,
-                              //                           id: snapshot
-                              //                               .data[index].id,
-                              //                         ),
-                              //                         // transitionDuration:
-                              //                         //     Duration(seconds: 1),
-                              //                         transitionsBuilder:
-                              //                             (ontext,
-                              //                                 animation,
-                              //                                 secondaryAnimation,
-                              //                                 child) {
-                              //                           var begin =
-                              //                               Offset(0.0, 1.0);
-                              //                           var end =
-                              //                               Offset(0.0, 0.47);
-                              //                           var curve = Curves.ease;
-                              //                           var tween = Tween(
-                              //                                   begin: begin,
-                              //                                   end: end)
-                              //                               .chain(CurveTween(
-                              //                                   curve: curve));
-                              //                           return SlideTransition(
-                              //                             position: animation
-                              //                                 .drive(tween),
-                              //                             child: child,
-                              //                           );
-                              //                         },
-                              //                       ));
-                              //               },
-                              //               child: Container(
-                              //                 child: Icon(
-                              //                   Icons.more_horiz,
-                              //                   color: Colors.grey,
-                              //                   size: 20,
-                              //                 ),
-                              //               ),
-                              //             ),
-                              //           ),
-                              //         ],
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
+                                                        return SlideTransition(
+                                                          position: animation.drive(tween),
+                                                          child: child,
+                                                        );
+                                                      },
+                                                    ))
+                                                  : Navigator.of(context).push(PageRouteBuilder(
+                                                      opaque: false,
+                                                      pageBuilder:
+                                                          (BuildContext context, animation, secondaryAnimation) =>
+                                                              PodcastThreeDots(
+                                                        title: snapshot.data[index].title,
+                                                        id: snapshot.data[index].id,
+                                                        attachmentName: snapshot.data[index].attachmentName,
+                                                        isDownloaded: true,
+                                                      ),
+                                                      // transitionDuration:
+                                                      //     Duration(seconds: 1),
+                                                      transitionsBuilder:
+                                                          (ontext, animation, secondaryAnimation, child) {
+                                                        var begin = Offset(0.0, 1.0);
+                                                        var end = Offset(0.0, 0.47);
+                                                        var curve = Curves.ease;
+                                                        var tween = Tween(begin: begin, end: end)
+                                                            .chain(CurveTween(curve: curve));
+                                                        return SlideTransition(
+                                                          position: animation.drive(tween),
+                                                          child: child,
+                                                        );
+                                                      },
+                                                    ));
+                                            },
+                                            child: Container(
+                                              child: Icon(
+                                                Icons.more_horiz,
+                                                color: Colors.grey,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         );

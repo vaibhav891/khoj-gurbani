@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:device_info/device_info.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
@@ -62,9 +63,8 @@ class LoginAndRegistrationService {
   bool isError = false;
 
   login(String email, String password) async {
-    final res = await http.post(
-        'https://api.khojgurbani.org/api/v1/android/login',
-        body: {'email': email, 'password': password});
+    final res = await http
+        .post('https://api.khojgurbani.org/api/v1/android/login', body: {'email': email, 'password': password});
     final data = jsonDecode(res.body);
     if (res.statusCode == 200) {
       if (data['token'] != '' || data['token'] != null) {
@@ -75,8 +75,7 @@ class LoginAndRegistrationService {
         // _password.clear();
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final token = prefs.getString('token') ?? "Error with token!";
-        final machineId =
-            prefs.getString('machine_id') ?? "Error with machine_id!";
+        final machineId = prefs.getString('machine_id') ?? "Error with machine_id!";
         final userId = prefs.getInt('user_id') ?? "Error with user_id";
         isUserLogedin = true;
         isError = false;
@@ -99,9 +98,7 @@ class LoginAndRegistrationService {
     final token = prefs.getString('token');
 
     final headers = {'Authorization': "Bearer " + token};
-    final response = await http.get(
-        'https://api.khojgurbani.org/api/v1/user/$userId',
-        headers: headers);
+    final response = await http.get('https://api.khojgurbani.org/api/v1/user/$userId', headers: headers);
     var jsonData = json.decode(response.body);
 
     UserDetails result = new UserDetails.fromJson(jsonData);
@@ -159,15 +156,13 @@ class LoginAndRegistrationService {
     }
 
     loginWithGoogle() async {
-      final res = await http.post(
-          'https://api.khojgurbani.org/api/v1/android/login-with-social?',
-          body: {
-            "name": name,
-            "email": email,
-            "photo_url": json.encode(photo),
-            "social_account_id": json.encode(id),
-            "provider": provider
-          });
+      final res = await http.post('https://api.khojgurbani.org/api/v1/android/login-with-social?', body: {
+        "name": name,
+        "email": email,
+        "photo_url": json.encode(photo),
+        "social_account_id": json.encode(id),
+        "provider": provider
+      });
       var data = JsonDecoder().convert(res.body);
 
       // print(user.toString());
@@ -211,29 +206,34 @@ class LoginAndRegistrationService {
     print("odjava");
   }
 
-  // FACEBOOK LOGIN
-  // void facebookLogin() async {
-  //   final facebookLogin = FacebookLogin();
-  //   final facebookLoginResult = await facebookLogin.logIn(['email']);
+  //FACEBOOK LOGIN
+  void facebookLogin() async {
+    //final facebookLogin = FacebookLogin();
+    await facebookLogout();
+    final facebookLoginResult = await FacebookAuth.instance.login();
 
-  //   print(facebookLoginResult.accessToken);
-  //   print(facebookLoginResult.accessToken.token);
-  //   print(facebookLoginResult.accessToken.expires);
-  //   print(facebookLoginResult.accessToken.permissions);
-  //   print(facebookLoginResult.accessToken.userId);
-  //   print(facebookLoginResult.accessToken.isValid());
+    print(facebookLoginResult.accessToken);
+    print(facebookLoginResult.accessToken.token);
+    print(facebookLoginResult.accessToken.expires);
+    print(facebookLoginResult.accessToken.grantedPermissions);
+    print(facebookLoginResult.accessToken.userId);
+    //print(facebookLoginResult.accessToken.isValid());
 
-  //   print(facebookLoginResult.errorMessage);
-  //   print(facebookLoginResult.status);
+    //print(facebookLoginResult.errorMessage);
+    print(facebookLoginResult.status);
 
-  //   final token = facebookLoginResult.accessToken.token;
+    //final token = facebookLoginResult.accessToken.token;
 
-  //   /// for profile details also use the below code
-  //   final graphResponse = await http.get(
-  //       'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=$token');
-  //   final profile = json.decode(graphResponse.body);
-  //   print(profile);
-  // }
+    /// for profile details also use the below code
+    // final graphResponse = await http.get(
+    //     'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=$token');
+    // final profile = json.decode(graphResponse.body);
+    // print(profile);
+  }
+
+  facebookLogout() async {
+    await FacebookAuth.instance.logOut();
+  }
 
   var userId;
   var userName;

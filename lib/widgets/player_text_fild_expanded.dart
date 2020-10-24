@@ -129,7 +129,7 @@ class _PlayerTextFildState extends State<PlayerTextFild> {
                                                                 print("error");
                                                               }
                                                             })(),
-                                                            style: TextStyle(color: Colors.black, fontSize: 17),
+                                                            style: TextStyle(color: Colors.black, fontSize: 18),
                                                             textAlign: TextAlign.center,
                                                           )
                                                         : Container(),
@@ -147,7 +147,7 @@ class _PlayerTextFildState extends State<PlayerTextFild> {
                                                                 print("error");
                                                               }
                                                             })(),
-                                                            style: TextStyle(color: Colors.black, fontSize: 15),
+                                                            style: TextStyle(color: Colors.black, fontSize: 18),
                                                             textAlign: TextAlign.center,
                                                           )
                                                         : Container(),

@@ -21,6 +21,7 @@ class PodcastThreeDots extends StatefulWidget {
   final int id;
   final int is_media;
   final indexOfPodcast;
+  final bool isDownloaded;
 
   const PodcastThreeDots({
     Key key,
@@ -32,6 +33,7 @@ class PodcastThreeDots extends StatefulWidget {
     this.is_media,
     this.playlist_id,
     this.indexOfPodcast,
+    this.isDownloaded = false,
   }) : super(key: key);
 
   @override
@@ -135,21 +137,27 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
 
   downloading() {
     showDialog(
-        context: context,
-        builder: (context) {
-          Future.delayed(Duration(seconds: 1), () {
-            Navigator.of(context).pop();
-          });
-          return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-            title: Center(
-              child: Text(
-                'Downloading...',
-                style: TextStyle(fontSize: 14),
-              ),
-            ),
-          );
+      context: context,
+      builder: (context) {
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.of(context).pop();
         });
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+          title: Center(
+            child: Text(
+              'Downloading...',
+              style: TextStyle(fontSize: 14),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  _removeFromDownload(int id, String pathname) async {
+    await download.removeDownloadFile(pathname);
+    await DBProvider.db.deleteDownload(id);
   }
 
   @override
@@ -248,28 +256,36 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                       padding: const EdgeInsets.only(left: 20, top: 15),
                       child: GestureDetector(
                         onTap: () {
-                          download.downloadImage(this.widget.image, this.widget.title);
-                          download
-                              .downloadFile(
-                            this.widget.attachmentName,
-                            this.widget.title,
-                          )
-                              .whenComplete(() async {
-                            Downloads newDT = Downloads(
-                              title: this.widget.title,
-                              author: this.widget.artistName,
-                              attachmentName: download.pathName.toString(),
-                              image: download.imagePath.toString(),
-                              is_media: 0,
-                            );
-                            await DBProvider.db.newDownload(newDT);
-                          });
-                          Navigator.of(context).pop();
-                          downloading();
-                          downloading();
+                          if (!widget.isDownloaded) {
+                            print('inside download -> song name [${widget.title}]');
+                            print('inside download -> attachment name [${widget.attachmentName}]');
+                            print('inside download -> image path [${widget.image}]');
+                            download.downloadImage(this.widget.image, this.widget.title);
+                            download
+                                .downloadFile(
+                              this.widget.attachmentName,
+                              this.widget.title,
+                            )
+                                .whenComplete(() async {
+                              Downloads newDT = Downloads(
+                                title: this.widget.title,
+                                author: this.widget.artistName,
+                                attachmentName: download.pathName.toString(),
+                                image: download.imagePath.toString(),
+                                is_media: 0,
+                              );
+                              await DBProvider.db.newDownload(newDT);
+                            });
+                            Navigator.of(context).pop();
+                            downloading();
+                            //downloading();
+                          } else {
+                            _removeFromDownload(widget.id, widget.attachmentName);
+                            Navigator.of(context).popAndPushNamed('/library');
+                          }
                         },
                         child: Text(
-                          'Download',
+                          !widget.isDownloaded ? 'Download' : 'Remove from download',
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),
