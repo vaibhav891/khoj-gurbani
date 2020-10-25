@@ -29,12 +29,18 @@ import 'models/featuredPodcasts.dart';
 import 'screens/music_player_full_size.dart';
 import 'services/loginAndRegistrationServices.dart';
 
-void main() {
+void main() async {
   getServices();
-  runApp(MyApp());
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp(MyApp(
+    sharedPreferences: prefs,
+  ));
 }
 
 class MyApp extends StatefulWidget {
+  final SharedPreferences sharedPreferences;
+
+  const MyApp({Key key, @required this.sharedPreferences}) : super(key: key);
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -849,7 +855,29 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(fontFamily: 'Cabin'),
       debugShowCheckedModeBanner: false,
       home: fromLink == false
-          ? LoginOrRegister()
+          ? widget.sharedPreferences.containsKey('token')
+              ? MediaPage(
+                  isPlaying: isPlaying,
+                  tapPause: tapPause,
+                  tapPlay: tapPlay,
+                  tapStop: tapStop,
+                  play: play,
+                  show: show,
+                  showOverlay: showOverlay,
+                  showOverlayFalse: showOverlayFalse,
+                  showOverlayTrue: showOverlayTrue,
+                  setListLinks: setListLinks,
+                  insertRecentlyPlayed: insertRecentlyPlayed,
+                  setIsOpenFullScreen: setIsOpenFullScreen,
+                  audioPlayer: audioPlayer,
+                  snapshot: this.snapshot,
+                  getLyrics: getLyrics,
+                  setPropertiesForFullScreen: this.setPropertiesForFullScreen,
+                  featuredPodcasts: featuredPodcasts,
+                  featuredPodcastsThemes: featuredPodcastsThemes,
+                  currentSong: currentSong,
+                )
+              : LoginOrRegister()
           : ArtistPage(
               indexOfArtist: auth_id,
               id: auth_id,
