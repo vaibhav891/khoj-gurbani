@@ -31,6 +31,7 @@ import 'services/loginAndRegistrationServices.dart';
 
 void main() async {
   getServices();
+  WidgetsFlutterBinding.ensureInitialized();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   runApp(MyApp(
     sharedPreferences: prefs,
@@ -855,7 +856,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(fontFamily: 'Cabin'),
       debugShowCheckedModeBanner: false,
       home: fromLink == false
-          ? widget.sharedPreferences.containsKey('token')
+          ? false //widget.sharedPreferences.containsKey('token')
               ? MediaPage(
                   isPlaying: isPlaying,
                   tapPause: tapPause,
