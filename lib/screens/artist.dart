@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:khojgurbani_music/screens/three_dots_on_song.dart';
@@ -213,13 +214,13 @@ class _ArtistPageState extends State<ArtistPage> {
     double maxHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        //centerTitle: true,
         backgroundColor: Color(0xffF5F5F5),
         title: Padding(
           padding: EdgeInsets.only(right: maxWidth * 0.06388),
           child: Container(
             // padding: EdgeInsets.only(bottom: 15),
-            height: maxHeight * 0.0418,
+            height: maxHeight * 0.057,
             width: maxWidth * 0.8694,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -236,17 +237,14 @@ class _ArtistPageState extends State<ArtistPage> {
               onChanged: onSearchTextChanged,
               style: TextStyle(height: 1.7),
               decoration: InputDecoration(
-                isDense: true,
+                //isDense: true,
                 // contentPadding: EdgeInsets.only(bottom: maxHeight * 0.0175),
-                prefixIcon: Icon(
-                  Icons.search,
-                  size: 20,
-                ),
+                prefixIcon: Image.asset('assets/images/search.png'),
                 suffixIcon: IconButton(
                   icon: Icon(
                     Icons.close,
                     size: 15,
-                    color: Colors.black,
+                    color: Colors.grey,
                   ),
                   onPressed: () {
                     controller.clear();
@@ -254,7 +252,7 @@ class _ArtistPageState extends State<ArtistPage> {
                   },
                 ),
                 hintText: "Search",
-                hintStyle: TextStyle(fontSize: 14),
+                hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
                 border: InputBorder.none,
               ),
             ),
@@ -310,7 +308,7 @@ class _ArtistPageState extends State<ArtistPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 20, top: 20),
+                padding: const EdgeInsets.only(left: 21, top: 20),
                 child: InkWell(
                   onTap: () {
                     print(this.widget.show);
@@ -319,7 +317,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     borderRadius: BorderRadius.circular(6.0),
                     child: _isLoading == false
                         ? Image(
-                            width: maxWidth * 0.4472,
+                            width: maxWidth * 0.42, //0.4472,
                             height: maxHeight * 0.2067,
                             image: NetworkImage(_isLoading == false ? service.oneArtist[0].image : ""),
                             fit: BoxFit.cover,
@@ -332,7 +330,7 @@ class _ArtistPageState extends State<ArtistPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: maxHeight * 0.0364, left: maxWidth * 0.038),
+                padding: EdgeInsets.only(top: maxHeight * 0.0364, left: maxWidth * 0.035),
                 child: Container(
                   width: maxWidth * 0.4361,
                   child: Column(
@@ -606,50 +604,46 @@ class _ArtistPageState extends State<ArtistPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Popular',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Text(
+                  'Popular',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: maxHeight * 0.00675, right: maxWidth * 0.055),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => ArtistPopularTracks(
+                                    id: widget.id,
+                                    showOverlay: this.widget.showOverlay,
+                                    showOverlayTrue: this.widget.showOverlayTrue,
+                                    showOverlayFalse: this.widget.showOverlayFalse,
+                                    show: this.widget.show,
+                                    play: this.widget.play,
+                                    setListLinks: this.widget.setListLinks,
+                                    insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                                    tapPause: this.widget.tapPause,
+                                    tapPlay: this.widget.tapPlay,
+                                    tapStop: this.widget.tapStop,
+                                    setIsOpenFullScreen: this.widget.setIsOpenFullScreen,
+                                    isPlaying: this.widget.isPlaying,
+                                    audioPlayer: this.widget.audioPlayer,
+                                    snapshot: this.widget.snapshot,
+                                    getLyrics: this.widget.getLyrics,
+                                    setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
+                                    currentSong: this.widget.currentSong,
+                                  )));
+                    },
+                    child: Text(
+                      "See all",
+                      style: TextStyle(color: Color(0xff578ed3), fontSize: 14),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: maxWidth * 0.580, top: maxHeight * 0.00675),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => ArtistPopularTracks(
-                                        id: widget.id,
-                                        showOverlay: this.widget.showOverlay,
-                                        showOverlayTrue: this.widget.showOverlayTrue,
-                                        showOverlayFalse: this.widget.showOverlayFalse,
-                                        show: this.widget.show,
-                                        play: this.widget.play,
-                                        setListLinks: this.widget.setListLinks,
-                                        insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
-                                        tapPause: this.widget.tapPause,
-                                        tapPlay: this.widget.tapPlay,
-                                        tapStop: this.widget.tapStop,
-                                        setIsOpenFullScreen: this.widget.setIsOpenFullScreen,
-                                        isPlaying: this.widget.isPlaying,
-                                        audioPlayer: this.widget.audioPlayer,
-                                        snapshot: this.widget.snapshot,
-                                        getLyrics: this.widget.getLyrics,
-                                        setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
-                                        currentSong: this.widget.currentSong,
-                                      )));
-                        },
-                        child: Text(
-                          "See all",
-                          style: TextStyle(color: Color(0xff578ed3), fontSize: 14),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -803,6 +797,7 @@ class _ArtistPageState extends State<ArtistPage> {
                                         Container(
                                           padding: EdgeInsets.only(
                                             top: maxHeight * 0.0087,
+                                            right: maxWidth * 0.005,
                                           ),
                                           child: Text(
                                             service.oneArtist[index].duration,
@@ -856,9 +851,9 @@ class _ArtistPageState extends State<ArtistPage> {
                                             },
                                             child: Container(
                                               child: Icon(
-                                                Icons.more_horiz,
+                                                CupertinoIcons.ellipsis,
                                                 color: Color(0xff727272),
-                                                size: 20,
+                                                size: 24,
                                               ),
                                             ),
                                           ),
@@ -1085,7 +1080,7 @@ class _ArtistPageState extends State<ArtistPage> {
                                 },
                                 child: Container(
                                   child: Icon(
-                                    Icons.more_horiz,
+                                    CupertinoIcons.ellipsis,
                                     color: Color(0xff727272),
                                     size: 20,
                                   ),

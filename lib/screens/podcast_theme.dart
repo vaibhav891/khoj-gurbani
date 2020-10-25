@@ -153,6 +153,7 @@ class _PodcastThemePageState extends State<PodcastThemePage> {
       body: Column(
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(top: maxHeight * 0.01756, left: maxWidth * 0.0555),
@@ -165,7 +166,7 @@ class _PodcastThemePageState extends State<PodcastThemePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.3888, top: maxHeight * 0.02027, right: maxWidth * 0.0555),
+                padding: EdgeInsets.only(top: maxHeight * 0.02027, right: maxWidth * 0.0555),
                 child: Container(
                   height: maxHeight * 0.03378,
                   width: maxWidth * 0.18888,

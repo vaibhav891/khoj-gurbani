@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khojgurbani_music/screens/podcast_on_three_dots.dart';
 import 'package:khojgurbani_music/screens/three_dots_on_song.dart';
@@ -660,7 +661,7 @@ class _PlaylistFullState extends State<PlaylistFull> {
                                       },
                                       child: Container(
                                         child: Icon(
-                                          Icons.more_horiz,
+                                          CupertinoIcons.ellipsis,
                                           size: 20,
                                           color: Color(0xff727272),
                                         ),

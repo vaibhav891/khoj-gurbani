@@ -195,6 +195,7 @@ class _PlayerTextFildState extends State<PlayerTextFild> {
                                                         }
                                                       })(),
                                                       textAlign: TextAlign.center,
+                                                      style: TextStyle(fontSize: 18),
                                                     ),
                                                   ],
                                                 ),

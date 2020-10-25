@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khojgurbani_music/models/Downloads.dart';
 import 'package:khojgurbani_music/screens/podcast_on_three_dots.dart';
@@ -487,7 +488,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                             },
                                             child: Container(
                                               child: Icon(
-                                                Icons.more_horiz,
+                                                CupertinoIcons.ellipsis,
                                                 color: Colors.grey,
                                                 size: 20,
                                               ),

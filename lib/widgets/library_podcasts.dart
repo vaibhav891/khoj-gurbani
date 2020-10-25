@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khojgurbani_music/screens/podcast_on_three_dots.dart';
 import 'package:khojgurbani_music/services/services.dart';
@@ -393,7 +394,7 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
                               },
                               child: Container(
                                 child: Icon(
-                                  Icons.more_horiz,
+                                  CupertinoIcons.ellipsis,
                                   size: 20,
                                   color: Color(0xff727272),
                                 ),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khojgurbani_music/widgets/bottom_navigation_bar.dart';
 
@@ -78,7 +79,7 @@ class _PlayingNextState extends State<PlayingNext> {
                                     top: maxHeight * 0.0067,
                                   ),
                                   child: Icon(
-                                    Icons.more_horiz,
+                                    CupertinoIcons.ellipsis,
                                     color: Colors.grey,
                                     size: 20,
                                   ),

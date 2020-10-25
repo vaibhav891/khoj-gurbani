@@ -159,13 +159,13 @@ class _LibraryState extends State<Library> {
                     text: 'Tracks',
                   ),
                   Tab(
-                    text: 'Artists',
+                    text: 'Ragis',
                   ),
                   Tab(
                     text: 'Downloads',
                   ),
                   Tab(
-                    text: 'Podcast',
+                    text: 'Podcasts',
                   ),
                 ],
               ),

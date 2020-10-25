@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khojgurbani_music/screens/three_dots_on_song.dart';
 import 'package:khojgurbani_music/services/loginAndRegistrationServices.dart';
@@ -441,7 +442,7 @@ class _LibraryTracksState extends State<LibraryTracks> {
                                     },
                                     child: Container(
                                       child: Icon(
-                                        Icons.more_horiz,
+                                        CupertinoIcons.ellipsis,
                                         size: 20,
                                         color: Color(0xff727272),
                                       ),

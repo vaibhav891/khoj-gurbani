@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -244,7 +245,7 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                       width: maxWidth * 0.0555,
                       padding: EdgeInsets.only(bottom: maxHeight * 0.009459),
                       child: Icon(
-                        Icons.more_horiz,
+                        CupertinoIcons.ellipsis,
                       ),
                     ),
                   ),

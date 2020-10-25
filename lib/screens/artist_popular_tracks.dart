@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khojgurbani_music/screens/three_dots_on_song.dart';
 import 'package:khojgurbani_music/services/services.dart';
@@ -564,7 +565,7 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                               left: maxWidth * 0.0277,
                                             ),
                                             child: Icon(
-                                              Icons.more_horiz,
+                                              CupertinoIcons.ellipsis,
                                               color: Color(0xff727272),
                                               size: 20,
                                             ),
@@ -778,7 +779,7 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                 },
                                 child: Container(
                                   child: Icon(
-                                    Icons.more_horiz,
+                                    CupertinoIcons.ellipsis,
                                     color: Color(0xff727272),
                                     size: 20,
                                   ),

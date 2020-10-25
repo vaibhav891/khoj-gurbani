@@ -310,7 +310,7 @@ class _MyAppState extends State<MyApp> {
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    height: MediaQuery.of(context).size.height * 0.08108,
+                    height: 60, //MediaQuery.of(context).size.height * 0.08108,
                     width: MediaQuery.of(context).size.width,
                     bottom: 80,
                     child: Material(
@@ -320,7 +320,7 @@ class _MyAppState extends State<MyApp> {
                         children: <Widget>[
                           fromFile != 1
                               ? Image(
-                                  height: MediaQuery.of(context).size.height * 0.08108,
+                                  height: 60, //MediaQuery.of(context).size.height * 0.08108,
                                   width: MediaQuery.of(context).size.width * 0.16666,
                                   image: NetworkImage(image
                                       // .contains(

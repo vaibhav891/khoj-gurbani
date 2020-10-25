@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khojgurbani_music/screens/three_dots_on_song.dart';
 import 'package:khojgurbani_music/services/services.dart';
@@ -161,8 +162,7 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
         ),
       ),
       Container(
-          padding:
-              EdgeInsets.only(left: maxWidth * 0.0694, top: maxHeight * 0.014),
+          padding: EdgeInsets.only(left: maxWidth * 0.0694, top: maxHeight * 0.014),
           height: maxHeight * 0.350,
           child: GridView.count(
               scrollDirection: Axis.horizontal,
@@ -221,12 +221,9 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                                   is_media: service.medias[index].is_media,
                                   author_id: service.medias[index].author_id,
                                 );
-                            this.widget.play(
-                                service.medias[index].attachmentName, context);
+                            this.widget.play(service.medias[index].attachmentName, context);
                             List links = [];
-                            for (int i = index;
-                                i < service.medias.length;
-                                i++) {
+                            for (int i = index; i < service.medias.length; i++) {
                               links.add(service.medias[i]);
                             }
                             this.widget.setListLinks(links);
@@ -234,9 +231,7 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                             setState(() {
                               this.widget.showOverlayTrue();
                             });
-                            this
-                                .widget
-                                .insertRecentlyPlayed(service.medias[index].id);
+                            this.widget.insertRecentlyPlayed(service.medias[index].id);
                           },
                           child: Stack(
                             children: <Widget>[
@@ -265,10 +260,8 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                                       width: maxWidth * 0.455555,
                                       child: Text(
                                         service.medias[index].author,
-                                        style: TextStyle(
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.grey),
+                                        style:
+                                            TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600, color: Colors.grey),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -283,8 +276,7 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                                   child: Image(
                                     height: maxHeight * 0.0635,
                                     width: maxWidth * 0.1306,
-                                    image: NetworkImage(
-                                        service.medias[index].image),
+                                    image: NetworkImage(service.medias[index].image),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -301,9 +293,7 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                             children: <Widget>[
                               Container(
                                 // width: maxWidth * 0.138888,
-                                padding: EdgeInsets.only(
-                                    top: maxHeight * 0.014,
-                                    right: maxWidth * 0.0555),
+                                padding: EdgeInsets.only(top: maxHeight * 0.014, right: maxWidth * 0.0555),
                                 child: Text(
                                   service.medias[index].duration,
                                   style: TextStyle(fontSize: 10),
@@ -313,48 +303,34 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                                 onTap: () {
                                   Navigator.of(context).push(PageRouteBuilder(
                                     opaque: false,
-                                    pageBuilder: (BuildContext context,
-                                            animation, secondaryAnimation) =>
-                                        SongOptions(
+                                    pageBuilder: (BuildContext context, animation, secondaryAnimation) => SongOptions(
                                       indexOfSong: service.medias[index].id,
-                                      indexOfArtist:
-                                          service.medias[index].author_id,
+                                      indexOfArtist: service.medias[index].author_id,
                                       title: service.medias[index].title,
                                       artistName: service.medias[index].author,
-                                      attachmentName:
-                                          service.medias[index].attachmentName,
+                                      attachmentName: service.medias[index].attachmentName,
                                       id: service.medias[index].id,
-                                      author_id:
-                                          service.medias[index].author_id,
+                                      author_id: service.medias[index].author_id,
                                       image: service.medias[index].image,
                                       showOverlay: this.widget.showOverlay,
-                                      showOverlayTrue:
-                                          this.widget.showOverlayTrue,
-                                      showOverlayFalse:
-                                          this.widget.showOverlayFalse,
+                                      showOverlayTrue: this.widget.showOverlayTrue,
+                                      showOverlayFalse: this.widget.showOverlayFalse,
                                       show: this.widget.show,
                                       play: this.widget.play,
                                       setListLinks: this.widget.setListLinks,
-                                      insertRecentlyPlayed:
-                                          this.widget.insertRecentlyPlayed,
-                                      setPropertiesForFullScreen: this
-                                          .widget
-                                          .setPropertiesForFullScreen,
+                                      insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                                      setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
                                       fromArtistPage: fromArtistPage,
                                       currentSong: this.widget.currentSong,
                                     ),
                                     // transitionDuration: Duration(seconds: 1),
-                                    transitionsBuilder: (ontext, animation,
-                                        secondaryAnimation, child) {
+                                    transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
                                       var begin = Offset(0.0, -1.0);
-                                      var end = this.widget.show == true
-                                          ? Offset(0.0, -0.08)
-                                          : Offset.zero;
+                                      var end = this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
                                       //  this.widget.show == true ?  end = Offset(0.0, -0.08) :
                                       var curve = Curves.ease;
 
-                                      var tween = Tween(begin: begin, end: end)
-                                          .chain(CurveTween(curve: curve));
+                                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
                                       return SlideTransition(
                                         position: animation.drive(tween),
@@ -364,16 +340,16 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                                   ));
                                 },
                                 child: Container(
-                                  // alignment: Alignment.center,
+                                  alignment: Alignment.centerRight,
                                   width: maxWidth * 0.238888,
                                   // height: maxHeight * 0.01399,
                                   padding: EdgeInsets.only(
                                     // top: maxHeight * 0.002750,
-                                    left: maxWidth * 0.0995,
+                                    right: maxWidth * 0.047,
                                   ),
                                   child: Icon(
-                                    Icons.more_horiz,
-                                    size: 20,
+                                    CupertinoIcons.ellipsis,
+                                    size: 26,
                                   ),
                                 ),
                               ),

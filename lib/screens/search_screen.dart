@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
@@ -399,104 +400,101 @@ class _SearchScreenState extends State<SearchScreen> {
     return showFilter == false
         ? Scaffold(
             appBar: AppBar(
-              centerTitle: true,
+              //centerTitle: true,
               backgroundColor: Color(0xffF5F5F5),
-              title: Padding(
-                padding: EdgeInsets.only(right: maxWidth * 0.06388),
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      // padding: EdgeInsets.only(bottom: 15),
-                      // height: maxHeight * 0.0418,
-                      height: maxHeight * 0.0418,
-                      width: maxWidth * 0.5694,
+              title: Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    // padding: EdgeInsets.only(bottom: 15),
+                    height: maxHeight * 0.057, //0.0418,
+                    width: maxWidth * 0.66,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6.0), topLeft: Radius.circular(6.0)),
+                    ),
+                    child: TextField(
+                      // textInputAction: TextInputAction.done,  on click keyboard finish
+                      //textAlignVertical: TextAlignVertical.center,
+                      onSubmitted: (value) {
+                        showH = false;
+                        this.controller.text == '' ? null : insertHistory(this.controller.text);
+                      },
+                      onTap: () {
+                        setState(() {
+                          showH = true;
+                        });
+                      },
+                      controller: controller,
+                      onChanged: onSearchTextChanged,
+                      style: TextStyle(height: 1.7),
+                      decoration: InputDecoration(
+                        //isDense: true,
+                        // contentPadding:
+                        // EdgeInsets.only(top: maxHeight * 0.0175),
+                        prefixIcon: Image.asset('assets/images/search.png'),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            Icons.close,
+                            size: 15,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {
+                            controller.clear();
+                            onSearchTextChanged('');
+                          },
+                        ),
+                        hintText: "Search tracks, artists",
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        showFilter = true;
+                        controller.clear();
+                      });
+                      // Navigator.of(context).push(PageRouteBuilder(
+                      //   opaque: false,
+                      //   pageBuilder: (BuildContext context, _, __) =>
+                      //       GurbaniSearch(
+                      //           melodys: this.widget.melodys,
+                      //           singers: this.widget.singers,
+                      //           dropDownOptions: this.widget.dropDownOptions),
+                      // ));
+
+                      // Navigator.push(
+                      //     context,
+                      //     new MaterialPageRoute(
+                      //       builder: (context) => GurbaniSearch(
+                      //           melodys: this.widget.melodys,
+                      //           singers: this.widget.singers,
+                      //           dropDownOptions: this.widget.dropDownOptions),
+                      //     ));
+                    },
+                    child: Container(
+                      height: maxHeight * 0.057,
+                      width: maxWidth * 0.0972,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.white),
                         borderRadius:
-                            BorderRadius.only(bottomLeft: Radius.circular(6.0), topLeft: Radius.circular(6.0)),
+                            BorderRadius.only(bottomRight: Radius.circular(6.0), topRight: Radius.circular(6.0)),
                       ),
-                      child: TextField(
-                        // textInputAction: TextInputAction.done,  on click keyboard finish
-                        textAlignVertical: TextAlignVertical.center,
-                        onSubmitted: (value) {
-                          showH = false;
-                          this.controller.text == '' ? null : insertHistory(this.controller.text);
-                        },
-                        onTap: () {
-                          setState(() {
-                            showH = true;
-                          });
-                        },
-                        controller: controller,
-                        onChanged: onSearchTextChanged,
-                        style: TextStyle(height: 1.7),
-                        decoration: InputDecoration(
-                          isDense: true,
-                          // contentPadding:
-                          // EdgeInsets.only(top: maxHeight * 0.0175),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            size: 20,
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              Icons.close,
-                              size: 15,
-                              color: Colors.black,
-                            ),
-                            onPressed: () {
-                              controller.clear();
-                              onSearchTextChanged('');
-                            },
-                          ),
-                          hintText: "Search tracks, artists",
-                          hintStyle: TextStyle(fontSize: 14),
-                          border: InputBorder.none,
-                        ),
-                      ),
+                      child: Center(child: Image(image: AssetImage('assets/images/filter.png'))),
                     ),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          showFilter = true;
-                          controller.clear();
-                        });
-                        // Navigator.of(context).push(PageRouteBuilder(
-                        //   opaque: false,
-                        //   pageBuilder: (BuildContext context, _, __) =>
-                        //       GurbaniSearch(
-                        //           melodys: this.widget.melodys,
-                        //           singers: this.widget.singers,
-                        //           dropDownOptions: this.widget.dropDownOptions),
-                        // ));
-
-                        // Navigator.push(
-                        //     context,
-                        //     new MaterialPageRoute(
-                        //       builder: (context) => GurbaniSearch(
-                        //           melodys: this.widget.melodys,
-                        //           singers: this.widget.singers,
-                        //           dropDownOptions: this.widget.dropDownOptions),
-                        //     ));
-                      },
-                      child: Container(
-                        height: maxHeight * 0.0418,
-                        width: maxWidth * 0.0972,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.white),
-                          borderRadius:
-                              BorderRadius.only(bottomRight: Radius.circular(6.0), topRight: Radius.circular(6.0)),
-                        ),
-                        child: Center(child: Image(image: AssetImage('assets/images/filter.png'))),
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
               leading: Container(
+                margin: EdgeInsets.only(right: 0),
                 child: IconButton(
                   color: Colors.black,
                   iconSize: 30,
@@ -996,7 +994,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               right: maxWidth * 0.00055,
                             ),
                             child: Icon(
-                              Icons.more_horiz,
+                              CupertinoIcons.ellipsis,
                               size: 20,
                             ),
                           ),
@@ -1362,11 +1360,11 @@ class _SearchScreenState extends State<SearchScreen> {
                             width: maxWidth * 0.138888,
                             padding: EdgeInsets.only(
                               top: maxHeight * 0.003750,
-                              right: maxWidth * 0.00055,
+                              right: maxWidth * 0.02,
                             ),
                             child: Icon(
-                              Icons.more_horiz,
-                              size: 20,
+                              CupertinoIcons.ellipsis,
+                              size: 22,
                             ),
                           ),
                         ),

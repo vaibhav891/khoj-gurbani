@@ -51,15 +51,13 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 
   Future<List<SubCategories>> _getSubCategorys(int id) async {
-    var data = await http
-        .get('https://api.khojgurbani.org/api/v1/android/sub-categories/$id');
+    var data = await http.get('https://api.khojgurbani.org/api/v1/android/sub-categories/$id');
     var jsonData = json.decode(data.body)['result'];
 
     List<SubCategories> subCategories = [];
 
     for (var s in jsonData) {
-      SubCategories sub =
-          SubCategories(s["id"], s["name"], s["slug"], s["attachment_name"]);
+      SubCategories sub = SubCategories(s["id"], s["name"], s["slug"], s["attachment_name"]);
       subCategories.add(sub);
     }
     return subCategories;
@@ -108,9 +106,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     top: maxHeight * 0.0216,
                     bottom: maxHeight * 0.0405),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.73,
-                    crossAxisSpacing: 9),
+                    crossAxisCount: 2, childAspectRatio: 0.73, crossAxisSpacing: 9),
                 itemCount: widget.categories.subCategoryCount,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
@@ -124,43 +120,33 @@ class _CategoryPageState extends State<CategoryPage> {
                                   builder: (context) => CategoryTracksPage(
                                       id: snapshot.data[index].id,
                                       name: snapshot.data[index].name,
-                                      api:
-                                          'https://api.khojgurbani.org/api/v1/android/resource-subcategory-media/' +
-                                              snapshot.data[index].id
-                                                  .toString(),
+                                      api: 'https://api.khojgurbani.org/api/v1/android/resource-subcategory-media/' +
+                                          snapshot.data[index].id.toString(),
                                       showOverlay: this.widget.showOverlay,
-                                      showOverlayTrue:
-                                          this.widget.showOverlayTrue,
-                                      showOverlayFalse:
-                                          this.widget.showOverlayFalse,
+                                      showOverlayTrue: this.widget.showOverlayTrue,
+                                      showOverlayFalse: this.widget.showOverlayFalse,
                                       show: this.widget.show,
                                       play: this.widget.play,
                                       setListLinks: this.widget.setListLinks,
-                                      insertRecentlyPlayed:
-                                          this.widget.insertRecentlyPlayed,
-                                      setPropertiesForFullScreen: this
-                                          .widget
-                                          .setPropertiesForFullScreen,
+                                      insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                                      setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
                                       currentSong: this.widget.currentSong)));
                         },
                         child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8)),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(6.0),
+                            borderRadius: BorderRadius.circular(8.0),
                             child: Image(
                               height: maxHeight * 0.2175,
                               width: maxWidth * 0.44722,
-                              image: NetworkImage(
-                                  snapshot.data[index].attachmentName),
+                              image: NetworkImage(snapshot.data[index].attachmentName),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(
-                            top: maxHeight * 0.0135, left: maxWidth * 0.0138),
+                        padding: EdgeInsets.only(top: maxHeight * 0.0135, left: maxWidth * 0.0138),
                         child: Row(
                           children: <Widget>[
                             Container(

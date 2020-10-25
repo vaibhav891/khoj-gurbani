@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:khojgurbani_music/models/UserSetings.dart';
@@ -1002,7 +1003,7 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                                   ));
                           },
                           child: Icon(
-                            Icons.more_horiz,
+                            CupertinoIcons.ellipsis,
                             color: Colors.grey,
                             size: 26,
                           ),

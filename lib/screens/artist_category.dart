@@ -161,16 +161,20 @@ class _ArtistCategoryState extends State<ArtistCategory> {
             child: ListView(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: 20, left: maxWidth * 0.055, right: maxWidth * 0.0638),
+                  padding: EdgeInsets.only(
+                    top: 20,
+                    left: maxWidth * 0.055,
+                  ),
+                  //right: maxWidth * 0.0638),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
                         child: Container(
-                          height: maxHeight * 0.0418,
+                          height: maxHeight * 0.05, //0.0418,
                           // width: 340,
                           decoration: BoxDecoration(
-                            border: Border.all(),
+                            border: Border.all(width: 0.5, color: Colors.grey),
                             borderRadius: BorderRadius.all(
                               Radius.circular(6.0),
                             ),
@@ -185,12 +189,13 @@ class _ArtistCategoryState extends State<ArtistCategory> {
                             style: TextStyle(height: 2.0),
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: maxHeight * 0.0135),
-                              prefixIcon: Icon(Icons.search),
+                              prefixIcon: Image.asset('assets/images/search.png'),
+                              //Icon(Icons.search),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   Icons.close,
                                   size: 15,
-                                  color: Colors.black,
+                                  color: Colors.grey,
                                 ),
                                 onPressed: () {
                                   controller.clear();
