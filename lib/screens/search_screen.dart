@@ -493,19 +493,19 @@ class _SearchScreenState extends State<SearchScreen> {
                   )
                 ],
               ),
-              leading: Container(
-                margin: EdgeInsets.only(right: 0),
-                child: IconButton(
-                  color: Colors.black,
-                  iconSize: 30,
-                  onPressed: () {
-                    Navigator.popAndPushNamed(context, '/media');
-                  },
-                  icon: Icon(
-                    Icons.chevron_left,
-                  ),
-                ),
-              ),
+              // leading: Container(
+              //   margin: EdgeInsets.only(right: 0),
+              //   child: IconButton(
+              //     color: Colors.black,
+              //     iconSize: 30,
+              //     onPressed: () {
+              //       Navigator.popAndPushNamed(context, '/media');
+              //     },
+              //     icon: Icon(
+              //       Icons.chevron_left,
+              //     ),
+              //   ),
+              // ),
               // leading:
             ),
             bottomNavigationBar: MyBottomNavBar(),
@@ -567,10 +567,11 @@ class _SearchScreenState extends State<SearchScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Padding(
-                                padding: EdgeInsets.only(top: maxHeight * 0.06621, left: maxWidth * 0.05555),
+                                padding: EdgeInsets.only(
+                                    top: maxHeight * 0.06621, left: maxWidth * 0.05555, right: maxWidth * 0.055),
                                 child: Container(
                                   height: maxHeight * 0.0418,
-                                  width: maxWidth / 1.15,
+                                  //width: maxWidth / 1.15,
                                   child: Stack(
                                     alignment: Alignment.centerRight,
                                     children: <Widget>[
@@ -598,6 +599,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                         controller: searchkeyword,
                                         style: TextStyle(height: 1.7),
                                         decoration: InputDecoration(
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(width: 2, color: Colors.grey)),
                                           isDense: true,
                                           hintText: "Gurbani search",
                                           hintStyle: TextStyle(fontSize: 14),
@@ -613,16 +616,19 @@ class _SearchScreenState extends State<SearchScreen> {
                                           //           'assets/images/keyboard.png')),
                                           //   onPressed: () {},
                                           // ),
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.keyboard,
-                                              color: keyboard == true ? Color(0xff578ed3) : Colors.grey,
+                                          GestureDetector(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(right: 4),
+                                              child: Icon(
+                                                Icons.keyboard,
+                                                color: keyboard == true ? Color(0xff578ed3) : Colors.grey,
+                                              ),
                                             ),
 
                                             //  Image(
                                             //     image: AssetImage(
                                             //         'assets/images/keyboard.png')),
-                                            onPressed: () {
+                                            onTap: () {
                                               if (keyboard == true) {
                                                 overlayEntry.remove();
                                                 setState(() {
@@ -682,82 +688,79 @@ class _SearchScreenState extends State<SearchScreen> {
                               //     }).toList(),
                               //   ),
                               // ),
-                              Container(
-                                width: maxWidth - 20,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: maxWidth * 0.055, top: maxHeight * 0.0675),
-                                  child: DropdownButton<String>(
-                                    value: dropdownValue1,
-                                    hint: Text("Singer (Raagi)"),
-                                    icon: Icon(
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: maxWidth * 0.055, top: maxHeight * 0.0675, right: maxWidth * 0.055),
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  value: dropdownValue1,
+                                  hint: Text("Singer (Raagi)"),
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: Color(0xff578ed3),
+                                  ),
+                                  iconSize: 30,
+                                  elevation: 16,
+                                  style: TextStyle(color: Colors.deepPurple),
+                                  underline: Container(
+                                    height: 2,
+                                    color: Colors.grey,
+                                  ),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      dropdownValue1 = newValue;
+                                    });
+                                  },
+                                  items: _sing.map((Singers map) {
+                                    return new DropdownMenuItem<String>(
+                                        value: map.name,
+                                        onTap: () {
+                                          setState(() {
+                                            searchOptionSingerId = map.id;
+                                          });
+                                        },
+                                        child: Text(map.name, style: new TextStyle(color: Colors.grey, fontSize: 12)));
+                                  }).toList(),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: maxWidth * 0.0555, top: maxHeight * 0.0675, right: maxWidth * 0.055),
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  value: dropdownValue2,
+                                  isDense: true,
+                                  // hint: Text(dropdownValue2),
+                                  icon: Padding(
+                                    padding: EdgeInsets.only(left: maxWidth * 0.3344),
+                                    child: Icon(
                                       Icons.keyboard_arrow_down,
                                       color: Color(0xff578ed3),
                                     ),
-                                    iconSize: 30,
-                                    elevation: 16,
-                                    style: TextStyle(color: Colors.deepPurple),
-                                    underline: Container(
-                                      height: 2,
-                                      color: Colors.grey,
-                                    ),
-                                    onChanged: (String newValue) {
-                                      setState(() {
-                                        dropdownValue1 = newValue;
-                                      });
-                                    },
-                                    items: _sing.map((Singers map) {
-                                      return new DropdownMenuItem<String>(
-                                          value: map.name,
-                                          onTap: () {
-                                            setState(() {
-                                              searchOptionSingerId = map.id;
-                                            });
-                                          },
-                                          child:
-                                              Text(map.name, style: new TextStyle(color: Colors.grey, fontSize: 12)));
-                                    }).toList(),
                                   ),
-                                ),
-                              ),
-                              Container(
-                                width: maxWidth - 20,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxHeight * 0.0675),
-                                  child: DropdownButton<String>(
-                                    value: dropdownValue2,
-                                    isDense: true,
-                                    // hint: Text(dropdownValue2),
-                                    icon: Padding(
-                                      padding: EdgeInsets.only(left: maxWidth * 0.3344),
-                                      child: Icon(
-                                        Icons.keyboard_arrow_down,
-                                        color: Color(0xff578ed3),
-                                      ),
-                                    ),
-                                    iconSize: 30,
-                                    elevation: 16,
-                                    style: TextStyle(color: Colors.deepPurple),
-                                    underline: Container(
-                                      height: 2,
-                                      color: Colors.grey,
-                                    ),
-                                    onChanged: (String newValue) {
-                                      setState(() {
-                                        dropdownValue2 = newValue;
-                                      });
-                                    },
-                                    items: _drop.map((DropDown map) {
-                                      return new DropdownMenuItem<String>(
-                                          value: map.value,
-                                          onTap: () {
-                                            setState(() {
-                                              searchOptionId = map.id;
-                                            });
-                                          },
-                                          child: new Text(map.value,
-                                              style: new TextStyle(color: Colors.grey, fontSize: 12)));
-                                    }).toList(),
+                                  iconSize: 30,
+                                  elevation: 16,
+                                  style: TextStyle(color: Colors.deepPurple),
+                                  underline: Container(
+                                    height: 2,
+                                    color: Colors.grey,
                                   ),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      dropdownValue2 = newValue;
+                                    });
+                                  },
+                                  items: _drop.map((DropDown map) {
+                                    return new DropdownMenuItem<String>(
+                                        value: map.value,
+                                        onTap: () {
+                                          setState(() {
+                                            searchOptionId = map.id;
+                                          });
+                                        },
+                                        child: new Text(map.value,
+                                            style: new TextStyle(color: Colors.grey, fontSize: 12)));
+                                  }).toList(),
                                 ),
                               ),
                               SizedBox(

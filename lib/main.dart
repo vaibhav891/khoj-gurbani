@@ -856,7 +856,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(fontFamily: 'Cabin'),
       debugShowCheckedModeBanner: false,
       home: fromLink == false
-          ? false //widget.sharedPreferences.containsKey('token')
+          ? widget.sharedPreferences.containsKey('token')
               ? MediaPage(
                   isPlaying: isPlaying,
                   tapPause: tapPause,

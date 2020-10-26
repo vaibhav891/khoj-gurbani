@@ -155,18 +155,19 @@ class _MediaPageState extends State<MediaPage> {
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: Color(0xffF5F5F5),
-            title: Image.asset(
-              'assets/images/Khoj Gurbani logo.png',
-              width: maxWidth * 0.5,
-              height: maxHeight * 0.06,
-              color: Color(0xff578ED3),
-            ),
+            title:
+                // Image.asset(
+                //   'assets/images/Khoj Gurbani logo.png',
+                //   width: maxWidth * 0.5,
+                //   height: maxHeight * 0.06,
+                //   color: Color(0xff578ED3),
+                // ),
 
-            // Text(
-            //   'Media',
-            //   textAlign: TextAlign.center,
-            //   style: TextStyle(fontSize: 14, color: Colors.black),
-            // ),
+                Text(
+              'Media',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
           ),
           bottomNavigationBar: MyBottomNavBar(),
           backgroundColor: Colors.white,

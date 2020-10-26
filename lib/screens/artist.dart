@@ -330,7 +330,7 @@ class _ArtistPageState extends State<ArtistPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: maxHeight * 0.0364, left: maxWidth * 0.035),
+                padding: EdgeInsets.only(top: maxHeight * 0.0364, left: maxWidth * 0.05),
                 child: Container(
                   width: maxWidth * 0.4361,
                   child: Column(
@@ -441,9 +441,9 @@ class _ArtistPageState extends State<ArtistPage> {
             height: maxHeight * 0.0135,
           ),
           Padding(
-            padding: EdgeInsets.only(left: maxWidth * 0.0555, right: maxWidth * 0.0555),
+            padding: EdgeInsets.only(left: maxWidth * 0.05, right: maxWidth * 0.0555),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
@@ -516,9 +516,9 @@ class _ArtistPageState extends State<ArtistPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: maxHeight * 0.0135,
-                ),
+                // SizedBox(
+                //   width: maxWidth * 0.034,
+                // ),
                 GestureDetector(
                   onTap: () {
                     service.shuffleListOneArtist.shuffle();
@@ -742,11 +742,14 @@ class _ArtistPageState extends State<ArtistPage> {
                                                       maxLines: 1,
                                                       overflow: TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                        fontSize: 14.0,
+                                                        fontSize: 16.0,
                                                         fontWeight: FontWeight.w600,
                                                       ),
                                                     )
                                                   : Text(""),
+                                            ),
+                                            SizedBox(
+                                              height: 4,
                                             ),
                                             ConstrainedBox(
                                               constraints: BoxConstraints(maxWidth: maxWidth * 0.694444),

@@ -1029,7 +1029,10 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
               height: maxHeight * 0.047,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: maxWidth * 0.01),
+              padding: EdgeInsets.only(
+                left: maxWidth * 0.00,
+                right: maxWidth * 0.009,
+              ),
               child: Container(
                 height: maxHeight * 0.027,
                 child: SliderTheme(
