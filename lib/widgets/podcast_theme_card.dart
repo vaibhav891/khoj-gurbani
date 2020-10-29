@@ -340,11 +340,13 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                     )
                         .whenComplete(() async {
                       Downloads newDT = Downloads(
+                        id: widget.id,
                         title: this.widget.title,
                         author: this.widget.author,
                         attachmentName: service.pathName.toString(),
                         image: service.imagePath.toString(),
                         is_media: 0,
+                        //author_id: no author id for podcast
                       );
                       await DBProvider.db.newDownload(newDT);
                     });

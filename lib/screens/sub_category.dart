@@ -110,6 +110,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 itemCount: widget.categories.subCategoryCount,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
+                    //TODO vaibhav image changes here
                     // clipBehavior: Clip.hardEdge,
                     child: Column(children: <Widget>[
                       GestureDetector(
@@ -137,10 +138,10 @@ class _CategoryPageState extends State<CategoryPage> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image(
-                              height: maxHeight * 0.2175,
+                              height: maxHeight * 0.2,
                               width: maxWidth * 0.44722,
                               image: NetworkImage(snapshot.data[index].attachmentName),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fitHeight,
                             ),
                           ),
                         ),

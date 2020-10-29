@@ -163,7 +163,7 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
       ),
       Container(
           padding: EdgeInsets.only(left: maxWidth * 0.0694, top: maxHeight * 0.014),
-          height: maxHeight * 0.350,
+          height: maxHeight * 0.3,
           child: GridView.count(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.only(right: 5),
@@ -249,12 +249,15 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                                       child: Text(
                                         service.medias[index].title,
                                         style: TextStyle(
-                                          fontSize: 12.0,
+                                          fontSize: 14.0,
                                           fontWeight: FontWeight.w600,
                                         ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
+                                    ),
+                                    SizedBox(
+                                      height: maxHeight * 0.003,
                                     ),
                                     Container(
                                       width: maxWidth * 0.455555,
@@ -311,6 +314,8 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                                       attachmentName: service.medias[index].attachmentName,
                                       id: service.medias[index].id,
                                       author_id: service.medias[index].author_id,
+                                      shabadId: service.medias[index].shabadId,
+                                      page: service.medias[index].page,
                                       image: service.medias[index].image,
                                       showOverlay: this.widget.showOverlay,
                                       showOverlayTrue: this.widget.showOverlayTrue,

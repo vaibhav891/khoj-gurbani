@@ -142,20 +142,19 @@ class _SongOptionsState extends State<SongOptions> {
     });
   }
 
-  // mediaDownload(int id) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   final userId = prefs.getInt('user_id');
-  //   final token = prefs.getString('token');
-  //   final machineId = prefs.getString('machine_id');
+  mediaDownload(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getInt('user_id');
+    final token = prefs.getString('token');
+    final machineId = prefs.getString('machine_id');
 
-  //   // final headers = {'Authorization': "Bearer " + token};
-  //   final res = await http.post(
-  //       'https://api.khojgurbani.org/api/v1/android/user-download?media_id=$id&user_id=$userId&machine_id=$machineId&');
-  //   // headers: headers
-  //   // );
-  //   final data = jsonDecode(res.body);
-
-  // }
+    // final headers = {'Authorization': "Bearer " + token};
+    final res = await http.post(
+        'https://api.khojgurbani.org/api/v1/android/user-download?media_id=$id&user_id=$userId&machine_id=$machineId&');
+    // headers: headers
+    // );
+    final data = jsonDecode(res.body);
+  }
 
   deleteTrackFromPlaylist(int playlist_id, int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -463,13 +462,19 @@ class _SongOptionsState extends State<SongOptions> {
                       )
                           .whenComplete(() async {
                         Downloads newDT = Downloads(
-                          title: this.widget.title,
-                          author: this.widget.artistName,
+                          id: widget.id,
+                          title: widget.title,
+                          author: widget.artistName,
                           attachmentName: download.pathName.toString(),
                           image: download.imagePath.toString(),
                           is_media: 1,
+                          author_id: widget.author_id,
+                          shabad_id: widget.shabadId,
+                          page: widget.page,
                         );
                         await DBProvider.db.newDownload(newDT);
+                        // call api to notify server of new download
+                        mediaDownload(widget.id);
                       });
                       Navigator.of(context).pop();
                       downloading();

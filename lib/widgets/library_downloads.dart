@@ -100,7 +100,6 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
   var shuffleButton;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     playButton = DBProvider.db.downl;
     shuffleButton = DBProvider.db.downl;
@@ -338,7 +337,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                         snapshot.data[index].author,
                                         snapshot.data[index].attachmentName,
                                         snapshot.data[index].image.toString(),
-                                        snapshot.data[index].shabadId,
+                                        snapshot.data[index].shabad_id,
                                         snapshot.data[index].page,
                                         snapshot.data[index].id,
                                         fromFile: snapshot.data[index].fromFile);
@@ -442,6 +441,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                                         author_id: snapshot.data[index].author_id,
                                                         image: snapshot.data[index].image,
                                                         isDownloaded: true,
+                                                        indexOfArtist: snapshot.data[index].author_id,
                                                       ),
                                                       // transitionDuration:
                                                       //     Duration(seconds: 1),

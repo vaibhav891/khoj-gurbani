@@ -215,12 +215,13 @@ class _ArtistPageState extends State<ArtistPage> {
     return Scaffold(
       appBar: AppBar(
         //centerTitle: true,
+        titleSpacing: 0.0,
         backgroundColor: Color(0xffF5F5F5),
         title: Padding(
           padding: EdgeInsets.only(right: maxWidth * 0.06388),
           child: Container(
             // padding: EdgeInsets.only(bottom: 15),
-            height: maxHeight * 0.057,
+            height: maxHeight * 0.045,
             width: maxWidth * 0.8694,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -666,7 +667,7 @@ class _ArtistPageState extends State<ArtistPage> {
                       itemBuilder: (BuildContext context, int index) {
                         // Destination destination = destinations[index];
                         return Container(
-                          margin: EdgeInsets.only(bottom: maxHeight * 0.027),
+                          margin: EdgeInsets.only(bottom: maxHeight * 0.012),
                           width: maxWidth * 0.9305,
                           child: Stack(
                             // alignment: Alignment.topCenter,

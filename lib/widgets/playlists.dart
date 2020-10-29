@@ -67,12 +67,13 @@ class _PlayListWidgetState extends State<PlayListWidget> {
     final userId = prefs.getInt('user_id');
     final token = prefs.getString('token');
     final machineId = prefs.getString('machine_id');
+    final url = 'https://api.khojgurbani.org/api/v1/android/user-playlist?user_id=$userId&machine_id=$machineId';
 
+    print('Url -> $url');
     // this.playlistCard();
 
     // final headers = {'Authorization': "Bearer " + token};
-    final response = await http
-        .get('https://api.khojgurbani.org/api/v1/android/user-playlist?user_id=$userId&machine_id=$machineId');
+    final response = await http.get(url);
     var jsonData = json.decode(response.body);
 
     Playlists results = new Playlists.fromJson(jsonData);

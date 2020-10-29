@@ -111,7 +111,7 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
   podcastDownload(int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final userId = prefs.getInt('user_id');
-    final token = prefs.getString('token');
+    //final token = prefs.getString('token');
     final machineId = prefs.getString('machine_id');
 
     // final headers = {'Authorization': "Bearer " + token};
@@ -120,7 +120,11 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
           (userId == null ? 'machine_id=$machineId&' : 'user_id=$userId&machine_id=$machineId&'),
       // headers: headers
     );
-    final data = jsonDecode(res.body);
+    if (res.statusCode == 200) {
+      print('api returned success');
+    } else {
+      print('Api call returned error -> ${res.reasonPhrase}');
+    }
   }
 
   deleteTrackFromPlaylist(int playlist_id, int id) async {
@@ -268,13 +272,18 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                             )
                                 .whenComplete(() async {
                               Downloads newDT = Downloads(
+                                id: widget.id,
                                 title: this.widget.title,
                                 author: this.widget.artistName,
                                 attachmentName: download.pathName.toString(),
                                 image: download.imagePath.toString(),
                                 is_media: 0,
+                                //author_id: no author id for podcast
+                                //shabad_id: no shabad id for podcast
                               );
                               await DBProvider.db.newDownload(newDT);
+                              // call api to notify server of new download
+                              podcastDownload(widget.id);
                             });
                             Navigator.of(context).pop();
                             downloading();

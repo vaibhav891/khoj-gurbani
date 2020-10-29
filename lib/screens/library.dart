@@ -118,8 +118,8 @@ class _LibraryState extends State<Library> {
         ],
         title: Text(
           'Library',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black, fontSize: 14),
+          //textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
         leading: Container(
           // alignment: AxisDirection.left,

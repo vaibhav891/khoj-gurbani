@@ -402,14 +402,15 @@ class _SearchScreenState extends State<SearchScreen> {
             appBar: AppBar(
               //centerTitle: true,
               backgroundColor: Color(0xffF5F5F5),
+              titleSpacing: 0.0,
               title: Row(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Container(
                     // padding: EdgeInsets.only(bottom: 15),
-                    height: maxHeight * 0.057, //0.0418,
-                    width: maxWidth * 0.66,
+                    height: maxHeight * 0.045, //0.0418,
+                    width: maxWidth * 0.8,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: Colors.white),
@@ -480,7 +481,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       //     ));
                     },
                     child: Container(
-                      height: maxHeight * 0.057,
+                      height: maxHeight * 0.045,
                       width: maxWidth * 0.0972,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -774,6 +775,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                       searchKeyWord = searchkeyword.text;
                                       checkSearchKeywordLang();
                                       mediaSearchFilter();
+                                      if (keyboard == true) {
+                                        overlayEntry.remove();
+                                        setState(() {
+                                          keyboard = !keyboard;
+                                        });
+                                      }
                                       // showFilter = false;
                                     });
                                   },
@@ -902,12 +909,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                 child: Text(
                                   mediaFilters[index].title,
                                   style: TextStyle(
-                                    fontSize: 12.0,
+                                    fontSize: 14.0,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
+                              ),
+                              SizedBox(
+                                height: maxHeight * 0.003,
                               ),
                               Container(
                                 width: maxWidth / 1.8,
@@ -1271,12 +1281,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                 child: Text(
                                   searchResults2[i].title,
                                   style: TextStyle(
-                                    fontSize: 12.0,
+                                    fontSize: 14.0,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
+                              ),
+                              SizedBox(
+                                height: maxHeight * 0.003,
                               ),
                               Container(
                                 width: maxWidth / 1.7,
@@ -1430,9 +1443,13 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Padding(
         padding: EdgeInsets.all(2.0),
         child: RaisedButton(
+            color: Colors.grey,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             padding: EdgeInsets.all(1.0),
-            child: Icon(Icons.backspace),
+            child: Icon(
+              Icons.backspace,
+              color: Colors.white,
+            ),
             onPressed: () {
               setState(() {
                 if ((searchkeyword.text != null) && (searchkeyword.text.length > 0)) {
@@ -1451,11 +1468,16 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Padding(
         padding: EdgeInsets.all(2.0),
         child: RaisedButton(
+            color: Colors.grey,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             padding: EdgeInsets.all(1.0),
             child: Text(
               buttonText,
-              style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 17.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
             onPressed: () {
               buttonPressed(buttonText);
@@ -1470,11 +1492,12 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Padding(
         padding: EdgeInsets.all(2.0),
         child: RaisedButton(
+            color: Colors.grey,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             padding: EdgeInsets.all(1.0),
             child: Text(
               'space',
-              style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             onPressed: () {
               buttonPressed(' ');

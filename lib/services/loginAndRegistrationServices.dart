@@ -35,7 +35,7 @@ class LoginAndRegistrationService {
       print('Failed to get platform version');
     }
     getMachineId(identifier);
-    print(identifier);
+    print('machine id : $identifier');
     return [deviceName, deviceVersion, identifier];
   }
 

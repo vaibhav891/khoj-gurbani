@@ -63,9 +63,14 @@ class _AddToPlaylistState extends State<AddToPlaylist> {
     final int userId = prefs.getInt('user_id');
     final String token = prefs.getString('token');
     final String machineId = prefs.getString('machine_id');
+    var body = {
+      'user_id': json.encode(userId),
+      'playlist_name': playlist_name,
+      'machine_id': machineId,
+    };
+    print(body);
 
-    final res = await http.post('https://api.khojgurbani.org/api/v1/android/create-playlist',
-        body: {'user_id': json.encode(userId), 'playlist_name': playlist_name, 'machine_id': machineId});
+    final res = await http.post('https://api.khojgurbani.org/api/v1/android/create-playlist', body: body);
 
     var response = json.decode(res.body);
     setState(() {
