@@ -178,7 +178,7 @@ class _PlayListWidgetState extends State<PlayListWidget> {
                                   maxLines: 1,
                                   // textAlign: TextAlign.left,
                                   overflow: TextOverflow.clip,
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(fontSize: 16, color: Colors.black),
                                 ),
                               ),
                               Container(
@@ -289,7 +289,7 @@ class _PlayListWidgetState extends State<PlayListWidget> {
                                   'New playlist',
                                   maxLines: 1,
                                   overflow: TextOverflow.clip,
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(fontSize: 16, color: Colors.black),
                                 ),
                               ),
                             ),

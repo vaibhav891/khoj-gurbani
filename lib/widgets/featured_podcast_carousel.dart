@@ -104,7 +104,7 @@ class _FeaturedPodcastCarouselState extends State<FeaturedPodcastCarousel> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                'Featured Podcast',
+                'Featured Podcasts',
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
@@ -193,7 +193,7 @@ class _FeaturedPodcastCarouselState extends State<FeaturedPodcastCarousel> {
                                 maxLines: 2,
                                 softWrap: true,
                                 overflow: TextOverflow.clip,
-                                style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600, color: Colors.black),
+                                style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal, color: Colors.black),
                               ),
                             ],
                           ),

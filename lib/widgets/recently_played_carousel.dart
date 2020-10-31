@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -105,8 +106,7 @@ class _RecentlyPlayedCarouselState extends State<RecentlyPlayedCarousel> {
               return Column(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(
-                        left: maxWidth * 0.0555, bottom: maxHeight / 80),
+                    padding: EdgeInsets.only(left: maxWidth * 0.0555, bottom: maxHeight / 80),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -126,9 +126,7 @@ class _RecentlyPlayedCarouselState extends State<RecentlyPlayedCarousel> {
                     height: maxHeight * 0.22008,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data.length == null
-                          ? 0
-                          : snapshot.data.length,
+                      itemCount: snapshot.data.length == null ? 0 : snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           margin: EdgeInsets.only(top: maxHeight * 0.005),
@@ -149,13 +147,9 @@ class _RecentlyPlayedCarouselState extends State<RecentlyPlayedCarousel> {
                                       is_media: snapshot.data[index].is_media,
                                       author_id: snapshot.data[index].author_id,
                                     );
-                                this.widget.play(
-                                    snapshot.data[index].attachmentName,
-                                    context);
+                                this.widget.play(snapshot.data[index].attachmentName, context);
                                 List links = [];
-                                for (int i = index;
-                                    i < snapshot.data.length;
-                                    i++) {
+                                for (int i = index; i < snapshot.data.length; i++) {
                                   links.add(snapshot.data[i]);
                                 }
                                 this.widget.setListLinks(links);
@@ -175,39 +169,42 @@ class _RecentlyPlayedCarouselState extends State<RecentlyPlayedCarousel> {
                                       width: maxWidth * 0.329,
                                       decoration: BoxDecoration(
                                         color: Colors.transparent,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
+                                        borderRadius: BorderRadius.circular(10.0),
                                       ),
                                       child: Container(
                                         // height: 65.0,
                                         width: maxWidth * 0.378,
                                         decoration: BoxDecoration(
                                           color: Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                                          borderRadius: BorderRadius.circular(10.0),
                                         ),
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
                                               snapshot.data[index].title,
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                              style: //GoogleFonts.poppins(fontSize: 12, color: Colors.black),
+                                                  TextStyle(fontSize: 14.0, color: Colors.black
+                                                      // fontWeight: FontWeight.normal,
+                                                      // fontFamily: 'Cabin'
+                                                      ),
                                             ),
+                                            SizedBox(height: maxHeight * 0.001),
                                             Text(
                                               snapshot.data[index].author,
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
+                                              style:
+                                                  // GoogleFonts.poppins(
+                                                  //   fontSize: 11,
+                                                  // )
+                                                  TextStyle(
                                                 fontSize: 12.0,
-                                                fontWeight: FontWeight.w600,
+                                                // fontWeight: FontWeight.normal,
+                                                // color: Colors.grey[800],
                                               ),
                                             ),
                                           ],
@@ -232,13 +229,11 @@ class _RecentlyPlayedCarouselState extends State<RecentlyPlayedCarousel> {
                                         Container(
                                           // tag: 'recently-played1',
                                           child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(6.0),
+                                            borderRadius: BorderRadius.circular(6.0),
                                             child: Image(
                                               height: maxHeight * 0.160,
                                               width: maxWidth * 0.329,
-                                              image: NetworkImage(
-                                                  snapshot.data[index].image),
+                                              image: NetworkImage(snapshot.data[index].image),
                                               fit: BoxFit.cover,
                                             ),
                                           ),

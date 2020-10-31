@@ -99,71 +99,81 @@ class _CategoryPageState extends State<CategoryPage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
-              return GridView.builder(
+              return ListView.builder(
                 padding: EdgeInsets.only(
                     left: maxWidth * 0.0555,
                     right: maxWidth * 0.0555,
                     top: maxHeight * 0.0216,
                     bottom: maxHeight * 0.0405),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 0.73, crossAxisSpacing: 9),
+                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //   crossAxisCount: 1,
+                //   childAspectRatio: 0.73,
+                //   // crossAxisSpacing: 9,
+                // ),
                 itemCount: widget.categories.subCategoryCount,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    //TODO vaibhav image changes here
                     // clipBehavior: Clip.hardEdge,
-                    child: Column(children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => CategoryTracksPage(
-                                      id: snapshot.data[index].id,
-                                      name: snapshot.data[index].name,
-                                      api: 'https://api.khojgurbani.org/api/v1/android/resource-subcategory-media/' +
-                                          snapshot.data[index].id.toString(),
-                                      showOverlay: this.widget.showOverlay,
-                                      showOverlayTrue: this.widget.showOverlayTrue,
-                                      showOverlayFalse: this.widget.showOverlayFalse,
-                                      show: this.widget.show,
-                                      play: this.widget.play,
-                                      setListLinks: this.widget.setListLinks,
-                                      insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
-                                      setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
-                                      currentSong: this.widget.currentSong)));
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image(
-                              height: maxHeight * 0.2,
-                              width: maxWidth * 0.44722,
-                              image: NetworkImage(snapshot.data[index].attachmentName),
-                              fit: BoxFit.fitHeight,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: maxHeight * 0.0135, left: maxWidth * 0.0138),
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              width: maxWidth * 0.4083,
-                              child: Text(
-                                snapshot.data[index].name,
-                                style: TextStyle(),
-                                textAlign: TextAlign.left,
-                                maxLines: 3,
-                                overflow: TextOverflow.clip,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Column(
+                        children: <Widget>[
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => CategoryTracksPage(
+                                          id: snapshot.data[index].id,
+                                          name: snapshot.data[index].name,
+                                          api:
+                                              'https://api.khojgurbani.org/api/v1/android/resource-subcategory-media/' +
+                                                  snapshot.data[index].id.toString(),
+                                          showOverlay: this.widget.showOverlay,
+                                          showOverlayTrue: this.widget.showOverlayTrue,
+                                          showOverlayFalse: this.widget.showOverlayFalse,
+                                          show: this.widget.show,
+                                          play: this.widget.play,
+                                          setListLinks: this.widget.setListLinks,
+                                          insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                                          setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
+                                          currentSong: this.widget.currentSong)));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image(
+                                  // height: maxHeight * 0.2,
+                                  // width: maxWidth * 0.44722,
+                                  image: NetworkImage(snapshot.data[index].attachmentName),
+                                  fit: BoxFit.fitHeight,
+                                ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: maxHeight * 0.01, left: maxWidth * 0.0138),
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  //width: maxWidth * 0.4083,
+                                  child: Text(
+                                    snapshot.data[index].name,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                    maxLines: 3,
+                                    overflow: TextOverflow.clip,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ]),
+                    ),
                   );
                 },
               );

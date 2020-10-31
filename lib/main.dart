@@ -5,6 +5,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:khojgurbani_music/screens/artist.dart';
 import 'dart:convert';
@@ -135,7 +136,7 @@ class _MyAppState extends State<MyApp> {
 
   setPropertiesForFullScreen(context, titleTMP, authorTMP, attachmentNameTEMP, imageTMP, shabadIdTMP, pageTMP,
       is_mediaTMP, author_idTMP, idTMP,
-      {fromFile}) {
+      {fromFile, isDownloaded = false}) {
     setState(() {
       this.title = titleTMP;
       this.singerName = authorTMP;
@@ -146,39 +147,40 @@ class _MyAppState extends State<MyApp> {
       this.is_media = is_mediaTMP;
       this.author_id = author_idTMP;
       this.id = idTMP;
+      this.isDownloaded = isDownloaded;
     });
     Navigator.push(
         context,
         new MaterialPageRoute(
             builder: (context) => MusicPlayerFullSize(
-                  title: this.title,
-                  artistName: this.singerName,
-                  attachmentName: this.attachmentName,
-                  image: this.image,
-                  shabadId: this.shabadId,
-                  page: this.page,
-                  is_media: this.is_media,
-                  author_id: this.author_id,
-                  id: this.id,
-                  tapPause: this.tapPause,
-                  tapPlay: this.tapPlay,
-                  showOverlay: this.showOverlay,
-                  showOverlayTrue: this.showOverlayTrue,
-                  setIsOpenFullScreen: this.setIsOpenFullScreen,
-                  show: this.show,
-                  isPlaying: this.isPlaying,
-                  audioPlayer: this.audioPlayer,
-                  snapshot: this.snapshot,
-                  getLyrics: this.getLyrics,
-                  playPrevSong: playPrevSong,
-                  shuffleListLinks: shuffleListLinks,
-                  repeat: repeat,
-                  setRepeat: setRepeat,
-                  setShuffle: setShuffle,
-                  shuffle: shuffle,
-                  playNextSong: playNextSong,
-                  fromFile: fromFile,
-                )));
+                title: this.title,
+                artistName: this.singerName,
+                attachmentName: this.attachmentName,
+                image: this.image,
+                shabadId: this.shabadId,
+                page: this.page,
+                is_media: this.is_media,
+                author_id: this.author_id,
+                id: this.id,
+                tapPause: this.tapPause,
+                tapPlay: this.tapPlay,
+                showOverlay: this.showOverlay,
+                showOverlayTrue: this.showOverlayTrue,
+                setIsOpenFullScreen: this.setIsOpenFullScreen,
+                show: this.show,
+                isPlaying: this.isPlaying,
+                audioPlayer: this.audioPlayer,
+                snapshot: this.snapshot,
+                getLyrics: this.getLyrics,
+                playPrevSong: playPrevSong,
+                shuffleListLinks: shuffleListLinks,
+                repeat: repeat,
+                setRepeat: setRepeat,
+                setShuffle: setShuffle,
+                shuffle: shuffle,
+                playNextSong: playNextSong,
+                fromFile: fromFile,
+                isDownloaded: isDownloaded)));
   }
 
   var snapshot;
@@ -215,6 +217,7 @@ class _MyAppState extends State<MyApp> {
   int is_media;
   int author_id;
   int id;
+  bool isDownloaded;
 
   showOverlayTrue() {
     setState(() {
@@ -347,63 +350,69 @@ class _MyAppState extends State<MyApp> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width * 0.04166,
-                                top: MediaQuery.of(context).size.height * 0.01891),
-                            // width: 150,
-                            // color: Colors.blue,
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Container(
-                                      width: MediaQuery.of(context).size.width * 0.40277,
-                                      child: Text(
-                                        title,
-                                        overflow: TextOverflow.clip,
-                                        maxLines: 1,
-                                        style: TextStyle(color: Colors.white, fontSize: 12),
+                          Center(
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width * 0.04166,
+                                  top: MediaQuery.of(context).size.height * 0.012),
+                              // width: 150,
+                              // color: Colors.blue,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Container(
+                                        width: MediaQuery.of(context).size.width * 0.40277,
+                                        child: Text(
+                                          title,
+                                          overflow: TextOverflow.clip,
+                                          maxLines: 1,
+                                          style:
+                                              TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Container(
-                                      width: MediaQuery.of(context).size.width * 0.40277,
-                                      child: singerName != null
-                                          ? Text(
-                                              singerName,
-                                              overflow: TextOverflow.clip,
-                                              maxLines: 1,
-                                              style: TextStyle(color: Colors.grey, fontSize: 12),
-                                            )
-                                          : Container(),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Container(
+                                        width: MediaQuery.of(context).size.width * 0.40277,
+                                        child: singerName != null
+                                            ? Text(
+                                                singerName,
+                                                overflow: TextOverflow.clip,
+                                                maxLines: 1,
+                                                style: TextStyle(color: Colors.grey[300], fontSize: 16),
+                                              )
+                                            : Container(),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width * 0.1388,
+                                    // top: MediaQuery.of(context).size.height * 0.0243,
+                                  ),
+                                  child: GestureOverlay(
+                                    // icons: icons,
+                                    isPlaying: this.isPlaying,
+                                    tapPause: this.tapPause,
+                                    tapPlay: this.tapPlay,
+                                    tapStop: this.tapStop,
+                                    show: this.show,
+                                    removeOverlayEntry: removeOverlayEntry,
+                                    showOverlayFalse: showOverlayFalse,
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width * 0.1388,
-                                    top: MediaQuery.of(context).size.height * 0.0243),
-                                child: GestureOverlay(
-                                  // icons: icons,
-                                  isPlaying: this.isPlaying,
-                                  tapPause: this.tapPause,
-                                  tapPlay: this.tapPlay,
-                                  tapStop: this.tapStop,
-                                  show: this.show,
-                                  removeOverlayEntry: removeOverlayEntry,
-                                  showOverlayFalse: showOverlayFalse,
-                                ),
-                              ),
-                            ],
                           ),
                         ],
                       ),
@@ -853,7 +862,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Cabin'),
+      theme: ThemeData(
+        fontFamily: 'Cabin',
+        textTheme: GoogleFonts.latoTextTheme(),
+      ),
       debugShowCheckedModeBanner: false,
       home: fromLink == false
           ? widget.sharedPreferences.containsKey('token')

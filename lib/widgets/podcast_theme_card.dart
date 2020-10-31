@@ -175,6 +175,7 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
     var newDT = DateTime.parse(widget.created_at);
     return Card(
       elevation: this.widget.allPodcasts.isSelected && this.widget.isPlaying == true ? 30 : 2,
+
       // semanticContainer: false,
       margin: EdgeInsets.only(left: maxWidth * 0.05555, top: 0, right: maxWidth * 0.05555),
       child: Container(
@@ -202,18 +203,23 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: maxWidth * 0.02777, bottom: maxHeight * 0.02027),
+                        padding: EdgeInsets.only(left: maxWidth * 0.03, bottom: maxHeight * 0.01),
                         child: Container(
-                          width: maxWidth * 0.5,
+                          width: maxWidth * 0.45,
                           child: Text(
                             widget.title,
-                            maxLines: 1,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(),
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
                           ),
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    width: maxWidth * 0.07,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -263,7 +269,7 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                   child: Text(
                     widget.description != null ? widget.description : '',
                     maxLines: 2,
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(fontSize: 13),
                   )),
             ),
             Row(
@@ -319,13 +325,18 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                 //   child: Text('Feb 19-'),
                 // ),
                 Padding(
-                  padding: EdgeInsets.only(top: maxHeight * 0.04054, left: maxWidth * 0.013888),
+                  padding: EdgeInsets.only(top: maxHeight * 0.035, left: maxWidth * 0.013888),
                   child: Container(
                       width: maxWidth * 0.43777,
                       child: Row(
                         children: <Widget>[
                           // Text(widget.duration + " MIN"),
-                          Text(DateFormat.MMM().add_d().format(newDT) + " - " + widget.duration + " MIN"),
+                          Text(
+                            DateFormat.MMM().add_d().format(newDT) + " - " + widget.duration + " MIN",
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
                         ],
                       )),
                 ),

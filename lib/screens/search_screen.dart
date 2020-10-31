@@ -732,12 +732,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                   value: dropdownValue2,
                                   isDense: true,
                                   // hint: Text(dropdownValue2),
-                                  icon: Padding(
-                                    padding: EdgeInsets.only(left: maxWidth * 0.3344),
-                                    child: Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: Color(0xff578ed3),
-                                    ),
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: Color(0xff578ed3),
                                   ),
                                   iconSize: 30,
                                   elevation: 16,
@@ -909,7 +906,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 child: Text(
                                   mediaFilters[index].title,
                                   style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   maxLines: 1,
@@ -923,7 +920,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 width: maxWidth / 1.8,
                                 child: Text(
                                   mediaFilters[index].name,
-                                  style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600, color: Colors.grey),
+                                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal, color: Colors.grey),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -955,10 +952,10 @@ class _SearchScreenState extends State<SearchScreen> {
                       children: <Widget>[
                         Container(
                           // width: maxWidth * 0.138888,
-                          padding: EdgeInsets.only(top: maxHeight * 0.014, right: maxWidth * 0.0555),
+                          padding: EdgeInsets.only(top: maxHeight * 0.014, right: maxWidth * 0.045),
                           child: Text(
                             mediaFilters[index].duration,
-                            style: TextStyle(fontSize: 10),
+                            style: TextStyle(fontSize: 13),
                           ),
                         ),
                         GestureDetector(
@@ -1003,12 +1000,12 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: Container(
                             width: maxWidth * 0.138888,
                             padding: EdgeInsets.only(
-                              top: maxHeight * 0.006750,
+                              top: maxHeight * 0.005,
                               right: maxWidth * 0.00055,
                             ),
                             child: Icon(
                               CupertinoIcons.ellipsis,
-                              size: 20,
+                              size: 24,
                             ),
                           ),
                         ),
@@ -1281,7 +1278,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 child: Text(
                                   searchResults2[i].title,
                                   style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   maxLines: 1,
@@ -1295,7 +1292,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 width: maxWidth / 1.7,
                                 child: Text(
                                   searchResults2[i].author,
-                                  style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600, color: Colors.grey),
+                                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal, color: Colors.grey),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -1330,7 +1327,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           padding: EdgeInsets.only(top: maxHeight * 0.014, right: maxWidth * 0.0555),
                           child: Text(
                             searchResults2[i].duration,
-                            style: TextStyle(fontSize: 10),
+                            style: TextStyle(fontSize: 13),
                           ),
                         ),
                         GestureDetector(
@@ -1380,7 +1377,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                             child: Icon(
                               CupertinoIcons.ellipsis,
-                              size: 22,
+                              size: 24,
                             ),
                           ),
                         ),

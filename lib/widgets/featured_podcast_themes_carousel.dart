@@ -45,12 +45,10 @@ class FeaturedPodcastThemesCarousel extends StatefulWidget {
   );
 
   @override
-  _FeaturedPodcastThemesCarouselState createState() =>
-      _FeaturedPodcastThemesCarouselState();
+  _FeaturedPodcastThemesCarouselState createState() => _FeaturedPodcastThemesCarouselState();
 }
 
-class _FeaturedPodcastThemesCarouselState
-    extends State<FeaturedPodcastThemesCarousel> {
+class _FeaturedPodcastThemesCarouselState extends State<FeaturedPodcastThemesCarousel> {
   void initState() {
     // _getFeaturedPodcastsThemes();
   }
@@ -99,8 +97,7 @@ class _FeaturedPodcastThemesCarouselState
                                 tapPause: this.widget.tapPause,
                                 tapPlay: this.widget.tapPlay,
                                 tapStop: this.widget.tapStop,
-                                setIsOpenFullScreen:
-                                    this.widget.setIsOpenFullScreen,
+                                setIsOpenFullScreen: this.widget.setIsOpenFullScreen,
                                 isPlaying: this.widget.isPlaying,
                                 audioPlayer: this.widget.audioPlayer,
                                 id: widget.featuredPodcastsThemes[index].id,
@@ -128,10 +125,7 @@ class _FeaturedPodcastThemesCarouselState
                                 widget.featuredPodcastsThemes[index].title,
                                 maxLines: 1,
                                 overflow: TextOverflow.clip,
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
                               ),
                             ],
                           ),
@@ -158,9 +152,7 @@ class _FeaturedPodcastThemesCarouselState
                                 child: Image(
                                   height: maxHeight * 0.181,
                                   width: maxWidth * 0.3777,
-                                  image: NetworkImage(widget
-                                      .featuredPodcastsThemes[index]
-                                      .categoryImage),
+                                  image: NetworkImage(widget.featuredPodcastsThemes[index].categoryImage),
                                   fit: BoxFit.cover,
                                 ),
                               ),

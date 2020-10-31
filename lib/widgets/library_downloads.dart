@@ -137,6 +137,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                   this.widget.currentSong.author_id,
                                   this.widget.currentSong.id,
                                   fromFile: fromFile,
+                                  isDownloaded: true,
                                 )
                             : this.widget.setPropertiesForFullScreen(
                                   context,
@@ -150,6 +151,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                   playButton[0].author_id,
                                   playButton[0].id,
                                   fromFile: fromFile,
+                                  isDownloaded: true,
                                 );
                         this.widget.play(
                             this.widget.show == true
@@ -217,6 +219,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                     this.widget.currentSong.author_id,
                                     this.widget.currentSong.id,
                                     fromFile: fromFile,
+                                    isDownloaded: true,
                                   )
                               : this.widget.setPropertiesForFullScreen(
                                     context,
@@ -230,6 +233,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                     shuffleButton[0].author_id,
                                     shuffleButton[0].id,
                                     fromFile: fromFile,
+                                    isDownloaded: true,
                                   );
                           this.widget.play(
                               this.widget.show == true
@@ -370,7 +374,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
-                                                  fontSize: 14.0,
+                                                  fontSize: 16.0,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
@@ -382,7 +386,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                                 maxLines: 1,
                                                 style: TextStyle(
                                                   color: Colors.grey,
-                                                  fontSize: 14,
+                                                  fontSize: 16,
                                                 ),
                                               ),
                                             ),
@@ -490,7 +494,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                               child: Icon(
                                                 CupertinoIcons.ellipsis,
                                                 color: Colors.grey,
-                                                size: 20,
+                                                size: 24,
                                               ),
                                             ),
                                           ),

@@ -527,7 +527,7 @@ class _PlaylistFullState extends State<PlaylistFull> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.only(
-                                      top: maxHeight * 0.014,
+                                      top: maxHeight * 0.005,
                                       left: maxWidth * 0.159,
                                     ),
                                     child: Column(
@@ -540,10 +540,13 @@ class _PlaylistFullState extends State<PlaylistFull> {
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontSize: 14.0,
-                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.normal,
                                             ),
                                           ),
+                                        ),
+                                        SizedBox(
+                                          height: maxHeight * 0.007,
                                         ),
                                         ConstrainedBox(
                                           constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
@@ -552,7 +555,9 @@ class _PlaylistFullState extends State<PlaylistFull> {
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                                fontSize: 14.0, fontWeight: FontWeight.w600, color: Color(0xffB3B3B3)),
+                                                fontSize: 14.0,
+                                                fontWeight: FontWeight.normal,
+                                                color: Color(0xffB3B3B3)),
                                           ),
                                         )
                                       ],
@@ -584,11 +589,11 @@ class _PlaylistFullState extends State<PlaylistFull> {
                                   children: <Widget>[
                                     Container(
                                       padding: EdgeInsets.only(
-                                        top: maxHeight * 0.0167,
+                                        top: maxHeight * 0.005,
                                       ),
                                       child: Text(
                                         playlistTracks[index].duration,
-                                        style: TextStyle(fontSize: 10),
+                                        style: TextStyle(fontSize: 14),
                                       ),
                                     ),
                                     GestureDetector(
@@ -662,7 +667,7 @@ class _PlaylistFullState extends State<PlaylistFull> {
                                       child: Container(
                                         child: Icon(
                                           CupertinoIcons.ellipsis,
-                                          size: 20,
+                                          size: 28,
                                           color: Color(0xff727272),
                                         ),
                                       ),

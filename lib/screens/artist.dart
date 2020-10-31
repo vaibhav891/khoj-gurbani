@@ -743,8 +743,8 @@ class _ArtistPageState extends State<ArtistPage> {
                                                       maxLines: 1,
                                                       overflow: TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                        fontSize: 16.0,
-                                                        fontWeight: FontWeight.w600,
+                                                        fontSize: 15.0,
+                                                        fontWeight: FontWeight.normal,
                                                       ),
                                                     )
                                                   : Text(""),
@@ -761,7 +761,7 @@ class _ArtistPageState extends State<ArtistPage> {
                                                       overflow: TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                           fontSize: 14.0,
-                                                          fontWeight: FontWeight.w600,
+                                                          fontWeight: FontWeight.normal,
                                                           color: Color(0xffB3B3B3)),
                                                     )
                                                   : Text(""),
@@ -805,7 +805,7 @@ class _ArtistPageState extends State<ArtistPage> {
                                           ),
                                           child: Text(
                                             service.oneArtist[index].duration,
-                                            style: TextStyle(fontSize: 10),
+                                            style: TextStyle(fontSize: 13),
                                           ),
                                         ),
                                         Padding(

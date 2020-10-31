@@ -391,7 +391,7 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                         return GestureDetector(
                           onTap: () {},
                           child: Container(
-                            margin: EdgeInsets.only(bottom: maxHeight * 0.0270),
+                            margin: EdgeInsets.only(bottom: maxHeight * 0.011),
                             width: maxWidth * 0.9305,
                             child: Stack(
                               // alignment: Alignment.topCenter,
@@ -453,7 +453,7 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                       children: <Widget>[
                                         Padding(
                                           padding: EdgeInsets.only(
-                                            top: maxHeight * 0.014,
+                                            top: maxHeight * 0.005,
                                             left: maxWidth * 0.159,
                                           ),
                                           child: Column(
@@ -467,10 +467,13 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                                   maxLines: 1,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.normal,
                                                   ),
                                                 ),
+                                              ),
+                                              SizedBox(
+                                                height: maxHeight * 0.003,
                                               ),
                                               ConstrainedBox(
                                                 constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
@@ -480,7 +483,7 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                                   overflow: TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                       fontSize: 14.0,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight: FontWeight.normal,
                                                       color: Color(0xffB3B3B3)),
                                                 ),
                                               )
@@ -506,72 +509,78 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: <Widget>[
-                                    Column(
-                                      children: <Widget>[
-                                        Container(
-                                          width: 50,
-                                          alignment: Alignment.centerRight,
-                                          padding: EdgeInsets.only(top: maxHeight * 0.00675, right: maxWidth * 0.0555),
-                                          child: Text(
-                                            service.oneArtist[index].duration,
-                                            style: TextStyle(fontSize: 10),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: maxWidth * 0.065, top: maxHeight * 0.007),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Container(
+                                            //width: 50,
+                                            //alignment: Alignment.centerRight,
+                                            padding: EdgeInsets.only(right: maxWidth * 0.003),
+                                            child: Text(
+                                              service.oneArtist[index].duration,
+                                              style: TextStyle(fontSize: 13),
+                                            ),
                                           ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context).push(PageRouteBuilder(
-                                              opaque: false,
-                                              pageBuilder: (BuildContext context, animation, secondaryAnimation) =>
-                                                  SongOptions(
-                                                indexOfSong: service.oneArtist[index].id,
-                                                title: service.oneArtist[index].title,
-                                                artistName: service.oneArtist[index].authorName,
-                                                attachmentName: service.oneArtist[index].attachmentName,
-                                                id: service.oneArtist[index].id,
-                                                author_id: service.oneArtist[index].author_id,
-                                                image: service.oneArtist[index].image,
-                                                showOverlay: this.widget.showOverlay,
-                                                showOverlayTrue: this.widget.showOverlayTrue,
-                                                showOverlayFalse: this.widget.showOverlayFalse,
-                                                show: this.widget.show,
-                                                play: this.widget.play,
-                                                setListLinks: this.widget.setListLinks,
-                                                insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
-                                                setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
-                                                fromArtistPage: fromArtistPage,
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).push(PageRouteBuilder(
+                                                opaque: false,
+                                                pageBuilder: (BuildContext context, animation, secondaryAnimation) =>
+                                                    SongOptions(
+                                                  indexOfSong: service.oneArtist[index].id,
+                                                  title: service.oneArtist[index].title,
+                                                  artistName: service.oneArtist[index].authorName,
+                                                  attachmentName: service.oneArtist[index].attachmentName,
+                                                  id: service.oneArtist[index].id,
+                                                  author_id: service.oneArtist[index].author_id,
+                                                  image: service.oneArtist[index].image,
+                                                  showOverlay: this.widget.showOverlay,
+                                                  showOverlayTrue: this.widget.showOverlayTrue,
+                                                  showOverlayFalse: this.widget.showOverlayFalse,
+                                                  show: this.widget.show,
+                                                  play: this.widget.play,
+                                                  setListLinks: this.widget.setListLinks,
+                                                  insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                                                  setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
+                                                  fromArtistPage: fromArtistPage,
+                                                ),
+                                                // transitionDuration:
+                                                //     Duration(seconds: 1),
+                                                transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                                                  var begin = Offset(0.0, -1.0);
+                                                  var end = this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
+                                                  var curve = Curves.ease;
+
+                                                  var tween =
+                                                      Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+                                                  return SlideTransition(
+                                                    position: animation.drive(tween),
+                                                    child: child,
+                                                  );
+                                                },
+                                              ));
+                                            },
+                                            child: Container(
+                                              //alignment: Alignment.centerLeft,
+                                              //width: 50,
+                                              // padding: EdgeInsets.only(
+                                              //   top: maxHeight * 0.00675,
+                                              //   left: maxWidth * 0.0277,
+                                              // ),
+                                              child: Icon(
+                                                CupertinoIcons.ellipsis,
+                                                color: Color(0xff727272),
+                                                size: 24,
                                               ),
-                                              // transitionDuration:
-                                              //     Duration(seconds: 1),
-                                              transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
-                                                var begin = Offset(0.0, -1.0);
-                                                var end = this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
-                                                var curve = Curves.ease;
-
-                                                var tween =
-                                                    Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-                                                return SlideTransition(
-                                                  position: animation.drive(tween),
-                                                  child: child,
-                                                );
-                                              },
-                                            ));
-                                          },
-                                          child: Container(
-                                            alignment: Alignment.centerLeft,
-                                            width: 50,
-                                            padding: EdgeInsets.only(
-                                              top: maxHeight * 0.00675,
-                                              left: maxWidth * 0.0277,
-                                            ),
-                                            child: Icon(
-                                              CupertinoIcons.ellipsis,
-                                              color: Color(0xff727272),
-                                              size: 20,
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),

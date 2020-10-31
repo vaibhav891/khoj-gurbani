@@ -20,7 +20,7 @@ class Downloads {
     this.page = 0,
     this.is_media,
     this.author_id = 0,
-    this.fromFile = 1,
+    this.fromFile = 0,
   });
 
   factory Downloads.fromMap(Map<String, dynamic> json) => new Downloads(

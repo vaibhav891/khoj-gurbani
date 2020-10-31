@@ -237,7 +237,7 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                             children: <Widget>[
                               Padding(
                                 padding: EdgeInsets.only(
-                                  top: maxHeight * 0.014,
+                                  top: maxHeight * 0.005,
                                   left: maxWidth * 0.159,
                                 ),
                                 child: Column(
@@ -245,28 +245,28 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Container(
-                                      width: maxWidth * 0.455555,
+                                      width: maxWidth * 0.45,
                                       child: Text(
                                         service.medias[index].title,
                                         style: TextStyle(
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.normal,
                                         ),
                                         maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
+                                        overflow: TextOverflow.clip,
                                       ),
                                     ),
                                     SizedBox(
-                                      height: maxHeight * 0.003,
+                                      height: maxHeight * 0.007,
                                     ),
                                     Container(
-                                      width: maxWidth * 0.455555,
+                                      width: maxWidth * 0.4,
                                       child: Text(
                                         service.medias[index].author,
-                                        style:
-                                            TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600, color: Colors.grey),
+                                        style: TextStyle(
+                                            fontSize: 14.0, fontWeight: FontWeight.normal, color: Colors.grey),
                                         maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
+                                        overflow: TextOverflow.clip,
                                       ),
                                     )
                                   ],
@@ -296,10 +296,10 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                             children: <Widget>[
                               Container(
                                 // width: maxWidth * 0.138888,
-                                padding: EdgeInsets.only(top: maxHeight * 0.014, right: maxWidth * 0.0555),
+                                padding: EdgeInsets.only(top: maxHeight * 0.005, right: maxWidth * 0.0555),
                                 child: Text(
                                   service.medias[index].duration,
-                                  style: TextStyle(fontSize: 10),
+                                  style: TextStyle(fontSize: 14),
                                 ),
                               ),
                               GestureDetector(
@@ -354,7 +354,7 @@ class _FeaturedMediaState extends State<FeaturedMedia> {
                                   ),
                                   child: Icon(
                                     CupertinoIcons.ellipsis,
-                                    size: 26,
+                                    size: 28,
                                   ),
                                 ),
                               ),

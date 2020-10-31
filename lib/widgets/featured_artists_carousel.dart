@@ -186,7 +186,7 @@ class _FeaturedArtistsCarouselState extends State<FeaturedArtistsCarousel> {
                             child: Text(
                               artists[index].name,
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 14),
                               // overflow: TextOverflow.ellipsis,
                             ),
                           ),

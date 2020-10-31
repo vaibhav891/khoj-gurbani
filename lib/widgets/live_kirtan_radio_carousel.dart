@@ -28,21 +28,11 @@ class LiveKirtanRadioCarousel extends StatefulWidget {
   bool isPlaying;
   final audioPlayer;
 
-  LiveKirtanRadioCarousel(
-      this.showOverlay,
-      this.showOverlayTrue,
-      this.showOverlayFalse,
-      this.show,
-      this.play,
-      this.tapPause,
-      this.tapPlay,
-      this.tapStop,
-      this.isPlaying,
-      this.audioPlayer);
+  LiveKirtanRadioCarousel(this.showOverlay, this.showOverlayTrue, this.showOverlayFalse, this.show, this.play,
+      this.tapPause, this.tapPlay, this.tapStop, this.isPlaying, this.audioPlayer);
 
   @override
-  _LiveKirtanRadioCarouselState createState() =>
-      _LiveKirtanRadioCarouselState();
+  _LiveKirtanRadioCarouselState createState() => _LiveKirtanRadioCarouselState();
 }
 
 class _LiveKirtanRadioCarouselState extends State<LiveKirtanRadioCarousel> {
@@ -51,8 +41,7 @@ class _LiveKirtanRadioCarouselState extends State<LiveKirtanRadioCarousel> {
   }
 
   Future<List<Radio>> _getRadio() async {
-    var data = await http
-        .get('https://api.khojgurbani.org/api/v1/android/android-radio');
+    var data = await http.get('https://api.khojgurbani.org/api/v1/android/android-radio');
     var jsonData = json.decode(data.body)['data'];
 
     List<Radio> radioList = [];
@@ -124,16 +113,14 @@ class _LiveKirtanRadioCarouselState extends State<LiveKirtanRadioCarousel> {
                               // alignment: Alignment.topCenter,
                               children: <Widget>[
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      top: maxHeight * 0.0975,
-                                      right: maxWidth * 0.055),
+                                  padding: EdgeInsets.only(top: maxHeight * 0.11, right: maxWidth * 0.055),
                                   child: Center(
                                     child: Text(
                                       snapshot.data[index].title,
                                       textAlign: TextAlign.center,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.clip,
-                                      style: TextStyle(fontSize: 12),
+                                      //maxLines: 1,
+                                      // overflow: TextOverflow.clip,
+                                      style: TextStyle(fontSize: 14),
                                     ),
                                   ),
                                 ),
@@ -152,13 +139,11 @@ class _LiveKirtanRadioCarouselState extends State<LiveKirtanRadioCarousel> {
                                     Container(
                                       // tag: 'recently-played1',
                                       child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(180.0),
+                                        borderRadius: BorderRadius.circular(180.0),
                                         child: Image(
                                           height: maxHeight * 0.1067,
                                           width: maxWidth * 0.2194,
-                                          image: NetworkImage(
-                                              snapshot.data[index].img),
+                                          image: NetworkImage(snapshot.data[index].img),
                                           fit: BoxFit.cover,
                                         ),
                                       ),

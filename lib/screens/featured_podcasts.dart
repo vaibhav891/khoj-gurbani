@@ -140,7 +140,10 @@ class _FeaturedPodcastsState extends State<FeaturedPodcasts> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.3888, top: maxHeight * 0.02027, right: maxWidth * 0.0555),
+                padding: EdgeInsets.only(
+                  left: maxWidth * 0.44,
+                  top: maxHeight * 0.02027,
+                ),
                 child: Container(
                   height: maxHeight * 0.03378,
                   width: maxWidth * 0.18888,
@@ -284,7 +287,7 @@ class _FeaturedPodcastsState extends State<FeaturedPodcasts> {
                         }),
                     child: Text(
                       'Sort',
-                      style: TextStyle(color: Color(0xff578ed3), fontSize: 10),
+                      style: TextStyle(color: Color(0xff578ed3), fontSize: 13),
                     ),
                   ),
                 ),

@@ -42,12 +42,7 @@ class Result {
   int subCategoryCount;
   String attachmentName;
 
-  Result(
-      {this.id,
-      this.name,
-      this.slug,
-      this.subCategoryCount,
-      this.attachmentName});
+  Result({this.id, this.name, this.slug, this.subCategoryCount, this.attachmentName});
 
   Result.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -92,12 +87,10 @@ class FeaturedCategoriesCarousel extends StatefulWidget {
   );
 
   @override
-  _FeaturedCategoriesCarouselState createState() =>
-      _FeaturedCategoriesCarouselState();
+  _FeaturedCategoriesCarouselState createState() => _FeaturedCategoriesCarouselState();
 }
 
-class _FeaturedCategoriesCarouselState
-    extends State<FeaturedCategoriesCarousel> {
+class _FeaturedCategoriesCarouselState extends State<FeaturedCategoriesCarousel> {
   var service = getIt<Services>();
 
   @override
@@ -127,8 +120,7 @@ class _FeaturedCategoriesCarouselState
         ),
       ),
       Container(
-          padding:
-              EdgeInsets.only(left: maxWidth * 0.0555, top: maxHeight * 0.0135),
+          padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxHeight * 0.0135),
           height: maxHeight * 0.1757,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -145,15 +137,12 @@ class _FeaturedCategoriesCarouselState
                                   categories: service.categories[index],
                                   showOverlay: this.widget.showOverlay,
                                   showOverlayTrue: this.widget.showOverlayTrue,
-                                  showOverlayFalse:
-                                      this.widget.showOverlayFalse,
+                                  showOverlayFalse: this.widget.showOverlayFalse,
                                   show: this.widget.show,
                                   play: this.widget.play,
                                   setListLinks: this.widget.setListLinks,
-                                  insertRecentlyPlayed:
-                                      this.widget.insertRecentlyPlayed,
-                                  setPropertiesForFullScreen:
-                                      this.widget.setPropertiesForFullScreen,
+                                  insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                                  setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
                                   currentSong: this.widget.currentSong,
                                 )));
                   } else {
@@ -163,21 +152,16 @@ class _FeaturedCategoriesCarouselState
                             builder: (context) => CategoryTracksPage(
                                   id: service.categories[index].id,
                                   name: service.categories[index].name,
-                                  api:
-                                      'https://api.khojgurbani.org/api/v1/android/sub-categories-new/' +
-                                          service.categories[index].id
-                                              .toString(),
+                                  api: 'https://api.khojgurbani.org/api/v1/android/sub-categories-new/' +
+                                      service.categories[index].id.toString(),
                                   showOverlay: this.widget.showOverlay,
                                   showOverlayTrue: this.widget.showOverlayTrue,
-                                  showOverlayFalse:
-                                      this.widget.showOverlayFalse,
+                                  showOverlayFalse: this.widget.showOverlayFalse,
                                   show: this.widget.show,
                                   play: this.widget.play,
                                   setListLinks: widget.setListLinks,
-                                  insertRecentlyPlayed:
-                                      this.widget.insertRecentlyPlayed,
-                                  setPropertiesForFullScreen:
-                                      this.widget.setPropertiesForFullScreen,
+                                  insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                                  setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
                                   currentSong: this.widget.currentSong,
                                 )));
                   }
@@ -205,8 +189,8 @@ class _FeaturedCategoriesCarouselState
                                   maxLines: 1,
                                   overflow: TextOverflow.clip,
                                   style: TextStyle(
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               ],
@@ -236,8 +220,7 @@ class _FeaturedCategoriesCarouselState
                                 child: Image(
                                   height: maxHeight * 0.134,
                                   width: maxWidth * 0.289,
-                                  image: NetworkImage(
-                                      service.categories[index].attachmentName),
+                                  image: NetworkImage(service.categories[index].attachmentName),
                                   fit: BoxFit.fill,
                                 ),
                               ),

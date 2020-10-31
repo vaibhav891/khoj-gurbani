@@ -108,7 +108,11 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
         s.containsKey('priority_order_status') ? s["priority_order_status"] : '',
         s.containsKey('attachment_name') ? s["attachment_name"] : '',
         s.containsKey('author_image') ? s["author_image"] : '',
-        s.containsKey('author_name') ? s["author_name"] : s['title'],
+        s.containsKey('author_name')
+            ? s["author_name"]
+            : s.containsKey('author')
+                ? s['author']
+                : s['title'],
         s.containsKey('autor_name_without_bhai') ? s["autor_name_without_bhai"] : '',
         s.containsKey('page') ? s['page'] : '',
         s.containsKey('is_media') ? s['is_media'] : '',
@@ -180,7 +184,8 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                               ? this.widget.setPropertiesForFullScreen(
                                     context,
                                     this.widget.currentSong.title,
-                                    this.widget.currentSong.author,
+                                    //this.widget.currentSong.author,
+                                    widget.name,
                                     this.widget.currentSong.attachmentName,
                                     this.widget.currentSong.image,
                                     this.widget.currentSong.shabadId,
@@ -192,7 +197,8 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                               : this.widget.setPropertiesForFullScreen(
                                     context,
                                     subCategoriesNewP[0].title,
-                                    subCategoriesNewP[0].author,
+                                    //subCategoriesNewP[0].author,
+                                    widget.name,
                                     subCategoriesNew[0].attachmentName,
                                     subCategoriesNewP[0].image,
                                     subCategoriesNewP[0].shabadId,
@@ -259,7 +265,8 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                 ? this.widget.setPropertiesForFullScreen(
                                       context,
                                       this.widget.currentSong.title,
-                                      this.widget.currentSong.author,
+                                      //this.widget.currentSong.author,
+                                      widget.name,
                                       this.widget.currentSong.attachmentName,
                                       this.widget.currentSong.image,
                                       this.widget.currentSong.shabadId,
@@ -271,7 +278,8 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                 : this.widget.setPropertiesForFullScreen(
                                       context,
                                       shuffleList[0].title,
-                                      shuffleList[0].author,
+                                      //shuffleList[0].author,
+                                      widget.name,
                                       shuffleList[0].attachmentName,
                                       shuffleList[0].image,
                                       shuffleList[0].shabadId,
@@ -371,7 +379,7 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                           return GestureDetector(
                             onTap: () {},
                             child: Container(
-                              margin: EdgeInsets.only(bottom: maxHeight * 0.027),
+                              margin: EdgeInsets.only(bottom: maxHeight * 0.01),
                               child: Stack(
                                 children: <Widget>[
                                   // Positioned(
@@ -410,7 +418,8 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                         this.widget.showOverlay(
                                               context,
                                               snapshot.data[index].title,
-                                              snapshot.data[index].author,
+                                              //snapshot.data[index].author,
+                                              widget.name,
                                               snapshot.data[index].attachmentName,
                                               snapshot.data[index].image,
                                               snapshot.data[index].shabadId,
@@ -441,11 +450,11 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                             child: ConstrainedBox(
                                               constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
                                               child: Text(
-                                                snapshot.data[index].author,
+                                                snapshot.data[index].title,
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
-                                                  fontSize: 14.0,
+                                                  fontSize: 16.0,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
@@ -480,7 +489,7 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                               ),
                                               child: Text(
                                                 snapshot.data[index].duration,
-                                                style: TextStyle(fontSize: 10),
+                                                style: TextStyle(fontSize: 14),
                                               ),
                                             ),
                                             Padding(
@@ -533,7 +542,7 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                                   child: Icon(
                                                     CupertinoIcons.ellipsis,
                                                     color: Color(0xff727272),
-                                                    size: 20,
+                                                    size: 28,
                                                   ),
                                                 ),
                                               ),
