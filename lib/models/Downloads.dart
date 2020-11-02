@@ -4,11 +4,13 @@ class Downloads {
   final String author;
   final String attachmentName;
   final String image;
-  final int shabad_id;
+  final int shabadId;
   final int page;
   final int is_media;
   final int author_id;
+  final int duration;
   final int fromFile;
+  final int timestamp;
 
   Downloads({
     this.id,
@@ -16,11 +18,13 @@ class Downloads {
     this.author,
     this.attachmentName,
     this.image,
-    this.shabad_id = 0,
+    this.shabadId = 0,
     this.page = 0,
     this.is_media,
     this.author_id = 0,
-    this.fromFile = 0,
+    this.duration,
+    this.fromFile = 1,
+    this.timestamp = 0,
   });
 
   factory Downloads.fromMap(Map<String, dynamic> json) => new Downloads(
@@ -29,10 +33,13 @@ class Downloads {
         author: json["author"],
         attachmentName: json["attachmentName"],
         image: json["image"],
-        shabad_id: json["shabad_id"],
+        shabadId: json["shabad_id"],
         page: json["page"],
         is_media: json["is_media"],
         author_id: json["author_id"],
+        duration: json["duration"],
+        fromFile: json["fromFile"],
+        timestamp: json["timestamp"],
       );
 
   Map<String, dynamic> toMap() {
@@ -42,10 +49,13 @@ class Downloads {
       'author': author,
       'attachmentName': attachmentName,
       'image': image,
-      'shabad_id': shabad_id,
+      'shabad_id': shabadId,
       'page': page,
       'is_media': is_media,
       'author_id': author_id,
+      'duration': duration,
+      'fromFile': fromFile,
+      'timestamp': timestamp,
     };
   }
 
@@ -53,6 +63,6 @@ class Downloads {
   // each dog when using the print statement.
   @override
   String toString() {
-    return 'Dog{id: $id, name: $title, author: $author, attachmentName: $attachmentName, image: $image, is_media: $is_media, author_id: $author_id,shabad_id: $shabad_id,page: $page}';
+    return 'Dog{id: $id, name: $title, author: $author, attachmentName: $attachmentName, image: $image, is_media: $is_media, author_id: $author_id,shabadId: $shabadId,page: $page,,fromFile: $fromFile,timestamp: $timestamp,}';
   }
 }

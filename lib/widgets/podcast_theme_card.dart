@@ -19,7 +19,8 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
   }) {
     final double trackHeight = sliderTheme.trackHeight;
     final double trackLeft = offset.dx;
-    final double trackTop = offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackTop =
+        offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth = parentBox.size.width;
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
@@ -82,7 +83,8 @@ class PodcastThemeCard extends StatefulWidget {
   _PodcastThemeCardState createState() => _PodcastThemeCardState();
 }
 
-class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepAliveClientMixin {
+class _PodcastThemeCardState extends State<PodcastThemeCard>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
   var service = getIt<Downloader>();
@@ -106,7 +108,8 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
     this.widget.audioPlayer.onDurationChanged.listen((Duration d) {
       durationSong = d;
       if (!mounted) return;
-      setState(() => duration = (d - position).inSeconds > 0 ? d - position : Duration(seconds: 0));
+      setState(() => duration =
+          (d - position).inSeconds > 0 ? d - position : Duration(seconds: 0));
     });
   }
 
@@ -121,22 +124,26 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
   var s;
 
   audioPlayerState() {
-    this.widget.audioPlayer.onPlayerStateChanged.listen((AudioPlayerState s) => {
-          if (mounted)
-            {
-              setState(() {
-                if (s == AudioPlayerState.PAUSED) {
-                  this.widget.isPlaying = false;
-                  // this.widget.allPodcasts.isSelected = false;
-                } else if (s == AudioPlayerState.STOPPED) {
-                  this.widget.isPlaying = false;
-                  this.widget.allPodcasts.isSelected = false;
-                } else if (s == AudioPlayerState.PLAYING) {
-                  this.widget.isPlaying = true;
-                } else {}
-              })
-            }
-        });
+    this
+        .widget
+        .audioPlayer
+        .onPlayerStateChanged
+        .listen((AudioPlayerState s) => {
+              if (mounted)
+                {
+                  setState(() {
+                    if (s == AudioPlayerState.PAUSED) {
+                      this.widget.isPlaying = false;
+                      // this.widget.allPodcasts.isSelected = false;
+                    } else if (s == AudioPlayerState.STOPPED) {
+                      this.widget.isPlaying = false;
+                      this.widget.allPodcasts.isSelected = false;
+                    } else if (s == AudioPlayerState.PLAYING) {
+                      this.widget.isPlaying = true;
+                    } else {}
+                  })
+                }
+            });
   }
 
   seekToSecond(int second) {
@@ -145,7 +152,20 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
     this.widget.audioPlayer.seek(newDuration);
   }
 
-  var months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  var months = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC"
+  ];
 
   var page = null;
 
@@ -157,7 +177,8 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
             Navigator.of(context).pop();
           });
           return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15))),
             title: Center(
               child: Text(
                 "Downloading...",
@@ -174,16 +195,21 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
     double maxHeight = MediaQuery.of(context).size.height;
     var newDT = DateTime.parse(widget.created_at);
     return Card(
-      elevation: this.widget.allPodcasts.isSelected && this.widget.isPlaying == true ? 30 : 2,
+      elevation:
+          this.widget.allPodcasts.isSelected && this.widget.isPlaying == true
+              ? 30
+              : 2,
 
       // semanticContainer: false,
-      margin: EdgeInsets.only(left: maxWidth * 0.05555, top: 0, right: maxWidth * 0.05555),
+      margin: EdgeInsets.only(
+          left: maxWidth * 0.05555, top: 0, right: maxWidth * 0.05555),
       child: Container(
         // width: 500,
         child: Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: maxHeight * 0.027027, left: maxWidth * 0.05555),
+              padding: EdgeInsets.only(
+                  top: maxHeight * 0.027027, left: maxWidth * 0.05555),
               child: Row(
                 children: <Widget>[
                   Row(
@@ -194,16 +220,18 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                           child: Image(
                             height: maxHeight / 14,
                             width: maxWidth / 6,
-                            image: NetworkImage(
-                                widget.thumbnail.contains('https://api.khojgurbani.org/uploads/thumbnail/')
-                                    ? widget.thumbnail
-                                    : 'https://api.khojgurbani.org/uploads/thumbnail/' + widget.thumbnail),
+                            image: NetworkImage(widget.thumbnail.contains(
+                                    'https://api.khojgurbani.org/uploads/thumbnail/')
+                                ? widget.thumbnail
+                                : 'https://api.khojgurbani.org/uploads/thumbnail/' +
+                                    widget.thumbnail),
                             fit: BoxFit.fill,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: maxWidth * 0.03, bottom: maxHeight * 0.01),
+                        padding: EdgeInsets.only(
+                            left: maxWidth * 0.03, bottom: maxHeight * 0.01),
                         child: Container(
                           width: maxWidth * 0.45,
                           child: Text(
@@ -225,7 +253,9 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                     onTap: () {
                       Navigator.of(context).push(PageRouteBuilder(
                         opaque: false,
-                        pageBuilder: (BuildContext context, animation, secondaryAnimation) => PodcastThreeDots(
+                        pageBuilder: (BuildContext context, animation,
+                                secondaryAnimation) =>
+                            PodcastThreeDots(
                           title: this.widget.title,
                           artistName: this.widget.author,
                           image: this.widget.thumbnail,
@@ -235,11 +265,15 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                           indexOfPodcast: this.widget.indexOfPodcast,
                         ),
                         // transitionDuration: Duration(seconds: 1),
-                        transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                        transitionsBuilder:
+                            (ontext, animation, secondaryAnimation, child) {
                           var begin = Offset(0.0, 1.0);
-                          var end = this.widget.show == true ? Offset(0.0, 0.30) : Offset(0.0, 0.47);
+                          var end = this.widget.show == true
+                              ? Offset(0.0, 0.30)
+                              : Offset(0.0, 0.47);
                           var curve = Curves.ease;
-                          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
                           return SlideTransition(
                             position: animation.drive(tween),
                             child: child,
@@ -275,10 +309,12 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
             Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: maxWidth * 0.0277, top: maxHeight * 0.0270),
+                  padding: EdgeInsets.only(
+                      left: maxWidth * 0.0277, top: maxHeight * 0.0270),
                   child: IconButton(
                       color: Color(0xff578ed3),
-                      icon: this.widget.allPodcasts.isSelected == true && this.widget.isPlaying
+                      icon: this.widget.allPodcasts.isSelected == true &&
+                              this.widget.isPlaying
                           ? Icon(
                               Icons.pause_circle_filled,
                               size: 40.0,
@@ -286,6 +322,7 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                           : Icon(
                               Icons.play_circle_filled,
                               size: 40.0,
+                              color: Colors.grey[600],
                             ),
                       onPressed: () {
                         var isSelectedTMP = this.widget.allPodcasts.isSelected;
@@ -316,7 +353,9 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                             audioPlayerState();
                             !this.widget.isPlaying && isSelectedTMP
                                 ? this.widget.tapPause()
-                                : this.widget.play(this.widget.attachmentName, context);
+                                : this
+                                    .widget
+                                    .play(this.widget.attachmentName, context);
                           });
                       }),
                 ),
@@ -325,14 +364,18 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                 //   child: Text('Feb 19-'),
                 // ),
                 Padding(
-                  padding: EdgeInsets.only(top: maxHeight * 0.035, left: maxWidth * 0.013888),
+                  padding: EdgeInsets.only(
+                      top: maxHeight * 0.035, left: maxWidth * 0.013888),
                   child: Container(
                       width: maxWidth * 0.43777,
                       child: Row(
                         children: <Widget>[
                           // Text(widget.duration + " MIN"),
                           Text(
-                            DateFormat.MMM().add_d().format(newDT) + " - " + widget.duration + " MIN",
+                            DateFormat.MMM().add_d().format(newDT) +
+                                " - " +
+                                widget.duration +
+                                " MIN",
                             style: TextStyle(
                               fontSize: 12,
                             ),
@@ -343,30 +386,39 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                 GestureDetector(
                   onTap: () async {
                     downloading();
-                    service.downloadImage(this.widget.thumbnail, this.widget.title);
+                    service.downloadImage(
+                        this.widget.thumbnail, this.widget.title);
                     service
                         .downloadFile(
                       this.widget.attachmentName,
                       this.widget.title,
                     )
-                        .whenComplete(() async {
-                      Downloads newDT = Downloads(
-                        id: widget.id,
-                        title: this.widget.title,
-                        author: this.widget.author,
-                        attachmentName: service.pathName.toString(),
-                        image: service.imagePath.toString(),
-                        is_media: 0,
-                        //author_id: no author id for podcast
-                      );
-                      await DBProvider.db.newDownload(newDT);
-                    });
+                        .then(
+                      (value) async {
+                        Downloads newDT = Downloads(
+                          id: widget.id,
+                          title: this.widget.title,
+                          author: this.widget.author,
+                          attachmentName: service.pathName.toString(),
+                          image: service.imagePath.toString(),
+                          is_media: 0,
+                          duration: value,
+                          //author_id: no author id for podcast
+                          timestamp: DateTime.now().millisecondsSinceEpoch,
+                        );
+                        await DBProvider.db.newDownload(newDT);
+                      },
+                      onError: () => print(
+                          'Something went wrong, download returned error'),
+                    );
                   },
                   child: Container(
-                    padding: EdgeInsets.only(top: maxHeight * 0.04054, left: maxWidth / 5.8),
+                    padding: EdgeInsets.only(
+                        top: maxHeight * 0.04054, left: maxWidth / 5.8),
                     child: Container(
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey, width: 2), borderRadius: BorderRadius.circular(100)),
+                          border: Border.all(color: Colors.grey, width: 2),
+                          borderRadius: BorderRadius.circular(100)),
                       child: Icon(
                         Icons.arrow_downward,
                         color: Colors.grey,
@@ -388,13 +440,17 @@ class _PodcastThemeCardState extends State<PodcastThemeCard> with AutomaticKeepA
                           activeTickMarkColor: Color(0xff578ed3),
                           thumbColor: Colors.transparent,
                           trackShape: CustomTrackShape(),
-                          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0)),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 0.0)),
                       child: Slider(
-                        value: durationSong.inSeconds.toDouble() > (position?.inSeconds ?? 0).toDouble()
+                        value: durationSong.inSeconds.toDouble() >
+                                (position?.inSeconds ?? 0).toDouble()
                             ? (position?.inSeconds ?? 0).toDouble()
                             : 0.0,
                         min: 0.0,
-                        max: durationSong.inSeconds.toDouble() > 0 ? durationSong.inSeconds.toDouble() : 0,
+                        max: durationSong.inSeconds.toDouble() > 0
+                            ? durationSong.inSeconds.toDouble()
+                            : 0,
                         onChanged: (double value) {
                           setState(() {
                             seekToSecond(value.toInt());

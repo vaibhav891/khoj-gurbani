@@ -129,7 +129,8 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
         centerTitle: true,
         backgroundColor: Color(0xffF5F5F5),
         title: Padding(
-          padding: EdgeInsets.only(bottom: maxWidth * 0.0277, right: maxWidth * 0.06388),
+          padding: EdgeInsets.only(
+              bottom: maxWidth * 0.0277, right: maxWidth * 0.06388),
           child: Container(
             // padding: EdgeInsets.only(bottom: 15),
             height: maxHeight * 0.0418,
@@ -200,7 +201,8 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
           Row(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.0555, right: maxWidth * 0.0555),
+                padding: EdgeInsets.only(
+                    left: maxWidth * 0.0555, right: maxWidth * 0.0555),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
@@ -266,7 +268,10 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                   ),
                                   Text(
                                     "Play",
-                                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -299,7 +304,8 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                     context,
                                     service.shuffleListOneArtist[0].title,
                                     service.shuffleListOneArtist[0].author,
-                                    service.shuffleListOneArtist[0].attachmentName,
+                                    service
+                                        .shuffleListOneArtist[0].attachmentName,
                                     service.shuffleListOneArtist[0].image,
                                     service.shuffleListOneArtist[0].shabadId,
                                     service.shuffleListOneArtist[0].page,
@@ -310,11 +316,14 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                           this.widget.play(
                               this.widget.show == true
                                   ? this.widget.currentSong.attachmentName
-                                  : service.shuffleListOneArtist[0].attachmentName,
+                                  : service
+                                      .shuffleListOneArtist[0].attachmentName,
                               context,
                               true);
                           List links = [];
-                          for (int i = 0; i < service.shuffleListOneArtist.length; i++) {
+                          for (int i = 0;
+                              i < service.shuffleListOneArtist.length;
+                              i++) {
                             links.add(service.shuffleListOneArtist[i]);
                           }
                           this.widget.setListLinks(links);
@@ -344,8 +353,10 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                   ),
                                   Text(
                                     "Shuffle",
-                                    style:
-                                        TextStyle(color: Color(0xff578ed3), fontSize: 16, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        color: Color(0xff578ed3),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -360,7 +371,8 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxHeight * 0.0229),
+            padding: EdgeInsets.only(
+                left: maxWidth * 0.0555, top: maxHeight * 0.0229),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -381,7 +393,8 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
           controller.text == ''
               ? Flexible(
                   child: Container(
-                    padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxHeight * 0.01621),
+                    padding: EdgeInsets.only(
+                        left: maxWidth * 0.0555, top: maxHeight * 0.01621),
                     height: maxHeight * 0.681,
                     child: ListView.builder(
                       scrollDirection: Axis.vertical,
@@ -430,17 +443,25 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                             context,
                                             service.oneArtist[index].title,
                                             service.oneArtist[index].author,
-                                            service.oneArtist[index].attachmentName,
+                                            service.oneArtist[index]
+                                                .attachmentName,
                                             service.oneArtist[index].image,
                                             service.oneArtist[index].shabadId,
                                             service.oneArtist[index].page,
                                             service.oneArtist[index].id,
-                                            is_media: service.oneArtist[index].is_media,
-                                            author_id: service.oneArtist[index].author_id,
+                                            is_media: service
+                                                .oneArtist[index].is_media,
+                                            author_id: service
+                                                .oneArtist[index].author_id,
                                           );
-                                      this.widget.play(service.oneArtist[index].attachmentName, context);
+                                      this.widget.play(
+                                          service
+                                              .oneArtist[index].attachmentName,
+                                          context);
                                       List links = [];
-                                      for (int i = index; i < service.oneArtist.length; i++) {
+                                      for (int i = index;
+                                          i < service.oneArtist.length;
+                                          i++) {
                                         links.add(service.oneArtist[i]);
                                       }
                                       this.widget.setListLinks(links);
@@ -458,17 +479,23 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                           ),
                                           child: Column(
                                             // mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: <Widget>[
                                               ConstrainedBox(
-                                                constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
+                                                constraints: BoxConstraints(
+                                                    maxWidth:
+                                                        maxWidth * 0.594444),
                                                 child: Text(
-                                                  service.oneArtist[index].title,
+                                                  service
+                                                      .oneArtist[index].title,
                                                   maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                     fontSize: 15.0,
-                                                    fontWeight: FontWeight.normal,
+                                                    fontWeight:
+                                                        FontWeight.normal,
                                                   ),
                                                 ),
                                               ),
@@ -476,14 +503,19 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                                 height: maxHeight * 0.003,
                                               ),
                                               ConstrainedBox(
-                                                constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
+                                                constraints: BoxConstraints(
+                                                    maxWidth:
+                                                        maxWidth * 0.594444),
                                                 child: Text(
-                                                  service.oneArtist[index].author,
+                                                  service
+                                                      .oneArtist[index].author,
                                                   maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                       fontSize: 14.0,
-                                                      fontWeight: FontWeight.normal,
+                                                      fontWeight:
+                                                          FontWeight.normal,
                                                       color: Color(0xffB3B3B3)),
                                                 ),
                                               )
@@ -493,11 +525,13 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                         Container(
                                           // tag: 'recently-played1',
                                           child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(6.0),
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
                                             child: Image(
                                               height: maxHeight * 0.0635,
                                               width: maxWidth * 0.1305,
-                                              image: NetworkImage(service.oneArtist[index].image),
+                                              image: NetworkImage(service
+                                                  .oneArtist[index].image),
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -510,16 +544,21 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: <Widget>[
                                     Padding(
-                                      padding: EdgeInsets.only(right: maxWidth * 0.065, top: maxHeight * 0.007),
+                                      padding: EdgeInsets.only(
+                                          right: maxWidth * 0.065,
+                                          top: maxHeight * 0.007),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: <Widget>[
                                           Container(
                                             //width: 50,
                                             //alignment: Alignment.centerRight,
-                                            padding: EdgeInsets.only(right: maxWidth * 0.003),
+                                            padding: EdgeInsets.only(
+                                                right: maxWidth * 0.003),
                                             child: Text(
                                               service.oneArtist[index].duration,
                                               style: TextStyle(fontSize: 13),
@@ -527,39 +566,74 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              Navigator.of(context).push(PageRouteBuilder(
+                                              Navigator.of(context)
+                                                  .push(PageRouteBuilder(
                                                 opaque: false,
-                                                pageBuilder: (BuildContext context, animation, secondaryAnimation) =>
+                                                pageBuilder: (BuildContext
+                                                            context,
+                                                        animation,
+                                                        secondaryAnimation) =>
                                                     SongOptions(
-                                                  indexOfSong: service.oneArtist[index].id,
-                                                  title: service.oneArtist[index].title,
-                                                  artistName: service.oneArtist[index].authorName,
-                                                  attachmentName: service.oneArtist[index].attachmentName,
-                                                  id: service.oneArtist[index].id,
-                                                  author_id: service.oneArtist[index].author_id,
-                                                  image: service.oneArtist[index].image,
-                                                  showOverlay: this.widget.showOverlay,
-                                                  showOverlayTrue: this.widget.showOverlayTrue,
-                                                  showOverlayFalse: this.widget.showOverlayFalse,
+                                                  indexOfSong: service
+                                                      .oneArtist[index].id,
+                                                  title: service
+                                                      .oneArtist[index].title,
+                                                  artistName: service
+                                                      .oneArtist[index]
+                                                      .authorName,
+                                                  attachmentName: service
+                                                      .oneArtist[index]
+                                                      .attachmentName,
+                                                  id: service
+                                                      .oneArtist[index].id,
+                                                  author_id: service
+                                                      .oneArtist[index]
+                                                      .author_id,
+                                                  image: service
+                                                      .oneArtist[index].image,
+                                                  showOverlay:
+                                                      this.widget.showOverlay,
+                                                  showOverlayTrue: this
+                                                      .widget
+                                                      .showOverlayTrue,
+                                                  showOverlayFalse: this
+                                                      .widget
+                                                      .showOverlayFalse,
                                                   show: this.widget.show,
                                                   play: this.widget.play,
-                                                  setListLinks: this.widget.setListLinks,
-                                                  insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
-                                                  setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
-                                                  fromArtistPage: fromArtistPage,
+                                                  setListLinks:
+                                                      this.widget.setListLinks,
+                                                  insertRecentlyPlayed: this
+                                                      .widget
+                                                      .insertRecentlyPlayed,
+                                                  setPropertiesForFullScreen: this
+                                                      .widget
+                                                      .setPropertiesForFullScreen,
+                                                  fromArtistPage:
+                                                      fromArtistPage,
                                                 ),
                                                 // transitionDuration:
                                                 //     Duration(seconds: 1),
-                                                transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                                                transitionsBuilder: (ontext,
+                                                    animation,
+                                                    secondaryAnimation,
+                                                    child) {
                                                   var begin = Offset(0.0, -1.0);
-                                                  var end = this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
+                                                  var end =
+                                                      this.widget.show == true
+                                                          ? Offset(0.0, -0.08)
+                                                          : Offset.zero;
                                                   var curve = Curves.ease;
 
-                                                  var tween =
-                                                      Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                                  var tween = Tween(
+                                                          begin: begin,
+                                                          end: end)
+                                                      .chain(CurveTween(
+                                                          curve: curve));
 
                                                   return SlideTransition(
-                                                    position: animation.drive(tween),
+                                                    position:
+                                                        animation.drive(tween),
                                                     child: child,
                                                   );
                                                 },
@@ -603,7 +677,8 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
     double maxHeight = MediaQuery.of(context).size.height;
     return Flexible(
       child: Container(
-        padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxHeight * 0.02162),
+        padding:
+            EdgeInsets.only(left: maxWidth * 0.0555, top: maxHeight * 0.02162),
         height: maxHeight * 0.681,
         child:
             // FutureBuilder(
@@ -662,7 +737,9 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                               is_media: searchResults[index].is_media,
                               author_id: searchResults[index].author_id,
                             );
-                        this.widget.play(searchResults[index].attachmentName, context);
+                        this
+                            .widget
+                            .play(searchResults[index].attachmentName, context);
                         List links = [];
                         for (int i = index; i < searchResults.length; i++) {
                           links.add(searchResults[i]);
@@ -671,7 +748,9 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                         if (!mounted) return;
                         setState(() {
                           this.widget.showOverlayTrue();
-                          this.widget.insertRecentlyPlayed(searchResults[index].id);
+                          this
+                              .widget
+                              .insertRecentlyPlayed(searchResults[index].id);
                         });
                       },
                       child: Stack(
@@ -686,7 +765,8 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 ConstrainedBox(
-                                  constraints: BoxConstraints(maxWidth: maxWidth * 0.554444),
+                                  constraints: BoxConstraints(
+                                      maxWidth: maxWidth * 0.554444),
                                   child: searchResults[index].title != null
                                       ? Text(
                                           searchResults[index].title,
@@ -700,14 +780,17 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                                       : Container(),
                                 ),
                                 ConstrainedBox(
-                                  constraints: BoxConstraints(maxWidth: maxWidth * 0.694444),
+                                  constraints: BoxConstraints(
+                                      maxWidth: maxWidth * 0.694444),
                                   child: searchResults[index].author != null
                                       ? Text(
                                           searchResults[index].author,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
-                                              fontSize: 14.0, fontWeight: FontWeight.w600, color: Color(0xffB3B3B3)),
+                                              fontSize: 14.0,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color(0xffB3B3B3)),
                                         )
                                       : Container(),
                                 )
@@ -748,36 +831,50 @@ class _ArtistPopularTracksState extends State<ArtistPopularTracks> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: maxHeight * 0.00675),
+                              padding:
+                                  EdgeInsets.only(top: maxHeight * 0.00675),
                               child: GestureDetector(
                                 onTap: () {
                                   Navigator.of(context).push(PageRouteBuilder(
                                     opaque: false,
-                                    pageBuilder: (BuildContext context, animation, secondaryAnimation) => SongOptions(
+                                    pageBuilder: (BuildContext context,
+                                            animation, secondaryAnimation) =>
+                                        SongOptions(
                                       indexOfSong: searchResults[index].id,
                                       title: searchResults[index].title,
-                                      artistName: searchResults[index].authorName,
-                                      attachmentName: searchResults[index].attachmentName,
+                                      artistName:
+                                          searchResults[index].authorName,
+                                      attachmentName:
+                                          searchResults[index].attachmentName,
                                       id: searchResults[index].id,
                                       author_id: searchResults[index].author_id,
                                       image: searchResults[index].image,
                                       showOverlay: this.widget.showOverlay,
-                                      showOverlayTrue: this.widget.showOverlayTrue,
-                                      showOverlayFalse: this.widget.showOverlayFalse,
+                                      showOverlayTrue:
+                                          this.widget.showOverlayTrue,
+                                      showOverlayFalse:
+                                          this.widget.showOverlayFalse,
                                       show: this.widget.show,
                                       play: this.widget.play,
                                       setListLinks: this.widget.setListLinks,
-                                      insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
-                                      setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
+                                      insertRecentlyPlayed:
+                                          this.widget.insertRecentlyPlayed,
+                                      setPropertiesForFullScreen: this
+                                          .widget
+                                          .setPropertiesForFullScreen,
                                       fromArtistPage: fromArtistPage,
                                     ),
                                     // transitionDuration: Duration(seconds: 1),
-                                    transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                                    transitionsBuilder: (ontext, animation,
+                                        secondaryAnimation, child) {
                                       var begin = Offset(0.0, -1.0);
-                                      var end = this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
+                                      var end = this.widget.show == true
+                                          ? Offset(0.0, -0.08)
+                                          : Offset.zero;
                                       var curve = Curves.ease;
 
-                                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                      var tween = Tween(begin: begin, end: end)
+                                          .chain(CurveTween(curve: curve));
 
                                       return SlideTransition(
                                         position: animation.drive(tween),

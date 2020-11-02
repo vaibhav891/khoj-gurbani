@@ -40,6 +40,7 @@ dependencies:
   shared_preferences: ^0.5.1+2
   sqflite: ^1.3.1+1
   uni_links: ^0.4.0
+  #just_audio: ^0.5.5
 
 dev_dependencies:
   flutter_test:
@@ -74,9 +75,9 @@ flutter:
         - asset: assets/fonts/Cabin-Regular.ttf
         - asset: assets/fonts/Cabin-Bold.ttf
   #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+    - family: Lineto
+      fonts:
+        - asset: assets/fonts/lineto-circular-black.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

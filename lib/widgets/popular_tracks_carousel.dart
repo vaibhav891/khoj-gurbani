@@ -101,8 +101,16 @@ class PopularTracksCarousel extends StatefulWidget {
   final Function getPopularMedia;
   final Function insertRecentlyPlayed;
 
-  PopularTracksCarousel(this.showOverlay, this.showOverlayTrue, this.showOverlayFalse, this.show, this.play,
-      this.setListLinks, this.populars, this.getPopularMedia, this.insertRecentlyPlayed);
+  PopularTracksCarousel(
+      this.showOverlay,
+      this.showOverlayTrue,
+      this.showOverlayFalse,
+      this.show,
+      this.play,
+      this.setListLinks,
+      this.populars,
+      this.getPopularMedia,
+      this.insertRecentlyPlayed);
 
   @override
   _PopularTracksCaruselState createState() => _PopularTracksCaruselState();
@@ -140,7 +148,9 @@ class _PopularTracksCaruselState extends State<PopularTracksCarousel> {
           height: maxHeight * 0.250,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: (this.widget.populars?.length ?? 0) < 20 ? (this.widget.populars?.length ?? 0) : 20,
+            itemCount: (this.widget.populars?.length ?? 0) < 20
+                ? (this.widget.populars?.length ?? 0)
+                : 20,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 margin: EdgeInsets.only(top: maxHeight * 0.0134),
@@ -159,7 +169,8 @@ class _PopularTracksCaruselState extends State<PopularTracksCarousel> {
                           is_media: this.widget.populars[index].is_media,
                           author_id: this.widget.populars[index].author_id,
                         );
-                    this.widget.play(this.widget.populars[index].attachmentName, context);
+                    this.widget.play(
+                        this.widget.populars[index].attachmentName, context);
                     List links = [];
                     for (int i = index; i < this.widget.populars.length; i++) {
                       links.add(this.widget.populars[i]);
@@ -169,7 +180,9 @@ class _PopularTracksCaruselState extends State<PopularTracksCarousel> {
                     setState(() {
                       this.widget.showOverlayTrue();
                     });
-                    this.widget.insertRecentlyPlayed(this.widget.populars[index].id);
+                    this
+                        .widget
+                        .insertRecentlyPlayed(this.widget.populars[index].id);
                   },
                   child: Stack(
                     // alignment: Alignment.topCenter,
@@ -192,7 +205,7 @@ class _PopularTracksCaruselState extends State<PopularTracksCarousel> {
                                 maxLines: 1,
                                 overflow: TextOverflow.clip,
                                 style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 12.0,
                                   color: Colors.black,
                                   //fontWeight: FontWeight.w600,
                                 ),
@@ -201,10 +214,10 @@ class _PopularTracksCaruselState extends State<PopularTracksCarousel> {
                                 this.widget.populars[index].author,
                                 maxLines: 1,
                                 overflow: TextOverflow.clip,
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  //fontWeight: FontWeight.w600,
-                                ),
+                                style:
+                                    TextStyle(fontSize: 12.0, color: Colors.grey
+                                        //fontWeight: FontWeight.w600,
+                                        ),
                               ),
                             ],
                           ),
@@ -231,7 +244,8 @@ class _PopularTracksCaruselState extends State<PopularTracksCarousel> {
                                 child: Image(
                                   height: maxHeight * 0.181,
                                   width: maxWidth * 0.378,
-                                  image: NetworkImage(this.widget.populars[index].image),
+                                  image: NetworkImage(
+                                      this.widget.populars[index].image),
                                   fit: BoxFit.cover,
                                 ),
                               ),

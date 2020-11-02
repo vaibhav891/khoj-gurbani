@@ -22,7 +22,8 @@ class DBProvider {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "khojgurbani.db");
-    return await openDatabase(path, version: 1, onOpen: (db) {}, onCreate: (Database db, int version) async {
+    return await openDatabase(path, version: 1, onOpen: (db) {},
+        onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE Downloads ("
           "id INTEGER PRIMARY KEY,"
           "title TEXT,"
@@ -32,7 +33,10 @@ class DBProvider {
           "shabad_id INTEGER,"
           "page INTEGER,"
           "is_media INTEGER,"
-          "author_id INTEGER"
+          "author_id INTEGER,"
+          "duration INTEGER,"
+          "fromFile INTEGER,"
+          "timestamp INTEGER"
           ")");
       await db.execute("CREATE TABLE Lirycs ("
           "id INTEGER PRIMARY KEY,"
@@ -84,8 +88,9 @@ class DBProvider {
 
   Future<List<Downloads>> getAllDownloads() async {
     final db = await database;
-    var res = await db.query("Downloads");
-    List<Downloads> list = res.isNotEmpty ? res.map((c) => Downloads.fromMap(c)).toList() : [];
+    var res = await db.query("Downloads", orderBy: "timestamp ASC");
+    List<Downloads> list =
+        res.isNotEmpty ? res.map((c) => Downloads.fromMap(c)).toList() : [];
 
     downl = list;
     return list;

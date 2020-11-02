@@ -86,7 +86,8 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
       Row(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: maxWidth * 0.0555, right: maxWidth * 0.0555),
+            padding: EdgeInsets.only(
+                left: maxWidth * 0.0555, right: maxWidth * 0.0555),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -152,7 +153,10 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
                                 ),
                                 Text(
                                   "Play",
-                                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -186,22 +190,27 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
                                 context,
                                 service.shuffleUserFavoritePodcasts[0].title,
                                 service.shuffleUserFavoritePodcasts[0].author,
-                                service.shuffleUserFavoritePodcasts[0].attachmentName,
+                                service.shuffleUserFavoritePodcasts[0]
+                                    .attachmentName,
                                 service.shuffleUserFavoritePodcasts[0].image,
                                 service.shuffleUserFavoritePodcasts[0].shabadId,
                                 service.shuffleUserFavoritePodcasts[0].page,
                                 service.shuffleUserFavoritePodcasts[0].is_media,
-                                service.shuffleUserFavoritePodcasts[0].author_id,
+                                service
+                                    .shuffleUserFavoritePodcasts[0].author_id,
                                 service.shuffleUserFavoritePodcasts[0].id,
                               );
                       this.widget.play(
                           this.widget.show == true
                               ? this.widget.currentSong.attachmentName
-                              : service.shuffleUserFavoritePodcasts[0].attachmentName,
+                              : service.shuffleUserFavoritePodcasts[0]
+                                  .attachmentName,
                           context,
                           true);
                       List links = [];
-                      for (int m = 0; m < service.shuffleUserFavoritePodcasts.length; m++) {
+                      for (int m = 0;
+                          m < service.shuffleUserFavoritePodcasts.length;
+                          m++) {
                         links.add(service.shuffleUserFavoritePodcasts[m]);
                       }
                       this.widget.setListLinks(links);
@@ -232,7 +241,10 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
                                 ),
                                 Text(
                                   "Shuffle",
-                                  style: TextStyle(color: Color(0xff578ed3), fontSize: 16, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      color: Color(0xff578ed3),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -248,7 +260,8 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
         ],
       ),
       Container(
-        padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxWidth * 0.0135),
+        padding:
+            EdgeInsets.only(left: maxWidth * 0.0555, top: maxWidth * 0.0135),
         height: maxHeight / 1.565,
         child: ListView.builder(
           scrollDirection: Axis.vertical,
@@ -298,7 +311,9 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
                             userPodcasts[index].shabadId,
                             userPodcasts[index].page,
                             userPodcasts[index].id);
-                        this.widget.play(userPodcasts[index].attachmentName, context);
+                        this
+                            .widget
+                            .play(userPodcasts[index].attachmentName, context);
                         List links = [];
                         for (int i = index; i < userPodcasts.length; i++) {
                           links.add(userPodcasts[i]);
@@ -320,14 +335,15 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 ConstrainedBox(
-                                  constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
+                                  constraints: BoxConstraints(
+                                      maxWidth: maxWidth * 0.594444),
                                   child: Text(
                                     userPodcasts[index].title,
                                     maxLines: 1,
                                     overflow: TextOverflow.clip,
                                     style: TextStyle(
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.normal,
                                     ),
                                   ),
                                 ),
@@ -365,25 +381,28 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
                                 userPodcasts[index].duration,
                                 maxLines: 1,
                                 overflow: TextOverflow.clip,
-                                style: TextStyle(fontSize: 10),
+                                style: TextStyle(fontSize: 14.0),
                               ),
                             ),
                             GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(PageRouteBuilder(
                                   opaque: false,
-                                  pageBuilder: (BuildContext context, animation, secondaryAnimation) =>
+                                  pageBuilder: (BuildContext context, animation,
+                                          secondaryAnimation) =>
                                       PodcastThreeDots(
                                     title: userPodcasts[index].title,
                                     id: userPodcasts[index].id,
                                     indexOfPodcast: userPodcasts[index].id,
                                   ),
                                   // transitionDuration: Duration(seconds: 1),
-                                  transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                                  transitionsBuilder: (ontext, animation,
+                                      secondaryAnimation, child) {
                                     var begin = Offset(0.0, 1.0);
                                     var end = Offset(0.0, 0.47);
                                     var curve = Curves.ease;
-                                    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                    var tween = Tween(begin: begin, end: end)
+                                        .chain(CurveTween(curve: curve));
 
                                     return SlideTransition(
                                       position: animation.drive(tween),
@@ -395,7 +414,7 @@ class _LibraryPodcastsState extends State<LibraryPodcasts> {
                               child: Container(
                                 child: Icon(
                                   CupertinoIcons.ellipsis,
-                                  size: 20,
+                                  size: 24.0,
                                   color: Color(0xff727272),
                                 ),
                               ),

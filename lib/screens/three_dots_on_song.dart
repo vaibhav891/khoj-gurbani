@@ -42,7 +42,7 @@ class SongOptions extends StatefulWidget {
   final int fromFullMusicPlayer;
   final Function setIsOpenFullScreen;
   bool isPlaying;
-  final bool isDownloaded;
+  final int fromFile;
 
   SongOptions({
     this.indexOfSong,
@@ -70,7 +70,7 @@ class SongOptions extends StatefulWidget {
     this.fromFullMusicPlayer,
     this.setIsOpenFullScreen,
     this.isPlaying,
-    this.isDownloaded = false,
+    this.fromFile = 0,
   });
 
   @override
@@ -126,10 +126,15 @@ class _SongOptionsState extends State<SongOptions> {
     final String machineId = prefs.getString('machine_id');
 
     // final headers = {'Authorization': "Bearer " + token};
-    var body = {'media_id': json.encode(id), 'user_id': json.encode(userId), 'machine_id': machineId};
+    var body = {
+      'media_id': json.encode(id),
+      'user_id': json.encode(userId),
+      'machine_id': machineId
+    };
     //var body = jsonEncode({'media_id': id, 'user_id': userId, 'machine_id': machineId});
     print(body);
-    final res = await http.post('https://api.khojgurbani.org/api/v1/android/fav?', body: body);
+    final res = await http
+        .post('https://api.khojgurbani.org/api/v1/android/fav?', body: body);
     // headers: headers
     if (res.statusCode == 200)
       final data = jsonDecode(res.body);
@@ -179,7 +184,8 @@ class _SongOptionsState extends State<SongOptions> {
             Navigator.of(context).pop();
           });
           return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15))),
             title: Center(
               child: Text(
                 'Removed from Playlist',
@@ -198,10 +204,13 @@ class _SongOptionsState extends State<SongOptions> {
             Navigator.of(context).pop();
           });
           return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15))),
             title: Center(
               child: Text(
-                _isFavorite == false ? 'Added to Favorite' : 'Removed from Favorite',
+                _isFavorite == false
+                    ? 'Added to Favorite'
+                    : 'Removed from Favorite',
                 style: TextStyle(fontSize: 14),
               ),
             ),
@@ -217,7 +226,8 @@ class _SongOptionsState extends State<SongOptions> {
             Navigator.of(context).pop();
           });
           return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15))),
             title: Center(
               child: Text(
                 'Downloading...',
@@ -249,15 +259,19 @@ class _SongOptionsState extends State<SongOptions> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               (() {
-                if (this.widget.show == true || service.showFromService == true && this.widget.fromArtistPage == true) {
+                if (this.widget.show == true ||
+                    service.showFromService == true &&
+                        this.widget.fromArtistPage == true) {
                   return SizedBox(
                     height: maxHeight / 8,
                   );
-                } else if (this.widget.show == true && this.widget.fromArtistPage == false) {
+                } else if (this.widget.show == true &&
+                    this.widget.fromArtistPage == false) {
                   return SizedBox(
                     height: maxHeight / 8,
                   );
-                } else if (this.widget.fromArtistPage == true && this.widget.show == false) {
+                } else if (this.widget.fromArtistPage == true &&
+                    this.widget.show == false) {
                   return SizedBox(
                     height: maxHeight / 19,
                   );
@@ -275,7 +289,10 @@ class _SongOptionsState extends State<SongOptions> {
                       width: maxWidth / 1.3,
                       child: Text(
                         this.widget.title,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -284,13 +301,16 @@ class _SongOptionsState extends State<SongOptions> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.04722, top: maxHeight * 0.0067),
+                padding: EdgeInsets.only(
+                    left: maxWidth * 0.04722, top: maxHeight * 0.0067),
                 child: Row(
                   children: <Widget>[
                     Container(
                       width: maxWidth / 1.3,
                       child: Text(
-                        this.widget.artistName != null ? this.widget.artistName : '',
+                        this.widget.artistName != null
+                            ? this.widget.artistName
+                            : '',
                         style: TextStyle(color: Colors.white, fontSize: 14),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -300,21 +320,26 @@ class _SongOptionsState extends State<SongOptions> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.0583, top: maxHeight * 0.0378),
+                padding: EdgeInsets.only(
+                    left: maxWidth * 0.0583, top: maxHeight * 0.0378),
                 child: InkWell(
                   onTap: () {
                     this.widget.playlist_id == null
                         ? Navigator.of(context).push(PageRouteBuilder(
                             opaque: false,
-                            pageBuilder: (BuildContext context, animation, secondaryAnimation) => AddToPlaylist(
+                            pageBuilder: (BuildContext context, animation,
+                                    secondaryAnimation) =>
+                                AddToPlaylist(
                               media_id: this.widget.id,
                             ),
                             transitionDuration: Duration(seconds: 1),
-                            transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                            transitionsBuilder:
+                                (ontext, animation, secondaryAnimation, child) {
                               var begin = Offset(0.0, -1.0);
                               var end = Offset.zero;
                               var curve = Curves.ease;
-                              var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                              var tween = Tween(begin: begin, end: end)
+                                  .chain(CurveTween(curve: curve));
                               return SlideTransition(
                                 position: animation.drive(tween),
                                 child: child,
@@ -322,7 +347,8 @@ class _SongOptionsState extends State<SongOptions> {
                             },
                           ))
                         // .then((value) => Navigator.of(context).pop())
-                        : deleteTrackFromPlaylist(this.widget.playlist_id, this.widget.id);
+                        : deleteTrackFromPlaylist(
+                            this.widget.playlist_id, this.widget.id);
                   },
                   child: Container(
                     width: maxWidth * 0.6722,
@@ -333,7 +359,9 @@ class _SongOptionsState extends State<SongOptions> {
                           width: maxWidth * 0.04444,
                         ),
                         Text(
-                          this.widget.playlist_id != null ? "Remove from Playlist" : "Add to Playlist",
+                          this.widget.playlist_id != null
+                              ? "Remove from Playlist"
+                              : "Add to Playlist",
                           // : "Remove from Playlist",
                           style: TextStyle(
                             color: Colors.white,
@@ -346,7 +374,8 @@ class _SongOptionsState extends State<SongOptions> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.05833, top: maxHeight * 0.0378),
+                padding: EdgeInsets.only(
+                    left: maxWidth * 0.05833, top: maxHeight * 0.0378),
                 child: InkWell(
                   onTap: () {},
                   child: Container(
@@ -360,14 +389,18 @@ class _SongOptionsState extends State<SongOptions> {
                       child: Row(
                         children: <Widget>[
                           Icon(
-                            _isFavorite == true ? Icons.favorite : Icons.favorite_border,
+                            _isFavorite == true
+                                ? Icons.favorite
+                                : Icons.favorite_border,
                             color: Colors.white,
                           ),
                           SizedBox(
                             width: maxWidth * 0.044,
                           ),
                           Text(
-                            _isFavorite == true ? "Remove from Favorite" : "Add to Favorite",
+                            _isFavorite == true
+                                ? "Remove from Favorite"
+                                : "Add to Favorite",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
@@ -382,7 +415,8 @@ class _SongOptionsState extends State<SongOptions> {
               this.widget.fromArtistPage == true
                   ? Container()
                   : Padding(
-                      padding: EdgeInsets.only(left: maxWidth * 0.05833, top: maxHeight * 0.0378),
+                      padding: EdgeInsets.only(
+                          left: maxWidth * 0.05833, top: maxHeight * 0.0378),
                       child: InkWell(
                         onTap: () {
                           if (this.widget.fromFullMusicPlayer == 1) {
@@ -404,21 +438,29 @@ class _SongOptionsState extends State<SongOptions> {
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => ArtistPage(
-                                        indexOfArtist: this.widget.indexOfArtist,
+                                        indexOfArtist:
+                                            this.widget.indexOfArtist,
                                         id: this.widget.author_id,
                                         name: this.widget.artistName,
                                         attachmentName: this.widget.image,
                                         showOverlay: this.widget.showOverlay,
-                                        showOverlayTrue: this.widget.showOverlayTrue,
-                                        showOverlayFalse: this.widget.showOverlayFalse,
+                                        showOverlayTrue:
+                                            this.widget.showOverlayTrue,
+                                        showOverlayFalse:
+                                            this.widget.showOverlayFalse,
                                         show: widget.show,
                                         play: this.widget.play,
                                         setListLinks: this.widget.setListLinks,
-                                        setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
-                                        insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                                        setPropertiesForFullScreen: this
+                                            .widget
+                                            .setPropertiesForFullScreen,
+                                        insertRecentlyPlayed:
+                                            this.widget.insertRecentlyPlayed,
                                         currentSong: this.widget.currentSong,
-                                        setIsOpenFullScreen: this.widget.setIsOpenFullScreen,
-                                        fromFullMusicPlayer: this.widget.fromFullMusicPlayer,
+                                        setIsOpenFullScreen:
+                                            this.widget.setIsOpenFullScreen,
+                                        fromFullMusicPlayer:
+                                            this.widget.fromFullMusicPlayer,
                                       )));
                         },
                         child: Container(
@@ -426,7 +468,8 @@ class _SongOptionsState extends State<SongOptions> {
                           child: Row(
                             children: <Widget>[
                               Image(
-                                image: AssetImage('assets/images/Mask Group 9.png'),
+                                image: AssetImage(
+                                    'assets/images/Mask Group 9.png'),
                               ),
                               SizedBox(
                                 width: maxWidth * 0.044,
@@ -445,37 +488,47 @@ class _SongOptionsState extends State<SongOptions> {
                     ),
               // : Container(),
               Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.05833, top: maxHeight * 0.0378),
+                padding: EdgeInsets.only(
+                    left: maxWidth * 0.05833, top: maxHeight * 0.0378),
                 child: InkWell(
                   onTap: () {
                     // mediaDownload(this.widget.id);
-                    if (!widget.isDownloaded) {
+                    if (widget.fromFile == 0) {
                       print('inside download -> song name [${widget.title}]');
-                      print('inside download -> attachment name [${widget.attachmentName}]');
+                      print(
+                          'inside download -> attachment name [${widget.attachmentName}]');
                       print('inside download -> image path [${widget.image}]');
 
-                      download.downloadImage(this.widget.image, this.widget.title);
+                      download.downloadImage(
+                          this.widget.image, this.widget.title);
                       download
                           .downloadFile(
                         this.widget.attachmentName,
                         this.widget.title,
                       )
-                          .whenComplete(() async {
-                        Downloads newDT = Downloads(
-                          id: widget.id,
-                          title: widget.title,
-                          author: widget.artistName,
-                          attachmentName: download.pathName.toString(),
-                          image: download.imagePath.toString(),
-                          is_media: 1,
-                          author_id: widget.author_id,
-                          shabad_id: widget.shabadId,
-                          page: widget.page,
-                        );
-                        await DBProvider.db.newDownload(newDT);
-                        // call api to notify server of new download
-                        mediaDownload(widget.id);
-                      });
+                          .then(
+                        (value) async {
+                          Downloads newDT = Downloads(
+                            id: widget.id,
+                            title: widget.title,
+                            author: widget.artistName,
+                            attachmentName: download.pathName.toString(),
+                            image: download.imagePath.toString(),
+                            is_media: 1,
+                            author_id: widget.author_id,
+                            shabadId: widget.shabadId,
+                            duration: value,
+                            page: widget.page,
+                            timestamp: DateTime.now().millisecondsSinceEpoch,
+                          );
+                          await DBProvider.db.newDownload(newDT);
+                          // call api to notify server of new download
+                          mediaDownload(widget.id);
+                        },
+                        onError: (e) => print(
+                            'Something went wrong, download returned error'),
+                      );
+
                       Navigator.of(context).pop();
                       downloading();
                     } else {
@@ -495,7 +548,9 @@ class _SongOptionsState extends State<SongOptions> {
                           width: maxWidth * 0.044,
                         ),
                         Text(
-                          !widget.isDownloaded ? "Download" : 'Remove from downloads',
+                          widget.fromFile == 0
+                              ? "Download"
+                              : 'Remove from downloads',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -575,15 +630,18 @@ class _SongOptionsState extends State<SongOptions> {
               Container(
                 child: (() {
                   if (this.widget.show == true ||
-                      service.showFromService == true && this.widget.fromArtistPage == true) {
+                      service.showFromService == true &&
+                          this.widget.fromArtistPage == true) {
                     return SizedBox(
                       height: maxHeight / 3.3,
                     );
-                  } else if (this.widget.fromArtistPage == true && this.widget.show == false) {
+                  } else if (this.widget.fromArtistPage == true &&
+                      this.widget.show == false) {
                     return SizedBox(
                       height: maxHeight / 2,
                     );
-                  } else if (this.widget.show == true && this.widget.fromArtistPage == false) {
+                  } else if (this.widget.show == true &&
+                      this.widget.fromArtistPage == false) {
                     return SizedBox(
                       height: maxHeight / 4.2,
                     );

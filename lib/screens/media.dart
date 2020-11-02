@@ -95,7 +95,8 @@ class _MediaPageState extends State<MediaPage> {
 
   var populars;
   Future getPopularMedia() async {
-    var data = await http.get('https://api.khojgurbani.org/api/v1/media/popular-tracks');
+    var data = await http
+        .get('https://api.khojgurbani.org/api/v1/media/popular-tracks');
     var jsonData = json.decode(data.body);
 
     PopularTracksSongs s = new PopularTracksSongs.fromJson(jsonData);
@@ -147,7 +148,9 @@ class _MediaPageState extends State<MediaPage> {
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
 
-    var newDT = _isLoading == false ? DateTime.parse(homePodcastIndex[0].createdAt) : '';
+    var newDT = _isLoading == false
+        ? DateTime.parse(homePodcastIndex[0].createdAt)
+        : '';
     // if (_indexs != null) {
     return WillPopScope(
       onWillPop: () async => false,
@@ -164,7 +167,7 @@ class _MediaPageState extends State<MediaPage> {
                 // ),
 
                 Text(
-              'Media',
+              'Home',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20, color: Colors.black),
             ),
@@ -174,12 +177,17 @@ class _MediaPageState extends State<MediaPage> {
           body: ListView(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: maxWidth / 20, right: maxWidth / 20, top: maxHeight / 30),
+                padding: EdgeInsets.only(
+                    left: maxWidth / 20,
+                    right: maxWidth / 20,
+                    top: maxHeight / 30),
                 child: Container(
                   height: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6.0),
-                    image: DecorationImage(image: AssetImage('assets/images/media.png'), fit: BoxFit.cover),
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/media.png'),
+                        fit: BoxFit.cover),
                   ),
                   child: _isLoading == false
                       ? Stack(
@@ -191,7 +199,10 @@ class _MediaPageState extends State<MediaPage> {
                                 width: maxWidth / 3,
                                 child: Text(
                                   homePodcastIndex[0].title,
-                                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.white),
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -204,7 +215,10 @@ class _MediaPageState extends State<MediaPage> {
                                 width: maxWidth / 1.7,
                                 child: Text(
                                   DateFormat.yMMMd().format(newDT),
-                                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.white),
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -225,7 +239,9 @@ class _MediaPageState extends State<MediaPage> {
                                       null,
                                       null,
                                       isRadio: homePodcastIndex[0].is_radio);
-                                  this.widget.play(homePodcastIndex[0].englishPodcastSrc, context);
+                                  this.widget.play(
+                                      homePodcastIndex[0].englishPodcastSrc,
+                                      context);
                                   if (!mounted) return;
                                   setState(() {
                                     this.widget.showOverlayTrue();
@@ -242,7 +258,8 @@ class _MediaPageState extends State<MediaPage> {
                                       borderRadius: BorderRadius.circular(6.0),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         Icon(
                                           Icons.play_arrow,
@@ -279,7 +296,9 @@ class _MediaPageState extends State<MediaPage> {
                                       null,
                                       null,
                                       isRadio: homePodcastIndex[0].is_radio);
-                                  this.widget.play(homePodcastIndex[0].punjabiPodcardSrc, context);
+                                  this.widget.play(
+                                      homePodcastIndex[0].punjabiPodcardSrc,
+                                      context);
                                   if (!mounted) return;
                                   setState(() {
                                     this.widget.showOverlayTrue();
@@ -296,7 +315,8 @@ class _MediaPageState extends State<MediaPage> {
                                       borderRadius: BorderRadius.circular(6.0),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         Icon(
                                           Icons.play_arrow,

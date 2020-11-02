@@ -73,7 +73,9 @@ class _MyAppState extends State<MyApp> {
     audioPlayer = AudioPlayer();
     service.getDeviceDetails();
     super.initState();
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+    subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
       if (result.index != 2) {
         isInternetOn = true;
       } else {
@@ -92,9 +94,17 @@ class _MyAppState extends State<MyApp> {
       if (index == listLinks.length) index = 0;
       if (index < this.listLinks.length) {
         if (isOpenFullScreen == false) {
-          this.showOverlay(context, listLinks[index].title, listLinks[index].author, listLinks[index].attachmentName,
-              listLinks[index].image, listLinks[index].shabadId, listLinks[index].page, listLinks[index].id,
-              is_media: listLinks[index].is_media, author_id: listLinks[index].author_id);
+          this.showOverlay(
+              context,
+              listLinks[index].title,
+              listLinks[index].author,
+              listLinks[index].attachmentName,
+              listLinks[index].image,
+              listLinks[index].shabadId,
+              listLinks[index].page,
+              listLinks[index].id,
+              is_media: listLinks[index].is_media,
+              author_id: listLinks[index].author_id);
         } else {
           setState(() {
             title = listLinks[index].title;
@@ -134,9 +144,19 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  setPropertiesForFullScreen(context, titleTMP, authorTMP, attachmentNameTEMP, imageTMP, shabadIdTMP, pageTMP,
-      is_mediaTMP, author_idTMP, idTMP,
-      {fromFile, isDownloaded = false}) {
+  setPropertiesForFullScreen(
+    context,
+    titleTMP,
+    authorTMP,
+    attachmentNameTEMP,
+    imageTMP,
+    shabadIdTMP,
+    pageTMP,
+    is_mediaTMP,
+    author_idTMP,
+    idTMP, {
+    fromFile,
+  }) {
     setState(() {
       this.title = titleTMP;
       this.singerName = authorTMP;
@@ -147,47 +167,48 @@ class _MyAppState extends State<MyApp> {
       this.is_media = is_mediaTMP;
       this.author_id = author_idTMP;
       this.id = idTMP;
-      this.isDownloaded = isDownloaded;
+      this.fromFile = fromFile;
     });
     Navigator.push(
         context,
         new MaterialPageRoute(
             builder: (context) => MusicPlayerFullSize(
-                title: this.title,
-                artistName: this.singerName,
-                attachmentName: this.attachmentName,
-                image: this.image,
-                shabadId: this.shabadId,
-                page: this.page,
-                is_media: this.is_media,
-                author_id: this.author_id,
-                id: this.id,
-                tapPause: this.tapPause,
-                tapPlay: this.tapPlay,
-                showOverlay: this.showOverlay,
-                showOverlayTrue: this.showOverlayTrue,
-                setIsOpenFullScreen: this.setIsOpenFullScreen,
-                show: this.show,
-                isPlaying: this.isPlaying,
-                audioPlayer: this.audioPlayer,
-                snapshot: this.snapshot,
-                getLyrics: this.getLyrics,
-                playPrevSong: playPrevSong,
-                shuffleListLinks: shuffleListLinks,
-                repeat: repeat,
-                setRepeat: setRepeat,
-                setShuffle: setShuffle,
-                shuffle: shuffle,
-                playNextSong: playNextSong,
-                fromFile: fromFile,
-                isDownloaded: isDownloaded)));
+                  title: this.title,
+                  artistName: this.singerName,
+                  attachmentName: this.attachmentName,
+                  image: this.image,
+                  shabadId: this.shabadId,
+                  page: this.page,
+                  is_media: this.is_media,
+                  author_id: this.author_id,
+                  id: this.id,
+                  tapPause: this.tapPause,
+                  tapPlay: this.tapPlay,
+                  showOverlay: this.showOverlay,
+                  showOverlayTrue: this.showOverlayTrue,
+                  setIsOpenFullScreen: this.setIsOpenFullScreen,
+                  show: this.show,
+                  isPlaying: this.isPlaying,
+                  audioPlayer: this.audioPlayer,
+                  snapshot: this.snapshot,
+                  getLyrics: this.getLyrics,
+                  playPrevSong: playPrevSong,
+                  shuffleListLinks: shuffleListLinks,
+                  repeat: repeat,
+                  setRepeat: setRepeat,
+                  setShuffle: setShuffle,
+                  shuffle: shuffle,
+                  playNextSong: playNextSong,
+                  fromFile: fromFile,
+                )));
   }
 
   var snapshot;
   getLyrics(shabadId, page) async {
     if (shabadId != 0) {
       // final headers = {'Authorization': "Bearer " + token};
-      final response = await http.get('https://apiprod.khojgurbani.org/api/v1/shabad/$page/$shabadId');
+      final response = await http
+          .get('https://apiprod.khojgurbani.org/api/v1/shabad/$page/$shabadId');
 
       var data = json.decode(response.body);
 
@@ -217,7 +238,7 @@ class _MyAppState extends State<MyApp> {
   int is_media;
   int author_id;
   int id;
-  bool isDownloaded;
+  int fromFile;
 
   showOverlayTrue() {
     setState(() {
@@ -243,8 +264,9 @@ class _MyAppState extends State<MyApp> {
   //   var right = await audioPlayer.seek(Duration(minutes: 10, seconds: 9));
   // }
 
-  void showOverlay(context, title, singerName, attachmentName, image, shabadId, page, id,
-      {is_media, author_id, isRadio, fromFile}) async {
+  void showOverlay(
+      context, title, singerName, attachmentName, image, shabadId, page, id,
+      {is_media, author_id, isRadio, fromFile = 0}) async {
     // double maxWidth = MediaQuery.of(context).size.width;
     // double maxHeight = MediaQuery.of(context).size.height;
     if (show == true) {
@@ -310,7 +332,8 @@ class _MyAppState extends State<MyApp> {
                               playNextSong: playNextSong,
                               fromFile: fromFile,
                               currentSong: currentSong,
-                              setPropertiesForFullScreen: setPropertiesForFullScreen,
+                              setPropertiesForFullScreen:
+                                  setPropertiesForFullScreen,
                               play: play,
                               setListLinks: setListLinks,
                               insertRecentlyPlayed: insertRecentlyPlayed,
@@ -330,8 +353,10 @@ class _MyAppState extends State<MyApp> {
                         children: <Widget>[
                           fromFile != 1
                               ? Image(
-                                  height: 60, //MediaQuery.of(context).size.height * 0.08108,
-                                  width: MediaQuery.of(context).size.width * 0.16666,
+                                  height:
+                                      60, //MediaQuery.of(context).size.height * 0.08108,
+                                  width: MediaQuery.of(context).size.width *
+                                      0.16666,
                                   image: NetworkImage(image
                                       // .contains(
                                       //         'https://api.khojgurbani.org/uploads/author/')
@@ -345,16 +370,20 @@ class _MyAppState extends State<MyApp> {
                                   // tag: 'recently-played1',
                                   child: Image.file(
                                     File(image),
-                                    height: MediaQuery.of(context).size.height * 0.08108,
-                                    width: MediaQuery.of(context).size.width * 0.16666,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.08108,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.16666,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                           Center(
                             child: Container(
                               padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width * 0.04166,
-                                  top: MediaQuery.of(context).size.height * 0.012),
+                                  left: MediaQuery.of(context).size.width *
+                                      0.04166,
+                                  top: MediaQuery.of(context).size.height *
+                                      0.012),
                               // width: 150,
                               // color: Colors.blue,
                               child: Column(
@@ -362,13 +391,17 @@ class _MyAppState extends State<MyApp> {
                                   Row(
                                     children: <Widget>[
                                       Container(
-                                        width: MediaQuery.of(context).size.width * 0.40277,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.40277,
                                         child: Text(
                                           title,
                                           overflow: TextOverflow.clip,
                                           maxLines: 1,
-                                          style:
-                                              TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600),
                                         ),
                                       ),
                                     ],
@@ -376,13 +409,17 @@ class _MyAppState extends State<MyApp> {
                                   Row(
                                     children: <Widget>[
                                       Container(
-                                        width: MediaQuery.of(context).size.width * 0.40277,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.40277,
                                         child: singerName != null
                                             ? Text(
                                                 singerName,
                                                 overflow: TextOverflow.clip,
                                                 maxLines: 1,
-                                                style: TextStyle(color: Colors.grey[300], fontSize: 16),
+                                                style: TextStyle(
+                                                    color: Colors.grey[300],
+                                                    fontSize: 16),
                                               )
                                             : Container(),
                                       ),
@@ -397,7 +434,8 @@ class _MyAppState extends State<MyApp> {
                               children: <Widget>[
                                 Padding(
                                   padding: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width * 0.1388,
+                                    left: MediaQuery.of(context).size.width *
+                                        0.1388,
                                     // top: MediaQuery.of(context).size.height * 0.0243,
                                   ),
                                   child: GestureOverlay(
@@ -434,7 +472,8 @@ class _MyAppState extends State<MyApp> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Image(
-                            height: MediaQuery.of(context).size.height * 0.081081,
+                            height:
+                                MediaQuery.of(context).size.height * 0.081081,
                             width: MediaQuery.of(context).size.width * 0.16666,
                             image: NetworkImage(image
                                 // .contains(
@@ -447,8 +486,10 @@ class _MyAppState extends State<MyApp> {
                           ),
                           Container(
                             padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width * 0.04166,
-                                top: MediaQuery.of(context).size.height * 0.01891),
+                                left:
+                                    MediaQuery.of(context).size.width * 0.04166,
+                                top: MediaQuery.of(context).size.height *
+                                    0.01891),
                             // width: 150,
                             // color: Colors.blue,
                             child: Column(
@@ -456,12 +497,14 @@ class _MyAppState extends State<MyApp> {
                                 Row(
                                   children: <Widget>[
                                     Container(
-                                      width: MediaQuery.of(context).size.width * 0.40277,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.40277,
                                       child: Text(
                                         title,
                                         overflow: TextOverflow.clip,
                                         maxLines: 1,
-                                        style: TextStyle(color: Colors.white, fontSize: 12),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
                                       ),
                                     ),
                                   ],
@@ -469,13 +512,16 @@ class _MyAppState extends State<MyApp> {
                                 Row(
                                   children: <Widget>[
                                     Container(
-                                      width: MediaQuery.of(context).size.width * 0.40277,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.40277,
                                       child: singerName != null
                                           ? Text(
                                               singerName,
                                               overflow: TextOverflow.clip,
                                               maxLines: 1,
-                                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 12),
                                             )
                                           : Container(),
                                     ),
@@ -488,8 +534,10 @@ class _MyAppState extends State<MyApp> {
                             children: <Widget>[
                               Padding(
                                   padding: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width * 0.13888,
-                                      top: MediaQuery.of(context).size.height * 0.0243),
+                                      left: MediaQuery.of(context).size.width *
+                                          0.13888,
+                                      top: MediaQuery.of(context).size.height *
+                                          0.0243),
                                   child: GestureOverlay(
                                     // icons: icons,
                                     isPlaying: this.isPlaying,
@@ -512,7 +560,8 @@ class _MyAppState extends State<MyApp> {
     );
     overlayEntryOld = overlayEntry;
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => overlayState.insert(overlayEntry));
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => overlayState.insert(overlayEntry));
   }
 
   List listLinks = [];
@@ -650,7 +699,9 @@ class _MyAppState extends State<MyApp> {
         author_id = listLinks[index].author_id;
         id = listLinks[index].id;
       });
-      audioPlayer.play(listLinks[index].attachmentName).then((value) => getLyrics(this.shabadId, this.page));
+      audioPlayer
+          .play(listLinks[index].attachmentName)
+          .then((value) => getLyrics(this.shabadId, this.page));
       index++;
     }
   }
@@ -746,7 +797,8 @@ class _MyAppState extends State<MyApp> {
   var singers;
 
   getSingers() async {
-    var response = await http.get('https://api.khojgurbani.org/api/v1/android/all-singers');
+    var response = await http
+        .get('https://api.khojgurbani.org/api/v1/android/all-singers');
     var singer = JsonDecoder().convert(response.body);
 
     setState(() {
@@ -758,7 +810,8 @@ class _MyAppState extends State<MyApp> {
   var dropDownOptions;
 
   getDropDownOptions() async {
-    var response = await http.get('https://api.khojgurbani.org/api/v1/android/drop-down');
+    var response =
+        await http.get('https://api.khojgurbani.org/api/v1/android/drop-down');
     var drop = JsonDecoder().convert(response.body);
 
     setState(() {
@@ -771,7 +824,8 @@ class _MyAppState extends State<MyApp> {
   var songs;
 
   getArtistAndSongs() async {
-    final response = await http.get('https://api.khojgurbani.org/api/v1/android/media-search');
+    final response = await http
+        .get('https://api.khojgurbani.org/api/v1/android/media-search');
     var data = json.decode(response.body);
 
     ArtistAndSongs results = new ArtistAndSongs.fromJson(data);
@@ -787,7 +841,8 @@ class _MyAppState extends State<MyApp> {
   var featuredPodcasts;
 
   getFeaturedPodcasts() async {
-    var response = await http.get('https://api.khojgurbani.org/api/v1/android/home-skip');
+    var response =
+        await http.get('https://api.khojgurbani.org/api/v1/android/home-skip');
     var data = json.decode(response.body);
 
     FeaturedPodcastsList results = new FeaturedPodcastsList.fromJson(data);
@@ -800,7 +855,8 @@ class _MyAppState extends State<MyApp> {
   var featuredPodcastsThemes;
 
   getFeaturedPodcastThemes() async {
-    var response = await http.get('https://api.khojgurbani.org/api/v1/android/home-skip');
+    var response =
+        await http.get('https://api.khojgurbani.org/api/v1/android/home-skip');
     var data = json.decode(response.body);
 
     FeaturedPodcastsList results = new FeaturedPodcastsList.fromJson(data);
@@ -864,7 +920,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Cabin',
-        textTheme: GoogleFonts.latoTextTheme(),
+        textTheme: Theme.of(context).textTheme.apply(
+              fontFamily: 'Cabin',
+            ),
       ),
       debugShowCheckedModeBanner: false,
       home: fromLink == false
@@ -941,7 +999,8 @@ class _MyAppState extends State<MyApp> {
             ),
         '/createAccount': (BuildContext context) => CreateAccount(),
         '/forgotPassword': (BuildContext context) => ForgotPassword(),
-        '/forgotPasswordContinue': (BuildContext context) => ForgotPasswordContinue(),
+        '/forgotPasswordContinue': (BuildContext context) =>
+            ForgotPasswordContinue(),
         '/fullSizePlayer': (BuildContext context) => MusicPlayerFullSize(),
         '/subCategoryPage': (BuildContext context) => CategoryPage(),
         '/podcastThemes': (BuildContext context) => PodcastThemePage(

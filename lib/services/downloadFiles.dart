@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:http/http.dart' as http;
+//import 'package:just_audio/just_audio.dart' as ja;
 import 'package:path_provider/path_provider.dart';
 
 class Downloader {
@@ -19,7 +21,15 @@ class Downloader {
     pathName = file.path;
     downloadFinish = true;
     print('file download is finished');
-    return pathName;
+    final player = AudioPlayer();
+    await player.setUrl(
+      pathName,
+      isLocal: true,
+    );
+    var duration =
+        await Future.delayed(Duration(seconds: 2), () => player.getDuration());
+    print('File duration in mins -> $duration');
+    return duration;
   }
 
   Future<dynamic> downloadImage(String url, filename) async {
@@ -29,7 +39,7 @@ class Downloader {
       url,
     );
     var bytes = request.bodyBytes; //close();
-    await image.writeAsBytesSync(bytes);
+    image.writeAsBytesSync(bytes);
     imagePath = image.path;
     downloadFinish = true;
     return imagePath;

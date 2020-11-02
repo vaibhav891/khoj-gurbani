@@ -20,8 +20,18 @@ class UserDownloaded {
   final int page;
   final int author_id;
 
-  UserDownloaded(this.id, this.shabadId, this.title, this.author, this.type, this.duration, this.attachmentName,
-      this.image, this.is_media, this.page, this.author_id);
+  UserDownloaded(
+      this.id,
+      this.shabadId,
+      this.title,
+      this.author,
+      this.type,
+      this.duration,
+      this.attachmentName,
+      this.image,
+      this.is_media,
+      this.page,
+      this.author_id);
 }
 
 class LibraryDownloads extends StatefulWidget {
@@ -118,7 +128,8 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
           Row(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.0555, right: maxWidth * 0.0555),
+                padding: EdgeInsets.only(
+                    left: maxWidth * 0.0555, right: maxWidth * 0.0555),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
@@ -137,7 +148,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                   this.widget.currentSong.author_id,
                                   this.widget.currentSong.id,
                                   fromFile: fromFile,
-                                  isDownloaded: true,
+                                  //isDownloaded: true,
                                 )
                             : this.widget.setPropertiesForFullScreen(
                                   context,
@@ -151,7 +162,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                   playButton[0].author_id,
                                   playButton[0].id,
                                   fromFile: fromFile,
-                                  isDownloaded: true,
+                                  //isDownloaded: true,
                                 );
                         this.widget.play(
                             this.widget.show == true
@@ -189,7 +200,10 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                     ),
                                     Text(
                                       "Play",
-                                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -219,7 +233,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                     this.widget.currentSong.author_id,
                                     this.widget.currentSong.id,
                                     fromFile: fromFile,
-                                    isDownloaded: true,
+                                    //isDownloaded: true,
                                   )
                               : this.widget.setPropertiesForFullScreen(
                                     context,
@@ -233,7 +247,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                     shuffleButton[0].author_id,
                                     shuffleButton[0].id,
                                     fromFile: fromFile,
-                                    isDownloaded: true,
+                                    //isDownloaded: true,
                                   );
                           this.widget.play(
                               this.widget.show == true
@@ -274,7 +288,9 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                     Text(
                                       "Shuffle",
                                       style: TextStyle(
-                                          color: Color(0xff578ed3), fontSize: 16, fontWeight: FontWeight.bold),
+                                          color: Color(0xff578ed3),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -290,7 +306,8 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
             ],
           ),
           Container(
-            padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxWidth * 0.0135),
+            padding: EdgeInsets.only(
+                left: maxWidth * 0.0555, top: maxWidth * 0.0135),
             height: maxHeight / 1.57,
             child: FutureBuilder<List<Downloads>>(
               future: DBProvider.db.getAllDownloads(),
@@ -301,6 +318,7 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                       scrollDirection: Axis.vertical,
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
+                        //var index = snapshot.data.length - val - 1;
                         // Destination destination = destinations[index];
                         return Container(
                           margin: EdgeInsets.only(top: maxHeight * 0.0094),
@@ -333,21 +351,29 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                 // ),
                                 child: GestureDetector(
                                   onTap: () {
-                                    print('song title -> ${snapshot.data[index].title}');
-                                    print('attachment name -> ${snapshot.data[index].attachmentName}');
+                                    print(
+                                        'song title -> ${snapshot.data[index].title}');
+                                    print(
+                                        'attachment name -> ${snapshot.data[index].attachmentName}');
                                     this.widget.showOverlay(
                                         context,
                                         snapshot.data[index].title,
                                         snapshot.data[index].author,
                                         snapshot.data[index].attachmentName,
                                         snapshot.data[index].image.toString(),
-                                        snapshot.data[index].shabad_id,
+                                        snapshot.data[index].shabadId,
                                         snapshot.data[index].page,
                                         snapshot.data[index].id,
-                                        fromFile: snapshot.data[index].fromFile);
-                                    this.widget.play(snapshot.data[index].attachmentName, context);
+                                        is_media: snapshot.data[index].is_media,
+                                        fromFile:
+                                            snapshot.data[index].fromFile);
+                                    this.widget.play(
+                                        snapshot.data[index].attachmentName,
+                                        context);
                                     List links = [];
-                                    for (int i = index; i < snapshot.data.length; i++) {
+                                    for (int i = index;
+                                        i < snapshot.data.length;
+                                        i++) {
                                       links.add(snapshot.data[i]);
                                     }
                                     this.widget.setListLinks(links);
@@ -360,33 +386,45 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                     children: <Widget>[
                                       Padding(
                                         padding: EdgeInsets.only(
-                                          top: maxHeight * 0.014,
+                                          top: maxHeight * 0.006,
                                           left: maxWidth * 0.159,
                                         ),
                                         child: Column(
                                           // mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: <Widget>[
                                             ConstrainedBox(
-                                              constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
+                                              constraints: BoxConstraints(
+                                                  maxWidth:
+                                                      maxWidth * 0.594444),
                                               child: Text(
                                                 snapshot.data[index].title,
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 15.0,
+                                                  fontWeight: FontWeight.normal,
                                                 ),
                                               ),
                                             ),
+                                            SizedBox(
+                                              height: maxHeight * 0.006,
+                                            ),
                                             ConstrainedBox(
-                                              constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
+                                              constraints: BoxConstraints(
+                                                  maxWidth:
+                                                      maxWidth * 0.594444),
                                               child: Text(
-                                                snapshot.data[index].author != null ? snapshot.data[index].author : "",
+                                                snapshot.data[index].author !=
+                                                        null
+                                                    ? snapshot
+                                                        .data[index].author
+                                                    : "",
                                                 maxLines: 1,
                                                 style: TextStyle(
                                                   color: Colors.grey,
-                                                  fontSize: 16,
+                                                  fontSize: 14.0,
                                                 ),
                                               ),
                                             ),
@@ -396,9 +434,11 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                       Container(
                                         // tag: 'recently-played1',
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(6.0),
+                                          borderRadius:
+                                              BorderRadius.circular(6.0),
                                           child: Image.file(
-                                            File(snapshot.data[index].image.toString()),
+                                            File(snapshot.data[index].image
+                                                .toString()),
                                             height: maxHeight * 0.0635,
                                             width: maxWidth * 0.1305,
                                             fit: BoxFit.cover,
@@ -410,81 +450,128 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(right: maxWidth * 0.055555),
+                                padding:
+                                    EdgeInsets.only(right: maxWidth * 0.055555),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: <Widget>[
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: <Widget>[
-                                        // Container(
-                                        //   padding: EdgeInsets.only(
-                                        //     top: maxHeight * 0.0167,
-                                        //   ),
-                                        //   child: Text(
-                                        //     snapshot.data[index].duration,
-                                        //     maxLines: 1,
-                                        //     overflow: TextOverflow.clip,
-                                        //     style: TextStyle(fontSize: 10),
-                                        //   ),
-                                        // ),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                            top: maxHeight * 0.006,
+                                          ),
+                                          child: Text(
+                                            printDuration(Duration(
+                                                milliseconds: snapshot
+                                                    .data[index].duration)),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(fontSize: 14.0),
+                                          ),
+                                        ),
                                         Padding(
-                                          padding: EdgeInsets.only(top: maxHeight * 0.00675),
+                                          padding: EdgeInsets.only(
+                                              top: maxHeight * 0.00675),
                                           child: GestureDetector(
                                             onTap: () {
                                               snapshot.data[index].is_media == 1
-                                                  ? Navigator.of(context).push(PageRouteBuilder(
+                                                  ? Navigator.of(context)
+                                                      .push(PageRouteBuilder(
                                                       opaque: false,
-                                                      pageBuilder:
-                                                          (BuildContext context, animation, secondaryAnimation) =>
-                                                              SongOptions(
-                                                        indexOfSong: snapshot.data[index].id,
-                                                        title: snapshot.data[index].title,
-                                                        artistName: snapshot.data[index].author,
-                                                        id: snapshot.data[index].id,
-                                                        author_id: snapshot.data[index].author_id,
-                                                        image: snapshot.data[index].image,
-                                                        isDownloaded: true,
-                                                        indexOfArtist: snapshot.data[index].author_id,
+                                                      pageBuilder: (BuildContext
+                                                                  context,
+                                                              animation,
+                                                              secondaryAnimation) =>
+                                                          SongOptions(
+                                                        indexOfSong: snapshot
+                                                            .data[index].id,
+                                                        title: snapshot
+                                                            .data[index].title,
+                                                        artistName: snapshot
+                                                            .data[index].author,
+                                                        id: snapshot
+                                                            .data[index].id,
+                                                        author_id: snapshot
+                                                            .data[index]
+                                                            .author_id,
+                                                        image: snapshot
+                                                            .data[index].image,
+                                                        //isDownloaded: true,
+                                                        indexOfArtist: snapshot
+                                                            .data[index]
+                                                            .author_id,
+                                                        fromFile: snapshot
+                                                            .data[index]
+                                                            .fromFile,
                                                       ),
                                                       // transitionDuration:
                                                       //     Duration(seconds: 1),
                                                       transitionsBuilder:
-                                                          (ontext, animation, secondaryAnimation, child) {
-                                                        var begin = Offset(0.0, -1.0);
+                                                          (ontext,
+                                                              animation,
+                                                              secondaryAnimation,
+                                                              child) {
+                                                        var begin =
+                                                            Offset(0.0, -1.0);
                                                         var end = Offset.zero;
                                                         var curve = Curves.ease;
 
-                                                        var tween = Tween(begin: begin, end: end)
-                                                            .chain(CurveTween(curve: curve));
+                                                        var tween = Tween(
+                                                                begin: begin,
+                                                                end: end)
+                                                            .chain(CurveTween(
+                                                                curve: curve));
 
                                                         return SlideTransition(
-                                                          position: animation.drive(tween),
+                                                          position: animation
+                                                              .drive(tween),
                                                           child: child,
                                                         );
                                                       },
                                                     ))
-                                                  : Navigator.of(context).push(PageRouteBuilder(
+                                                  : Navigator.of(context)
+                                                      .push(PageRouteBuilder(
                                                       opaque: false,
-                                                      pageBuilder:
-                                                          (BuildContext context, animation, secondaryAnimation) =>
-                                                              PodcastThreeDots(
-                                                        title: snapshot.data[index].title,
-                                                        id: snapshot.data[index].id,
-                                                        attachmentName: snapshot.data[index].attachmentName,
-                                                        isDownloaded: true,
+                                                      pageBuilder: (BuildContext
+                                                                  context,
+                                                              animation,
+                                                              secondaryAnimation) =>
+                                                          PodcastThreeDots(
+                                                        title: snapshot
+                                                            .data[index].title,
+                                                        id: snapshot
+                                                            .data[index].id,
+                                                        attachmentName: snapshot
+                                                            .data[index]
+                                                            .attachmentName,
+                                                        //isDownloaded: true,
+                                                        fromFile: snapshot
+                                                            .data[index]
+                                                            .fromFile,
                                                       ),
                                                       // transitionDuration:
                                                       //     Duration(seconds: 1),
                                                       transitionsBuilder:
-                                                          (ontext, animation, secondaryAnimation, child) {
-                                                        var begin = Offset(0.0, 1.0);
-                                                        var end = Offset(0.0, 0.47);
+                                                          (ontext,
+                                                              animation,
+                                                              secondaryAnimation,
+                                                              child) {
+                                                        var begin =
+                                                            Offset(0.0, 1.0);
+                                                        var end =
+                                                            Offset(0.0, 0.47);
                                                         var curve = Curves.ease;
-                                                        var tween = Tween(begin: begin, end: end)
-                                                            .chain(CurveTween(curve: curve));
+                                                        var tween = Tween(
+                                                                begin: begin,
+                                                                end: end)
+                                                            .chain(CurveTween(
+                                                                curve: curve));
                                                         return SlideTransition(
-                                                          position: animation.drive(tween),
+                                                          position: animation
+                                                              .drive(tween),
                                                           child: child,
                                                         );
                                                       },
@@ -523,5 +610,19 @@ class _LibraryDownloadsState extends State<LibraryDownloads> {
         ],
       ),
     );
+  }
+
+  String printDuration(Duration duration) {
+    String twoDigits(int n) {
+      if (n >= 10) return "$n";
+      return "0$n";
+    }
+
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    if (duration.inHours > 0)
+      return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+    else
+      return "$twoDigitMinutes:$twoDigitSeconds";
   }
 }

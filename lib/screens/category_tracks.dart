@@ -103,17 +103,23 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
         s.containsKey('status') ? s["status"] : '',
         s.containsKey('duration') ? s["duration"] : '',
         s.containsKey('featured') ? s["featured"] : '',
-        s.containsKey('featured_display_order') ? s["featured_display_order"] : '',
+        s.containsKey('featured_display_order')
+            ? s["featured_display_order"]
+            : '',
         s.containsKey('priority_status') ? s["priority_status"] : '',
-        s.containsKey('priority_order_status') ? s["priority_order_status"] : '',
+        s.containsKey('priority_order_status')
+            ? s["priority_order_status"]
+            : '',
         s.containsKey('attachment_name') ? s["attachment_name"] : '',
         s.containsKey('author_image') ? s["author_image"] : '',
         s.containsKey('author_name')
             ? s["author_name"]
-            : s.containsKey('author')
-                ? s['author']
-                : s['title'],
-        s.containsKey('autor_name_without_bhai') ? s["autor_name_without_bhai"] : '',
+            // : s.containsKey('author')
+            //     ? s['author']
+            : s['title'],
+        s.containsKey('autor_name_without_bhai')
+            ? s["autor_name_without_bhai"]
+            : '',
         s.containsKey('page') ? s['page'] : '',
         s.containsKey('is_media') ? s['is_media'] : '',
         s.containsKey('author_id') ? s["author_id"] : '',
@@ -174,7 +180,8 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
             child: Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: maxWidth * 0.0555, right: maxWidth * 0.0555),
+                  padding: EdgeInsets.only(
+                      left: maxWidth * 0.0555, right: maxWidth * 0.0555),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
@@ -243,8 +250,10 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                       ),
                                       Text(
                                         "Play",
-                                        style:
-                                            TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -327,7 +336,9 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                       Text(
                                         "Shuffle",
                                         style: TextStyle(
-                                            color: Color(0xff578ed3), fontSize: 16, fontWeight: FontWeight.bold),
+                                            color: Color(0xff578ed3),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -344,7 +355,8 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: maxWidth * 0.05555, top: maxHeight * 0.0135),
+            padding: EdgeInsets.only(
+                left: maxWidth * 0.05555, top: maxHeight * 0.0135),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -365,7 +377,8 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
           Flexible(
             flex: 2,
             child: Container(
-              padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxHeight * 0.0162),
+              padding: EdgeInsets.only(
+                  left: maxWidth * 0.0555, top: maxHeight * 0.0162),
               //height: maxHeight * 0.6905,
               child: FutureBuilder(
                 future: _getSubCategorysNew(widget.id),
@@ -418,19 +431,26 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                         this.widget.showOverlay(
                                               context,
                                               snapshot.data[index].title,
-                                              //snapshot.data[index].author,
-                                              widget.name,
-                                              snapshot.data[index].attachmentName,
+                                              snapshot.data[index].author,
+                                              //widget.name,
+                                              snapshot
+                                                  .data[index].attachmentName,
                                               snapshot.data[index].image,
                                               snapshot.data[index].shabadId,
                                               snapshot.data[index].page,
                                               snapshot.data[index].id,
-                                              is_media: snapshot.data[index].is_media,
-                                              author_id: snapshot.data[index].author_id,
+                                              is_media:
+                                                  snapshot.data[index].is_media,
+                                              author_id: snapshot
+                                                  .data[index].author_id,
                                             );
-                                        this.widget.play(snapshot.data[index].attachmentName, context);
+                                        this.widget.play(
+                                            snapshot.data[index].attachmentName,
+                                            context);
                                         List links = [];
-                                        for (int i = index; i < snapshot.data.length; i++) {
+                                        for (int i = index;
+                                            i < snapshot.data.length;
+                                            i++) {
                                           links.add(snapshot.data[i]);
                                         }
                                         this.widget.setListLinks(links);
@@ -438,7 +458,8 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                         setState(() {
                                           this.widget.showOverlayTrue();
                                         });
-                                        this.widget.insertRecentlyPlayed(snapshot.data[index].id);
+                                        this.widget.insertRecentlyPlayed(
+                                            snapshot.data[index].id);
                                       },
                                       child: Stack(
                                         children: <Widget>[
@@ -448,9 +469,12 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                               left: maxWidth * 0.159,
                                             ),
                                             child: ConstrainedBox(
-                                              constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
+                                              constraints: BoxConstraints(
+                                                  maxWidth:
+                                                      maxWidth * 0.594444),
                                               child: Text(
-                                                snapshot.data[index].title,
+                                                snapshot.data[index]
+                                                    .author, //title,
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
@@ -462,11 +486,13 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                           ),
                                           Container(
                                             child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(6.0),
+                                              borderRadius:
+                                                  BorderRadius.circular(6.0),
                                               child: Image(
                                                 height: maxHeight * 0.0621,
                                                 width: maxWidth * 0.1305,
-                                                image: NetworkImage(snapshot.data[index].image),
+                                                image: NetworkImage(
+                                                    snapshot.data[index].image),
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -476,12 +502,14 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(right: maxWidth * 0.055555),
+                                    padding: EdgeInsets.only(
+                                        right: maxWidth * 0.055555),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: <Widget>[
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
                                           children: <Widget>[
                                             Container(
                                               padding: EdgeInsets.only(
@@ -493,46 +521,86 @@ class _CategoryTracksPageState extends State<CategoryTracksPage> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(top: maxHeight * 0.00475),
+                                              padding: EdgeInsets.only(
+                                                  top: maxHeight * 0.00475),
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  Navigator.of(context).push(PageRouteBuilder(
+                                                  Navigator.of(context)
+                                                      .push(PageRouteBuilder(
                                                     opaque: false,
-                                                    pageBuilder:
-                                                        (BuildContext context, animation, secondaryAnimation) =>
-                                                            SongOptions(
-                                                      indexOfSong: snapshot.data[index].id,
-                                                      indexOfArtist: snapshot.data[index].author_id,
-                                                      artistName: snapshot.data[index].author,
-                                                      title: snapshot.data[index].title,
-                                                      attachmentName: snapshot.data[index].attachmentName,
-                                                      id: snapshot.data[index].id,
-                                                      author_id: snapshot.data[index].author_id,
-                                                      image: snapshot.data[index].image,
-                                                      showOverlay: this.widget.showOverlay,
-                                                      showOverlayTrue: this.widget.showOverlayTrue,
-                                                      showOverlayFalse: this.widget.showOverlayFalse,
+                                                    pageBuilder: (BuildContext
+                                                                context,
+                                                            animation,
+                                                            secondaryAnimation) =>
+                                                        SongOptions(
+                                                      indexOfSong: snapshot
+                                                          .data[index].id,
+                                                      indexOfArtist: snapshot
+                                                          .data[index]
+                                                          .author_id,
+                                                      artistName: snapshot
+                                                          .data[index].author,
+                                                      title: snapshot
+                                                          .data[index].title,
+                                                      attachmentName: snapshot
+                                                          .data[index]
+                                                          .attachmentName,
+                                                      id: snapshot
+                                                          .data[index].id,
+                                                      author_id: snapshot
+                                                          .data[index]
+                                                          .author_id,
+                                                      image: snapshot
+                                                          .data[index].image,
+                                                      showOverlay: this
+                                                          .widget
+                                                          .showOverlay,
+                                                      showOverlayTrue: this
+                                                          .widget
+                                                          .showOverlayTrue,
+                                                      showOverlayFalse: this
+                                                          .widget
+                                                          .showOverlayFalse,
                                                       show: this.widget.show,
                                                       play: this.widget.play,
-                                                      setListLinks: this.widget.setListLinks,
-                                                      insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                                                      setListLinks: this
+                                                          .widget
+                                                          .setListLinks,
+                                                      insertRecentlyPlayed: this
+                                                          .widget
+                                                          .insertRecentlyPlayed,
                                                       setPropertiesForFullScreen:
-                                                          this.widget.setPropertiesForFullScreen,
-                                                      fromArtistPage: fromArtistPage,
+                                                          this
+                                                              .widget
+                                                              .setPropertiesForFullScreen,
+                                                      fromArtistPage:
+                                                          fromArtistPage,
                                                     ),
                                                     // transitionDuration:
                                                     //     Duration(seconds: 1),
-                                                    transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
-                                                      var begin = Offset(0.0, -1.0);
-                                                      var end =
-                                                          this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
+                                                    transitionsBuilder: (ontext,
+                                                        animation,
+                                                        secondaryAnimation,
+                                                        child) {
+                                                      var begin =
+                                                          Offset(0.0, -1.0);
+                                                      var end = this
+                                                                  .widget
+                                                                  .show ==
+                                                              true
+                                                          ? Offset(0.0, -0.08)
+                                                          : Offset.zero;
                                                       var curve = Curves.ease;
 
-                                                      var tween =
-                                                          Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                                      var tween = Tween(
+                                                              begin: begin,
+                                                              end: end)
+                                                          .chain(CurveTween(
+                                                              curve: curve));
 
                                                       return SlideTransition(
-                                                        position: animation.drive(tween),
+                                                        position: animation
+                                                            .drive(tween),
                                                         child: child,
                                                       );
                                                     },

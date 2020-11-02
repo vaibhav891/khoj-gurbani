@@ -96,7 +96,8 @@ class _LibraryTracksState extends State<LibraryTracks> {
           Row(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.0555, right: maxWidth * 0.0555),
+                padding: EdgeInsets.only(
+                    left: maxWidth * 0.0555, right: maxWidth * 0.0555),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
@@ -161,7 +162,10 @@ class _LibraryTracksState extends State<LibraryTracks> {
                                     ),
                                     Text(
                                       "Play",
-                                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -195,7 +199,8 @@ class _LibraryTracksState extends State<LibraryTracks> {
                                     context,
                                     service.shuffleListUserMedias[0].title,
                                     service.shuffleListUserMedias[0].author,
-                                    service.shuffleListUserMedias[0].attachmentName,
+                                    service.shuffleListUserMedias[0]
+                                        .attachmentName,
                                     service.shuffleListUserMedias[0].image,
                                     service.shuffleListUserMedias[0].shabadId,
                                     service.shuffleListUserMedias[0].page,
@@ -206,11 +211,14 @@ class _LibraryTracksState extends State<LibraryTracks> {
                           this.widget.play(
                               this.widget.show == true
                                   ? this.widget.currentSong.attachmentName
-                                  : service.shuffleListUserMedias[0].attachmentName,
+                                  : service
+                                      .shuffleListUserMedias[0].attachmentName,
                               context,
                               true);
                           List links = [];
-                          for (int i = 0; i < service.shuffleListUserMedias.length; i++) {
+                          for (int i = 0;
+                              i < service.shuffleListUserMedias.length;
+                              i++) {
                             links.add(service.shuffleListUserMedias[i]);
                           }
                           this.widget.setListLinks(links);
@@ -242,7 +250,9 @@ class _LibraryTracksState extends State<LibraryTracks> {
                                     Text(
                                       "Shuffle",
                                       style: TextStyle(
-                                          color: Color(0xff578ed3), fontSize: 16, fontWeight: FontWeight.bold),
+                                          color: Color(0xff578ed3),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -261,7 +271,8 @@ class _LibraryTracksState extends State<LibraryTracks> {
             ],
           ),
           Container(
-            padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxWidth * 0.0135),
+            padding: EdgeInsets.only(
+                left: maxWidth * 0.0555, top: maxWidth * 0.0135),
             height: maxHeight / 1.565,
             child: ListView.builder(
               scrollDirection: Axis.vertical,
@@ -310,7 +321,9 @@ class _LibraryTracksState extends State<LibraryTracks> {
                                   is_media: userMedia[index].is_media,
                                   author_id: userMedia[index].author_id,
                                 );
-                            this.widget.play(userMedia[index].attachmentName, context);
+                            this
+                                .widget
+                                .play(userMedia[index].attachmentName, context);
                             List links = [];
                             for (int i = index; i < userMedia.length; i++) {
                               links.add(userMedia[i]);
@@ -325,33 +338,38 @@ class _LibraryTracksState extends State<LibraryTracks> {
                             children: <Widget>[
                               Padding(
                                 padding: EdgeInsets.only(
-                                  top: maxHeight * 0.014,
+                                  top: maxHeight * 0.006,
                                   left: maxWidth * 0.159,
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     ConstrainedBox(
-                                      constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
+                                      constraints: BoxConstraints(
+                                          maxWidth: maxWidth * 0.594444),
                                       child: Text(
                                         userMedia[index].title,
                                         maxLines: 1,
                                         overflow: TextOverflow.clip,
                                         style: TextStyle(
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.normal,
                                         ),
                                       ),
                                     ),
+                                    SizedBox(
+                                      height: maxHeight * 0.006,
+                                    ),
                                     ConstrainedBox(
-                                      constraints: BoxConstraints(maxWidth: maxWidth * 0.594444),
+                                      constraints: BoxConstraints(
+                                          maxWidth: maxWidth * 0.594444),
                                       child: Text(
                                         userMedia[index].author,
                                         maxLines: 1,
                                         overflow: TextOverflow.clip,
                                         style: TextStyle(
                                           color: Colors.grey,
-                                          fontSize: 14,
+                                          fontSize: 14.0,
                                         ),
                                       ),
                                     ),
@@ -383,50 +401,67 @@ class _LibraryTracksState extends State<LibraryTracks> {
                               children: <Widget>[
                                 Container(
                                   padding: EdgeInsets.only(
-                                    top: maxHeight * 0.0167,
+                                    top: maxHeight * 0.006,
                                   ),
                                   child: Text(
                                     userMedia[index].duration,
                                     maxLines: 1,
                                     overflow: TextOverflow.clip,
-                                    style: TextStyle(fontSize: 10),
+                                    style: TextStyle(fontSize: 14.0),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: maxHeight * 0.00675),
+                                  padding:
+                                      EdgeInsets.only(top: maxHeight * 0.00675),
                                   child: GestureDetector(
                                     onTap: () {
-                                      Navigator.of(context).push(PageRouteBuilder(
+                                      Navigator.of(context)
+                                          .push(PageRouteBuilder(
                                         opaque: false,
-                                        pageBuilder: (BuildContext context, animation, secondaryAnimation) =>
+                                        pageBuilder: (BuildContext context,
+                                                animation,
+                                                secondaryAnimation) =>
                                             SongOptions(
                                           indexOfSong: userMedia[index].id,
-                                          indexOfArtist: userMedia[index].author_id,
+                                          indexOfArtist:
+                                              userMedia[index].author_id,
                                           title: userMedia[index].title,
                                           artistName: userMedia[index].author,
-                                          attachmentName: userMedia[index].attachmentName,
+                                          attachmentName:
+                                              userMedia[index].attachmentName,
                                           id: userMedia[index].id,
                                           playlist_id: null,
                                           author_id: userMedia[index].author_id,
                                           image: userMedia[index].image,
                                           showOverlay: this.widget.showOverlay,
-                                          showOverlayTrue: this.widget.showOverlayTrue,
-                                          showOverlayFalse: this.widget.showOverlayFalse,
+                                          showOverlayTrue:
+                                              this.widget.showOverlayTrue,
+                                          showOverlayFalse:
+                                              this.widget.showOverlayFalse,
                                           show: this.widget.show,
                                           play: this.widget.play,
-                                          setListLinks: this.widget.setListLinks,
-                                          insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
-                                          setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
+                                          setListLinks:
+                                              this.widget.setListLinks,
+                                          insertRecentlyPlayed:
+                                              this.widget.insertRecentlyPlayed,
+                                          setPropertiesForFullScreen: this
+                                              .widget
+                                              .setPropertiesForFullScreen,
                                           fromArtistPage: fromArtistPage,
                                         ),
                                         // transitionDuration:
                                         //     Duration(seconds: 1),
-                                        transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                                        transitionsBuilder: (ontext, animation,
+                                            secondaryAnimation, child) {
                                           var begin = Offset(0.0, -1.0);
-                                          var end = this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
+                                          var end = this.widget.show == true
+                                              ? Offset(0.0, -0.08)
+                                              : Offset.zero;
                                           var curve = Curves.ease;
 
-                                          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                          var tween = Tween(
+                                                  begin: begin, end: end)
+                                              .chain(CurveTween(curve: curve));
 
                                           return SlideTransition(
                                             position: animation.drive(tween),

@@ -21,7 +21,7 @@ class PodcastThreeDots extends StatefulWidget {
   final int id;
   final int is_media;
   final indexOfPodcast;
-  final bool isDownloaded;
+  final int fromFile;
 
   const PodcastThreeDots({
     Key key,
@@ -33,7 +33,7 @@ class PodcastThreeDots extends StatefulWidget {
     this.is_media,
     this.playlist_id,
     this.indexOfPodcast,
-    this.isDownloaded = false,
+    this.fromFile = 0,
   }) : super(key: key);
 
   @override
@@ -80,8 +80,12 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
     final userId = prefs.getInt('user_id');
     final machineId = prefs.getString('machine_id');
 
-    final res = await http.post('https://api.khojgurbani.org/api/v1/android/podcast-fav',
-        body: {'podcast_id': json.encode(id), 'user_id': json.encode(userId), 'machine_id': machineId});
+    final res = await http
+        .post('https://api.khojgurbani.org/api/v1/android/podcast-fav', body: {
+      'podcast_id': json.encode(id),
+      'user_id': json.encode(userId),
+      'machine_id': machineId
+    });
     final data = jsonDecode(res.body);
     if (!mounted) return;
     setState(() {
@@ -97,10 +101,13 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
             Navigator.of(context).pop();
           });
           return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15))),
             title: Center(
               child: Text(
-                _isFavorite == false ? 'Added to Favorite' : 'Removed from Favorite',
+                _isFavorite == false
+                    ? 'Added to Favorite'
+                    : 'Removed from Favorite',
                 style: TextStyle(fontSize: 14),
               ),
             ),
@@ -117,7 +124,9 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
     // final headers = {'Authorization': "Bearer " + token};
     final res = await http.post(
       'https://api.khojgurbani.org/api/v1/android/user-download?podcast_id=$id' +
-          (userId == null ? 'machine_id=$machineId&' : 'user_id=$userId&machine_id=$machineId&'),
+          (userId == null
+              ? 'machine_id=$machineId&'
+              : 'user_id=$userId&machine_id=$machineId&'),
       // headers: headers
     );
     if (res.statusCode == 200) {
@@ -147,7 +156,8 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
           Navigator.of(context).pop();
         });
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15))),
           title: Center(
             child: Text(
               'Downloading...',
@@ -192,7 +202,10 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                         child: Text(
                           this.widget.title,
                           maxLines: 1,
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
                       ),
                     ),
@@ -206,16 +219,20 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                     this.widget.playlist_id == null
                         ? Navigator.of(context).push(PageRouteBuilder(
                             opaque: false,
-                            pageBuilder: (BuildContext context, animation, secondaryAnimation) => AddToPlaylist(
+                            pageBuilder: (BuildContext context, animation,
+                                    secondaryAnimation) =>
+                                AddToPlaylist(
                               podcast_id: this.widget.id,
                             ),
                             transitionDuration: Duration(seconds: 1),
-                            transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                            transitionsBuilder:
+                                (ontext, animation, secondaryAnimation, child) {
                               var begin = Offset(0.0, -1.0);
                               var end = Offset.zero;
                               var curve = Curves.ease;
 
-                              var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                              var tween = Tween(begin: begin, end: end)
+                                  .chain(CurveTween(curve: curve));
 
                               return SlideTransition(
                                 position: animation.drive(tween),
@@ -223,7 +240,8 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                               );
                             },
                           ))
-                        : deleteTrackFromPlaylist(this.widget.playlist_id, this.widget.id);
+                        : deleteTrackFromPlaylist(
+                            this.widget.playlist_id, this.widget.id);
                   },
                   child: Row(
                     children: <Widget>[
@@ -237,7 +255,9 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                       Padding(
                         padding: const EdgeInsets.only(left: 20, top: 15),
                         child: Text(
-                          this.widget.playlist_id != null ? 'Remove from Playlist' : 'Add to Playlist',
+                          this.widget.playlist_id != null
+                              ? 'Remove from Playlist'
+                              : 'Add to Playlist',
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),
@@ -260,41 +280,55 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                       padding: const EdgeInsets.only(left: 20, top: 15),
                       child: GestureDetector(
                         onTap: () {
-                          if (!widget.isDownloaded) {
-                            print('inside download -> song name [${widget.title}]');
-                            print('inside download -> attachment name [${widget.attachmentName}]');
-                            print('inside download -> image path [${widget.image}]');
-                            download.downloadImage(this.widget.image, this.widget.title);
+                          if (widget.fromFile == 0) {
+                            print(
+                                'inside download -> song name [${widget.title}]');
+                            print(
+                                'inside download -> attachment name [${widget.attachmentName}]');
+                            print(
+                                'inside download -> image path [${widget.image}]');
+                            download.downloadImage(
+                                this.widget.image, this.widget.title);
                             download
                                 .downloadFile(
                               this.widget.attachmentName,
                               this.widget.title,
                             )
-                                .whenComplete(() async {
-                              Downloads newDT = Downloads(
-                                id: widget.id,
-                                title: this.widget.title,
-                                author: this.widget.artistName,
-                                attachmentName: download.pathName.toString(),
-                                image: download.imagePath.toString(),
-                                is_media: 0,
-                                //author_id: no author id for podcast
-                                //shabad_id: no shabad id for podcast
-                              );
-                              await DBProvider.db.newDownload(newDT);
-                              // call api to notify server of new download
-                              podcastDownload(widget.id);
-                            });
+                                .then(
+                              (value) async {
+                                Downloads newDT = Downloads(
+                                  id: widget.id,
+                                  title: this.widget.title,
+                                  author: this.widget.artistName,
+                                  attachmentName: download.pathName.toString(),
+                                  image: download.imagePath.toString(),
+                                  is_media: 0,
+                                  //author_id: no author id for podcast
+                                  //shabad_id: no shabad id for podcast
+                                  duration: value,
+                                  timestamp:
+                                      DateTime.now().millisecondsSinceEpoch,
+                                );
+                                await DBProvider.db.newDownload(newDT);
+                                // call api to notify server of new download
+                                podcastDownload(widget.id);
+                              },
+                              onError: () => print(
+                                  'Something went wrong, download returned error'),
+                            );
                             Navigator.of(context).pop();
                             downloading();
                             //downloading();
                           } else {
-                            _removeFromDownload(widget.id, widget.attachmentName);
+                            _removeFromDownload(
+                                widget.id, widget.attachmentName);
                             Navigator.of(context).popAndPushNamed('/library');
                           }
                         },
                         child: Text(
-                          !widget.isDownloaded ? 'Download' : 'Remove from download',
+                          widget.fromFile == 0
+                              ? 'Download'
+                              : 'Remove from download',
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),
@@ -309,7 +343,9 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20, top: 15),
                       child: Icon(
-                        _isFavorite == true ? Icons.favorite : Icons.favorite_border,
+                        _isFavorite == true
+                            ? Icons.favorite
+                            : Icons.favorite_border,
                         color: Colors.white,
                       ),
                     ),
@@ -322,7 +358,9 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                           addedToFavoriteDialog();
                         },
                         child: Text(
-                          _isFavorite == true ? 'Remove from Favorite' : 'Add to Favorite',
+                          _isFavorite == true
+                              ? 'Remove from Favorite'
+                              : 'Add to Favorite',
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),

@@ -133,7 +133,13 @@ class Scriptures {
   String scriptureRoman;
   Translation translation;
 
-  Scriptures({this.id, this.shabadID, this.scripture, this.scriptureOriginal, this.scriptureRoman, this.translation});
+  Scriptures(
+      {this.id,
+      this.shabadID,
+      this.scripture,
+      this.scriptureOriginal,
+      this.scriptureRoman,
+      this.translation});
 
   Scriptures.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -141,7 +147,9 @@ class Scriptures {
     scripture = json['Scripture'];
     scriptureOriginal = json['ScriptureOriginal'];
     scriptureRoman = json['ScriptureRoman'];
-    translation = json['translation'] != null ? new Translation.fromJson(json['translation']) : null;
+    translation = json['translation'] != null
+        ? new Translation.fromJson(json['translation'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -211,7 +219,13 @@ class Santhya {
   int priority;
   int userIdFk;
 
-  Santhya({this.santheyaId, this.santhyaUrl, this.shabadId, this.changetime, this.priority, this.userIdFk});
+  Santhya(
+      {this.santheyaId,
+      this.santhyaUrl,
+      this.shabadId,
+      this.changetime,
+      this.priority,
+      this.userIdFk});
 
   Santhya.fromJson(Map<String, dynamic> json) {
     santheyaId = json['santheya_id'];
@@ -271,7 +285,8 @@ class Katha {
     displaySingerId = json['DisplaySingerId'];
     userIdFk = json['user_id_fk'];
     approved = json['approved'];
-    singer = json['singer'] != null ? new Singer.fromJson(json['singer']) : null;
+    singer =
+        json['singer'] != null ? new Singer.fromJson(json['singer']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -352,7 +367,7 @@ class MusicPlayerFullSize extends StatefulWidget {
   final Function setListLinks;
   final Function insertRecentlyPlayed;
   bool show;
-  bool isDownloaded;
+  //bool isDownloaded;
 
   MusicPlayerFullSize({
     Key key,
@@ -392,7 +407,7 @@ class MusicPlayerFullSize extends StatefulWidget {
     this.setListLinks,
     this.insertRecentlyPlayed,
     this.show,
-    this.isDownloaded,
+    //this.isDownloaded,
   }) : super(key: key);
 
   @override
@@ -405,7 +420,9 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
   int fromFullMusicPlayer;
 
   void initState() {
-    this.widget.shabadId != null ? this.widget.getLyrics(this.widget.shabadId, this.widget.page) : null;
+    this.widget.shabadId != null
+        ? this.widget.getLyrics(this.widget.shabadId, this.widget.page)
+        : null;
     getTranslateValue();
     this.widget.setIsOpenFullScreen(true);
     super.initState();
@@ -433,7 +450,9 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
       if (!mounted) return;
       setState(() {
         position = p;
-        duration = (durationSong - position).inSeconds > 0 ? durationSong - position : Duration(seconds: 0);
+        duration = (durationSong - position).inSeconds > 0
+            ? durationSong - position
+            : Duration(seconds: 0);
       });
     });
   }
@@ -519,7 +538,8 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
               this.widget.shabadId == 0 || this.widget.shabadId == null
                   ? SafeArea(
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, bottom: 20),
                         child: Column(
                           children: <Widget>[
                             InkWell(
@@ -596,20 +616,22 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                                     InkWell(
                                       onTap: () {
                                         this.widget.showOverlay(
-                                              context,
-                                              this.widget.title,
-                                              this.widget.artistName,
-                                              this.widget.attachmentName,
-                                              this.widget.image,
-                                              this.widget.shabadId,
-                                              this.widget.page,
-                                              this.widget.id,
-                                              is_media: this.widget.is_media,
-                                              author_id: this.widget.author_id,
-                                            );
+                                            context,
+                                            this.widget.title,
+                                            this.widget.artistName,
+                                            this.widget.attachmentName,
+                                            this.widget.image,
+                                            this.widget.shabadId,
+                                            this.widget.page,
+                                            this.widget.id,
+                                            is_media: this.widget.is_media,
+                                            author_id: this.widget.author_id,
+                                            fromFile: widget.fromFile);
                                         setState(() {
                                           this.widget.showOverlayTrue();
-                                          this.widget.setIsOpenFullScreen(false);
+                                          this
+                                              .widget
+                                              .setIsOpenFullScreen(false);
                                         });
                                         Navigator.of(context).pop();
                                       },
@@ -622,7 +644,9 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                                     Column(
                                       children: <Widget>[
                                         Padding(
-                                          padding: EdgeInsets.only(left: maxWidth * 0.0555, right: maxWidth * 0.0555),
+                                          padding: EdgeInsets.only(
+                                              left: maxWidth * 0.0555,
+                                              right: maxWidth * 0.0555),
                                           child: Container(
                                             height: maxHeight * 0.4008,
                                             child:
@@ -639,188 +663,152 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                                                     padding: EdgeInsets.only(
                                                       top: maxHeight * 0.00,
                                                     ),
-                                                    scrollDirection: Axis.vertical,
-                                                    itemCount: this.widget.snapshot?.data?.scriptures?.length ?? 0,
-                                                    itemBuilder: (BuildContext context, int index) {
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemCount: this
+                                                            .widget
+                                                            .snapshot
+                                                            ?.data
+                                                            ?.scriptures
+                                                            ?.length ??
+                                                        0,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
                                                       return Padding(
-                                                        padding: EdgeInsets.only(bottom: maxHeight * 0.015),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                bottom:
+                                                                    maxHeight *
+                                                                        0.015),
                                                         child: Column(
                                                           children: <Widget>[
-                                                            this.isGurmukhi == true
+                                                            this.isGurmukhi ==
+                                                                    true
                                                                 ? Text(
                                                                     (() {
-                                                                      if (this.isGurmukhi == true) {
-                                                                        return this
-                                                                                    .widget
-                                                                                    .snapshot
-                                                                                    .data
-                                                                                    .scriptures[index]
-                                                                                    .scripture !=
+                                                                      if (this.isGurmukhi ==
+                                                                          true) {
+                                                                        return this.widget.snapshot.data.scriptures[index].scripture !=
                                                                                 null
-                                                                            ? this
-                                                                                .widget
-                                                                                .snapshot
-                                                                                .data
-                                                                                .scriptures[index]
-                                                                                .scripture
+                                                                            ? this.widget.snapshot.data.scriptures[index].scripture
                                                                             : 'No translation';
                                                                       } else {
-                                                                        print("error");
+                                                                        print(
+                                                                            "error");
                                                                       }
                                                                     })(),
                                                                     style: TextStyle(
-                                                                        color: Colors.black,
-                                                                        fontSize: 24,
-                                                                        fontWeight: FontWeight.bold),
-                                                                    textAlign: TextAlign.center,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            24,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
                                                                   )
                                                                 : Container(),
-                                                            this.isEnglish == true
+                                                            this.isEnglish ==
+                                                                    true
                                                                 ? Text(
                                                                     (() {
-                                                                      if (this.isEnglish == true) {
-                                                                        return this
-                                                                                    .widget
-                                                                                    .snapshot
-                                                                                    .data
-                                                                                    .scriptures[index]
-                                                                                    .scriptureRoman !=
+                                                                      if (this.isEnglish ==
+                                                                          true) {
+                                                                        return this.widget.snapshot.data.scriptures[index].scriptureRoman !=
                                                                                 null
-                                                                            ? this
-                                                                                .widget
-                                                                                .snapshot
-                                                                                .data
-                                                                                .scriptures[index]
-                                                                                .scriptureRoman
+                                                                            ? this.widget.snapshot.data.scriptures[index].scriptureRoman
                                                                             : 'No translation';
                                                                       } else {
-                                                                        print("error");
+                                                                        print(
+                                                                            "error");
                                                                       }
                                                                     })(),
-                                                                    style: TextStyle(color: Colors.black, fontSize: 18),
-                                                                    textAlign: TextAlign.center,
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            18),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
                                                                   )
                                                                 : Container(),
-                                                            this.isLarevaar == true
+                                                            this.isLarevaar ==
+                                                                    true
                                                                 ? Text(
                                                                     (() {
-                                                                      if (this.isLarevaar == true) {
-                                                                        return this
-                                                                                    .widget
-                                                                                    .snapshot
-                                                                                    .data
-                                                                                    .scriptures[index]
-                                                                                    .scriptureOriginal !=
+                                                                      if (this.isLarevaar ==
+                                                                          true) {
+                                                                        return this.widget.snapshot.data.scriptures[index].scriptureOriginal !=
                                                                                 null
-                                                                            ? this
-                                                                                .widget
-                                                                                .snapshot
-                                                                                .data
-                                                                                .scriptures[index]
-                                                                                .scriptureOriginal
+                                                                            ? this.widget.snapshot.data.scriptures[index].scriptureOriginal
                                                                             : 'No translation';
                                                                       } else {
-                                                                        print("error");
+                                                                        print(
+                                                                            "error");
                                                                       }
                                                                     })(),
-                                                                    style: TextStyle(color: Colors.black, fontSize: 18),
-                                                                    textAlign: TextAlign.center,
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            18),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
                                                                   )
                                                                 : Container(),
                                                             this.val != 5
                                                                 ? Text(
                                                                     (() {
-                                                                      if (this.val == 0) {
-                                                                        return this
-                                                                                    .widget
-                                                                                    .snapshot
-                                                                                    .data
-                                                                                    .scriptures[index]
-                                                                                    .translation
-                                                                                    .santSinghKhalsaEnglish !=
+                                                                      if (this.val ==
+                                                                          0) {
+                                                                        return this.widget.snapshot.data.scriptures[index].translation.santSinghKhalsaEnglish !=
                                                                                 null
-                                                                            ? this
-                                                                                .widget
-                                                                                .snapshot
-                                                                                .data
-                                                                                .scriptures[index]
-                                                                                .translation
-                                                                                .santSinghKhalsaEnglish
+                                                                            ? this.widget.snapshot.data.scriptures[index].translation.santSinghKhalsaEnglish
                                                                             : 'No translation';
-                                                                      } else if (this.val == 1) {
-                                                                        return this
-                                                                                    .widget
-                                                                                    .snapshot
-                                                                                    .data
-                                                                                    .scriptures[index]
-                                                                                    .translation
-                                                                                    .manmohanSinghEnglish !=
+                                                                      } else if (this
+                                                                              .val ==
+                                                                          1) {
+                                                                        return this.widget.snapshot.data.scriptures[index].translation.manmohanSinghEnglish !=
                                                                                 null
-                                                                            ? this
-                                                                                .widget
-                                                                                .snapshot
-                                                                                .data
-                                                                                .scriptures[index]
-                                                                                .translation
-                                                                                .manmohanSinghEnglish
+                                                                            ? this.widget.snapshot.data.scriptures[index].translation.manmohanSinghEnglish
                                                                             : 'No translation';
-                                                                      } else if (this.val == 2) {
-                                                                        return this
-                                                                                    .widget
-                                                                                    .snapshot
-                                                                                    .data
-                                                                                    .scriptures[index]
-                                                                                    .translation
-                                                                                    .sahibSinghPunjabi !=
+                                                                      } else if (this
+                                                                              .val ==
+                                                                          2) {
+                                                                        return this.widget.snapshot.data.scriptures[index].translation.sahibSinghPunjabi !=
                                                                                 null
-                                                                            ? this
-                                                                                .widget
-                                                                                .snapshot
-                                                                                .data
-                                                                                .scriptures[index]
-                                                                                .translation
-                                                                                .sahibSinghPunjabi
+                                                                            ? this.widget.snapshot.data.scriptures[index].translation.sahibSinghPunjabi
                                                                             : 'No translation';
-                                                                      } else if (this.val == 3) {
-                                                                        return this
-                                                                                    .widget
-                                                                                    .snapshot
-                                                                                    .data
-                                                                                    .scriptures[index]
-                                                                                    .translation
-                                                                                    .harbansSinghPunjabi !=
+                                                                      } else if (this
+                                                                              .val ==
+                                                                          3) {
+                                                                        return this.widget.snapshot.data.scriptures[index].translation.harbansSinghPunjabi !=
                                                                                 null
-                                                                            ? this
-                                                                                .widget
-                                                                                .snapshot
-                                                                                .data
-                                                                                .scriptures[index]
-                                                                                .translation
-                                                                                .harbansSinghPunjabi
+                                                                            ? this.widget.snapshot.data.scriptures[index].translation.harbansSinghPunjabi
                                                                             : 'No translation';
-                                                                      } else if (this.val == 4) {
-                                                                        return this
-                                                                                    .widget
-                                                                                    .snapshot
-                                                                                    .data
-                                                                                    .scriptures[index]
-                                                                                    .translation
-                                                                                    .manmohanSinghPunjabi !=
+                                                                      } else if (this
+                                                                              .val ==
+                                                                          4) {
+                                                                        return this.widget.snapshot.data.scriptures[index].translation.manmohanSinghPunjabi !=
                                                                                 null
-                                                                            ? this
-                                                                                .widget
-                                                                                .snapshot
-                                                                                .data
-                                                                                .scriptures[index]
-                                                                                .translation
-                                                                                .manmohanSinghPunjabi
+                                                                            ? this.widget.snapshot.data.scriptures[index].translation.manmohanSinghPunjabi
                                                                             : 'No translation';
                                                                       } else {
                                                                         return '';
                                                                       }
                                                                     })(),
-                                                                    textAlign: TextAlign.center,
-                                                                    style: TextStyle(height: 1.5, fontSize: 18),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: TextStyle(
+                                                                        height:
+                                                                            1.5,
+                                                                        fontSize:
+                                                                            18),
                                                                   )
                                                                 : Container(),
                                                           ],
@@ -853,20 +841,22 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                               Row(
                                 children: <Widget>[
                                   Padding(
-                                    padding: EdgeInsets.only(left: maxWidth * 0.0555),
+                                    padding: EdgeInsets.only(
+                                        left: maxWidth * 0.0555),
                                     child: InkWell(
                                       onTap: () {
                                         Navigator.push(
                                             context,
                                             new MaterialPageRoute(
-                                                builder: (context) => PlayerTextFild(
-                                                    widget.description,
-                                                    this.isGurmukhi,
-                                                    this.isEnglish,
-                                                    this.isLarevaar,
-                                                    this.val,
-                                                    this.widget.shabadId,
-                                                    this.widget.page)));
+                                                builder: (context) =>
+                                                    PlayerTextFild(
+                                                        widget.description,
+                                                        this.isGurmukhi,
+                                                        this.isEnglish,
+                                                        this.isLarevaar,
+                                                        this.val,
+                                                        this.widget.shabadId,
+                                                        this.widget.page)));
                                       },
                                       child: Icon(
                                         Icons.zoom_out_map,
@@ -876,29 +866,44 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(left: maxWidth * 0.722, right: maxWidth * 0.0555),
+                                    padding: EdgeInsets.only(
+                                        left: maxWidth * 0.722,
+                                        right: maxWidth * 0.0555),
                                     child: InkWell(
                                       onTap: () {
-                                        Navigator.of(context).push(PageRouteBuilder(
+                                        Navigator.of(context)
+                                            .push(PageRouteBuilder(
                                           opaque: false,
-                                          pageBuilder: (BuildContext context, animation, secondaryAnimation) =>
+                                          pageBuilder: (BuildContext context,
+                                                  animation,
+                                                  secondaryAnimation) =>
                                               SettingsScreen(
                                             translateValue: translateValue,
-                                            scriptureIsGurmukhi: scriptureIsGurmukhi,
-                                            scriptureIsEnglish: scriptureIsEnglish,
-                                            scriptureIsLarevaar: scriptureIsLarevaar,
+                                            scriptureIsGurmukhi:
+                                                scriptureIsGurmukhi,
+                                            scriptureIsEnglish:
+                                                scriptureIsEnglish,
+                                            scriptureIsLarevaar:
+                                                scriptureIsLarevaar,
                                             val: val,
                                             isGurmukhi: isGurmukhi,
                                             isEnglish: isEnglish,
                                             isLarevaar: isLarevaar,
                                           ),
-                                          transitionDuration: Duration(seconds: 1),
-                                          transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                                          transitionDuration:
+                                              Duration(seconds: 1),
+                                          transitionsBuilder: (ontext,
+                                              animation,
+                                              secondaryAnimation,
+                                              child) {
                                             var begin = Offset(0.0, -1.0);
                                             var end = Offset.zero;
                                             var curve = Curves.ease;
 
-                                            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                            var tween = Tween(
+                                                    begin: begin, end: end)
+                                                .chain(
+                                                    CurveTween(curve: curve));
 
                                             return SlideTransition(
                                               position: animation.drive(tween),
@@ -922,110 +927,132 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(top: maxWidth * 0.0555, left: maxWidth * 0.0555),
+                    padding: EdgeInsets.only(
+                        top: maxWidth * 0.0555, left: maxWidth * 0.0555),
                     child: Container(
                       width: maxWidth * 0.5999,
                       child: Text(
                         this.widget.title,
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
-                  this.widget.fromFile != 1
-                      ? Padding(
-                          padding:
-                              EdgeInsets.only(left: maxWidth * 0.200, top: maxWidth * 0.0555, right: maxWidth * 0.0555),
-                          child: InkWell(
-                            onTap: () {
-                              print('inside ontap - attname -> ${widget.attachmentName}');
-                              this.widget.is_media == 1
-                                  ? Navigator.of(context).push(PageRouteBuilder(
-                                      opaque: false,
-                                      pageBuilder: (BuildContext context, animation, secondaryAnimation) => SongOptions(
-                                        indexOfSong: this.widget.id,
-                                        indexOfArtist: this.widget.author_id,
-                                        title: this.widget.title,
-                                        artistName: this.widget.artistName,
-                                        attachmentName: this.widget.attachmentName,
-                                        id: this.widget.id,
-                                        author_id: this.widget.author_id,
-                                        image: this.widget.image,
-                                        shabadId: this.widget.shabadId,
-                                        page: this.widget.page,
-                                        is_media: this.widget.is_media,
-                                        fromArtistPage: fromArtistPage,
-                                        fromFullMusicPlayer: fromFullMusicPlayer,
-                                        showOverlay: this.widget.showOverlay,
-                                        showOverlayTrue: this.widget.showOverlayTrue,
-                                        showOverlayFalse: this.widget.showOverlayFalse,
-                                        setIsOpenFullScreen: this.widget.setIsOpenFullScreen,
-                                        currentSong: this.widget.currentSong,
-                                        setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
-                                        play: this.widget.play,
-                                        setListLinks: this.widget.setListLinks,
-                                        insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
-                                        show: this.widget.show,
-                                        isPlaying: this.widget.isPlaying,
-                                        isDownloaded: widget.isDownloaded,
-                                      ),
-                                      // transitionDuration: Duration(milliseconds: 5),
-                                      transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
-                                        var begin = Offset(0.0, -1.0);
-                                        var end = this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
-                                        var curve = Curves.ease;
+                  // this.widget.fromFile != 1
+                  //     ?
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: maxWidth * 0.200,
+                        top: maxWidth * 0.0555,
+                        right: maxWidth * 0.0555),
+                    child: InkWell(
+                      onTap: () {
+                        print(
+                            'inside ontap - attname -> ${widget.attachmentName}');
+                        this.widget.is_media == 1
+                            ? Navigator.of(context).push(PageRouteBuilder(
+                                opaque: false,
+                                pageBuilder: (BuildContext context, animation,
+                                        secondaryAnimation) =>
+                                    SongOptions(
+                                  indexOfSong: this.widget.id,
+                                  indexOfArtist: this.widget.author_id,
+                                  title: this.widget.title,
+                                  artistName: this.widget.artistName,
+                                  attachmentName: this.widget.attachmentName,
+                                  id: this.widget.id,
+                                  author_id: this.widget.author_id,
+                                  image: this.widget.image,
+                                  shabadId: this.widget.shabadId,
+                                  page: this.widget.page,
+                                  is_media: this.widget.is_media,
+                                  fromArtistPage: fromArtistPage,
+                                  fromFullMusicPlayer: fromFullMusicPlayer,
+                                  showOverlay: this.widget.showOverlay,
+                                  showOverlayTrue: this.widget.showOverlayTrue,
+                                  showOverlayFalse:
+                                      this.widget.showOverlayFalse,
+                                  setIsOpenFullScreen:
+                                      this.widget.setIsOpenFullScreen,
+                                  currentSong: this.widget.currentSong,
+                                  setPropertiesForFullScreen:
+                                      this.widget.setPropertiesForFullScreen,
+                                  play: this.widget.play,
+                                  setListLinks: this.widget.setListLinks,
+                                  insertRecentlyPlayed:
+                                      this.widget.insertRecentlyPlayed,
+                                  show: this.widget.show,
+                                  isPlaying: this.widget.isPlaying,
+                                  fromFile: widget.fromFile,
+                                  //isDownloaded: widget.isDownloaded,
+                                ),
+                                // transitionDuration: Duration(milliseconds: 5),
+                                transitionsBuilder: (ontext, animation,
+                                    secondaryAnimation, child) {
+                                  var begin = Offset(0.0, -1.0);
+                                  var end = this.widget.show == true
+                                      ? Offset(0.0, -0.08)
+                                      : Offset.zero;
+                                  var curve = Curves.ease;
 
-                                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                  var tween = Tween(begin: begin, end: end)
+                                      .chain(CurveTween(curve: curve));
 
-                                        return SlideTransition(
-                                          position: animation.drive(tween),
-                                          child: child,
-                                        );
-                                      },
-                                    ))
-                                  : Navigator.of(context).push(PageRouteBuilder(
-                                      opaque: false,
-                                      pageBuilder: (BuildContext context, animation, secondaryAnimation) =>
-                                          PodcastThreeDots(
-                                        isDownloaded: widget.isDownloaded,
-                                        indexOfPodcast: this.widget.id,
-                                        title: this.widget.title,
-                                        id: this.widget.id,
-                                        attachmentName: this.widget.attachmentName,
-                                        image: this.widget.image,
-                                      ),
-                                      // transitionDuration: Duration(seconds: 1),
-                                      transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
-                                        var begin = Offset(0.0, 1.0);
-                                        var end = Offset(0.0, 0.47);
-                                        var curve = Curves.ease;
-                                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                                        return SlideTransition(
-                                          position: animation.drive(tween),
-                                          child: child,
-                                        );
-                                      },
-                                    ));
-                            },
-                            child: Icon(
-                              CupertinoIcons.ellipsis,
-                              color: Colors.grey,
-                              size: 26,
-                            ),
-                          ),
-                        )
-                      : Container(),
+                                  return SlideTransition(
+                                    position: animation.drive(tween),
+                                    child: child,
+                                  );
+                                },
+                              ))
+                            : Navigator.of(context).push(PageRouteBuilder(
+                                opaque: false,
+                                pageBuilder: (BuildContext context, animation,
+                                        secondaryAnimation) =>
+                                    PodcastThreeDots(
+                                  //isDownloaded: widget.isDownloaded,
+                                  indexOfPodcast: this.widget.id,
+                                  title: this.widget.title,
+                                  id: this.widget.id,
+                                  attachmentName: this.widget.attachmentName,
+                                  image: this.widget.image,
+                                ),
+                                // transitionDuration: Duration(seconds: 1),
+                                transitionsBuilder: (ontext, animation,
+                                    secondaryAnimation, child) {
+                                  var begin = Offset(0.0, 1.0);
+                                  var end = Offset(0.0, 0.47);
+                                  var curve = Curves.ease;
+                                  var tween = Tween(begin: begin, end: end)
+                                      .chain(CurveTween(curve: curve));
+                                  return SlideTransition(
+                                    position: animation.drive(tween),
+                                    child: child,
+                                  );
+                                },
+                              ));
+                      },
+                      child: Icon(
+                        CupertinoIcons.ellipsis,
+                        color: Colors.grey,
+                        size: 26,
+                      ),
+                    ),
+                  ),
+//                      : Container(),
                 ],
               ),
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(top: maxHeight * 0.0067, left: maxWidth * 0.0555),
+                    padding: EdgeInsets.only(
+                        top: maxHeight * 0.0067, left: maxWidth * 0.0555),
                     child: this.widget.artistName != null
                         ? Text(
                             this.widget.artistName,
-                            style: TextStyle(fontSize: 14, color: Color(0xff578ed3)),
+                            style: TextStyle(
+                                fontSize: 14, color: Color(0xff578ed3)),
                           )
                         : Text(''),
                   )
@@ -1043,11 +1070,14 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                   height: maxHeight * 0.027,
                   child: SliderTheme(
                     child: Slider(
-                      value: durationSong.inSeconds.toDouble() > (position?.inSeconds ?? 0).toDouble()
+                      value: durationSong.inSeconds.toDouble() >
+                              (position?.inSeconds ?? 0).toDouble()
                           ? (position?.inSeconds ?? 0).toDouble()
                           : 0.0,
                       min: 0.0,
-                      max: durationSong.inSeconds.toDouble() >= 0 ? durationSong.inSeconds.toDouble() : 0,
+                      max: durationSong.inSeconds.toDouble() >= 0
+                          ? durationSong.inSeconds.toDouble()
+                          : 0,
                       onChanged: (double value) {
                         setState(() {
                           seekToSecond(value.toInt());
@@ -1059,7 +1089,8 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                     data: SliderTheme.of(context).copyWith(
                         trackHeight: 4,
                         thumbColor: Color(0xff578ed3),
-                        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10)),
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 10)),
                   ),
                 ),
               ),
@@ -1133,10 +1164,14 @@ class _MusicPlayerFullSizeState extends State<MusicPlayerFullSize> {
                       decoration: BoxDecoration(
                           color: Color(0xff578ed3),
                           borderRadius: BorderRadius.circular(100.0),
-                          boxShadow: [BoxShadow(color: Colors.black, blurRadius: 10)]),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black, blurRadius: 10)
+                          ]),
                       child: InkWell(
                         onTap: () {
-                          this.widget.isPlaying == true ? this.widget.tapPause() : this.widget.tapPlay();
+                          this.widget.isPlaying == true
+                              ? this.widget.tapPause()
+                              : this.widget.tapPlay();
                         },
                         child: this.widget.isPlaying == true
                             ? Icon(
