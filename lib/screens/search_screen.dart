@@ -54,7 +54,13 @@ class Result {
   String createdAt;
   String updatedAt;
 
-  Result({this.id, this.userId, this.machineId, this.keyword, this.createdAt, this.updatedAt});
+  Result(
+      {this.id,
+      this.userId,
+      this.machineId,
+      this.keyword,
+      this.createdAt,
+      this.updatedAt});
 
   Result.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -286,8 +292,8 @@ class _SearchScreenState extends State<SearchScreen> {
     final userId = prefs.getInt('user_id');
     final machineId = prefs.getString('machine_id');
 
-    final response = await http
-        .get('https://api.khojgurbani.org/api/v1/android/search-history?user_id=$userId&machine_id=$machineId');
+    final response = await http.get(
+        'https://api.khojgurbani.org/api/v1/android/search-history?user_id=$userId&machine_id=$machineId');
     var data = json.decode(response.body);
 
     SearchHistory history = new SearchHistory.fromJson(data);
@@ -382,7 +388,9 @@ class _SearchScreenState extends State<SearchScreen> {
     setState(() {
       mediaF = mediaFilter;
     });
-    mediaFilters = (mediaF).map<MediaSearchFilter>((item) => MediaSearchFilter.fromJson(item)).toList();
+    mediaFilters = (mediaF)
+        .map<MediaSearchFilter>((item) => MediaSearchFilter.fromJson(item))
+        .toList();
 
     return mediaFilter;
   }
@@ -395,8 +403,12 @@ class _SearchScreenState extends State<SearchScreen> {
     // _mel = (this.widget.melodys)
     //     .map<Melodies>((item) => Melodies.fromJson(item))
     //     .toList();
-    _sing = (this.widget.singers).map<Singers>((item) => Singers.fromJson(item)).toList();
-    _drop = (this.widget.dropDownOptions).map<DropDown>((item) => DropDown.fromJson(item)).toList();
+    _sing = (this.widget.singers)
+        .map<Singers>((item) => Singers.fromJson(item))
+        .toList();
+    _drop = (this.widget.dropDownOptions)
+        .map<DropDown>((item) => DropDown.fromJson(item))
+        .toList();
     return showFilter == false
         ? Scaffold(
             appBar: AppBar(
@@ -414,14 +426,18 @@ class _SearchScreenState extends State<SearchScreen> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6.0), topLeft: Radius.circular(6.0)),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(6.0),
+                          topLeft: Radius.circular(6.0)),
                     ),
                     child: TextField(
                       // textInputAction: TextInputAction.done,  on click keyboard finish
                       //textAlignVertical: TextAlignVertical.center,
                       onSubmitted: (value) {
                         showH = false;
-                        this.controller.text == '' ? null : insertHistory(this.controller.text);
+                        this.controller.text == ''
+                            ? null
+                            : insertHistory(this.controller.text);
                       },
                       onTap: () {
                         setState(() {
@@ -486,10 +502,13 @@ class _SearchScreenState extends State<SearchScreen> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.white),
-                        borderRadius:
-                            BorderRadius.only(bottomRight: Radius.circular(6.0), topRight: Radius.circular(6.0)),
+                        borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(6.0),
+                            topRight: Radius.circular(6.0)),
                       ),
-                      child: Center(child: Image(image: AssetImage('assets/images/filter.png'))),
+                      child: Center(
+                          child: Image(
+                              image: AssetImage('assets/images/filter.png'))),
                     ),
                   )
                 ],
@@ -526,7 +545,10 @@ class _SearchScreenState extends State<SearchScreen> {
               actions: <Widget>[],
               title: Text(
                 "Filters",
-                style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold),
               ),
               leading: Container(
                 // width: 20,
@@ -543,7 +565,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       // setState(() {
                       //   showFilter = false;
                       // });
-                      Navigator.pushNamedAndRemoveUntil(context, '/search', ModalRoute.withName('/'));
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/search', ModalRoute.withName('/'));
                     },
                     padding: EdgeInsets.only(bottom: maxHeight * 0.0135),
                     icon: Icon(
@@ -569,7 +592,9 @@ class _SearchScreenState extends State<SearchScreen> {
                             children: <Widget>[
                               Padding(
                                 padding: EdgeInsets.only(
-                                    top: maxHeight * 0.06621, left: maxWidth * 0.05555, right: maxWidth * 0.055),
+                                    top: maxHeight * 0.06621,
+                                    left: maxWidth * 0.05555,
+                                    right: maxWidth * 0.055),
                                 child: Container(
                                   height: maxHeight * 0.0418,
                                   //width: maxWidth / 1.15,
@@ -578,12 +603,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                     children: <Widget>[
                                       TextField(
                                         focusNode: focusNode,
-                                        textAlignVertical: TextAlignVertical.center,
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
                                         onSubmitted: (value) {
                                           setState(() {
                                             searchKeyWord = value;
                                             checkSearchKeywordLang();
-                                            if (searchKeyWord != '') mediaSearchFilter();
+                                            if (searchKeyWord != '')
+                                              mediaSearchFilter();
 
                                             // showFilter = true;
                                           });
@@ -601,7 +628,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                         style: TextStyle(height: 1.7),
                                         decoration: InputDecoration(
                                           enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(width: 2, color: Colors.grey)),
+                                              borderSide: BorderSide(
+                                                  width: 2,
+                                                  color: Colors.grey)),
                                           isDense: true,
                                           hintText: "Gurbani search",
                                           hintStyle: TextStyle(fontSize: 14),
@@ -619,10 +648,13 @@ class _SearchScreenState extends State<SearchScreen> {
                                           // ),
                                           GestureDetector(
                                             child: Padding(
-                                              padding: const EdgeInsets.only(right: 4),
+                                              padding: const EdgeInsets.only(
+                                                  right: 4),
                                               child: Icon(
                                                 Icons.keyboard,
-                                                color: keyboard == true ? Color(0xff578ed3) : Colors.grey,
+                                                color: keyboard == true
+                                                    ? Color(0xff578ed3)
+                                                    : Colors.grey,
                                               ),
                                             ),
 
@@ -636,7 +668,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   keyboard = !keyboard;
                                                 });
                                               } else {
-                                                FocusScope.of(context).unfocus();
+                                                FocusScope.of(context)
+                                                    .unfocus();
                                                 buildPunKeyboard(context);
                                                 setState(() {
                                                   keyboard = !keyboard;
@@ -691,7 +724,9 @@ class _SearchScreenState extends State<SearchScreen> {
                               // ),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    left: maxWidth * 0.055, top: maxHeight * 0.0675, right: maxWidth * 0.055),
+                                    left: maxWidth * 0.055,
+                                    top: maxHeight * 0.0675,
+                                    right: maxWidth * 0.055),
                                 child: DropdownButton<String>(
                                   isExpanded: true,
                                   value: dropdownValue1,
@@ -720,13 +755,18 @@ class _SearchScreenState extends State<SearchScreen> {
                                             searchOptionSingerId = map.id;
                                           });
                                         },
-                                        child: Text(map.name, style: new TextStyle(color: Colors.grey, fontSize: 12)));
+                                        child: Text(map.name,
+                                            style: new TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12)));
                                   }).toList(),
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    left: maxWidth * 0.0555, top: maxHeight * 0.0675, right: maxWidth * 0.055),
+                                    left: maxWidth * 0.0555,
+                                    top: maxHeight * 0.0675,
+                                    right: maxWidth * 0.055),
                                 child: DropdownButton<String>(
                                   isExpanded: true,
                                   value: dropdownValue2,
@@ -757,7 +797,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                           });
                                         },
                                         child: new Text(map.value,
-                                            style: new TextStyle(color: Colors.grey, fontSize: 12)));
+                                            style: new TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12)));
                                   }).toList(),
                                 ),
                               ),
@@ -765,7 +807,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                 height: maxHeight * 0.1081,
                               ),
                               Padding(
-                                padding: EdgeInsets.only(left: maxWidth * 0.0597),
+                                padding:
+                                    EdgeInsets.only(left: maxWidth * 0.0597),
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
@@ -791,7 +834,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                       border: Border.all(color: Colors.grey),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
                                           'Search',
@@ -816,7 +860,9 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget buildBody() {
-    return this.controller.text.isEmpty ? buildHistoryList() : buildSearchResults();
+    return this.controller.text.isEmpty
+        ? buildHistoryList()
+        : buildSearchResults();
   }
 
   // Fliter results
@@ -831,7 +877,8 @@ class _SearchScreenState extends State<SearchScreen> {
         itemCount: mediaFilters?.length ?? 0,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: EdgeInsets.only(top: maxHeight * 0.0135, left: maxWidth * 0.05555),
+            padding: EdgeInsets.only(
+                top: maxHeight * 0.0135, left: maxWidth * 0.05555),
             child: Stack(
               // alignment: Alignment.topCenter,
               children: <Widget>[
@@ -879,7 +926,9 @@ class _SearchScreenState extends State<SearchScreen> {
                             is_media: mediaFilters[index].is_media,
                             author_id: mediaFilters[index].author_id,
                           );
-                      this.widget.play(mediaFilters[index].attachmentName, context);
+                      this
+                          .widget
+                          .play(mediaFilters[index].attachmentName, context);
                       List links = [];
                       for (int t = index; t < mediaFilters.length; t++) {
                         links.add(mediaFilters[t]);
@@ -894,7 +943,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.only(
-                            top: maxHeight * 0.014,
+                            top: maxHeight * 0.01,
                             left: maxWidth * 0.159,
                           ),
                           child: Column(
@@ -906,8 +955,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                 child: Text(
                                   mediaFilters[index].title,
                                   style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -920,7 +969,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                 width: maxWidth / 1.8,
                                 child: Text(
                                   mediaFilters[index].name,
-                                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal, color: Colors.grey),
+                                  style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.grey),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -952,22 +1004,26 @@ class _SearchScreenState extends State<SearchScreen> {
                       children: <Widget>[
                         Container(
                           // width: maxWidth * 0.138888,
-                          padding: EdgeInsets.only(top: maxHeight * 0.014, right: maxWidth * 0.045),
+                          padding: EdgeInsets.only(
+                              top: maxHeight * 0.01, right: maxWidth * 0.045),
                           child: Text(
                             mediaFilters[index].duration,
-                            style: TextStyle(fontSize: 13),
+                            style: TextStyle(fontSize: 14),
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(PageRouteBuilder(
                               opaque: false,
-                              pageBuilder: (BuildContext context, animation, secondaryAnimation) => SongOptions(
+                              pageBuilder: (BuildContext context, animation,
+                                      secondaryAnimation) =>
+                                  SongOptions(
                                 indexOfSong: mediaFilters[index].id,
                                 indexOfArtist: mediaFilters[index].author_id,
                                 title: mediaFilters[index].title,
                                 artistName: mediaFilters[index].name,
-                                attachmentName: mediaFilters[index].attachmentName,
+                                attachmentName:
+                                    mediaFilters[index].attachmentName,
                                 id: mediaFilters[index].mediaId,
                                 author_id: mediaFilters[index].author_id,
                                 image: mediaFilters[index].image,
@@ -977,18 +1033,24 @@ class _SearchScreenState extends State<SearchScreen> {
                                 show: this.widget.show,
                                 play: this.widget.play,
                                 setListLinks: this.widget.setListLinks,
-                                insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
-                                setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
+                                insertRecentlyPlayed:
+                                    this.widget.insertRecentlyPlayed,
+                                setPropertiesForFullScreen:
+                                    this.widget.setPropertiesForFullScreen,
                                 fromArtistPage: fromArtistPage,
                                 currentSong: this.widget.currentSong,
                               ),
                               // transitionDuration: Duration(seconds: 1),
-                              transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                              transitionsBuilder: (ontext, animation,
+                                  secondaryAnimation, child) {
                                 var begin = Offset(0.0, -1.0);
-                                var end = this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
+                                var end = this.widget.show == true
+                                    ? Offset(0.0, -0.08)
+                                    : Offset.zero;
                                 var curve = Curves.ease;
 
-                                var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
 
                                 return SlideTransition(
                                   position: animation.drive(tween),
@@ -1029,7 +1091,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
     final res = await http.post(
       'https://api.khojgurbani.org/api/v1/android/media-search-delete',
-      body: {'keyword': keyword, 'user_id': json.encode(userId), 'machine_id': machineId},
+      body: {
+        'keyword': keyword,
+        'user_id': json.encode(userId),
+        'machine_id': machineId
+      },
       // headers: {
       //   'Authorization': "Bearer " + token,
       // }
@@ -1046,7 +1112,11 @@ class _SearchScreenState extends State<SearchScreen> {
     final String machineId = prefs.getString('machine_id');
     final res = await http.post(
       'https://api.khojgurbani.org/api/v1/android/media-search-insert',
-      body: {'keyword': keyword, 'user_id': json.encode(userId), 'machine_id': machineId},
+      body: {
+        'keyword': keyword,
+        'user_id': json.encode(userId),
+        'machine_id': machineId
+      },
       // headers: {
       //   'Authorization': "Bearer " + token,
       // }
@@ -1072,8 +1142,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 ? Container()
                 : GestureDetector(
                     onTap: () {
-                      onSearchTextChanged(this.controller.text = searchHistory.result[index].keyword);
-                      this.controller.text = searchHistory.result[index].keyword;
+                      onSearchTextChanged(this.controller.text =
+                          searchHistory.result[index].keyword);
+                      this.controller.text =
+                          searchHistory.result[index].keyword;
                     },
                     child: Text(searchHistory.result[index].keyword)),
             trailing: GestureDetector(
@@ -1102,10 +1174,16 @@ class _SearchScreenState extends State<SearchScreen> {
       SliverToBoxAdapter(
         child: searchResults1.length != 0
             ? Padding(
-                padding: EdgeInsets.only(left: maxWidth * 0.055, top: maxHeight * 0.01756, bottom: maxHeight * 0.0135),
+                padding: EdgeInsets.only(
+                    left: maxWidth * 0.055,
+                    top: maxHeight * 0.01756,
+                    bottom: maxHeight * 0.0135),
                 child: Text(
                   "Ragi",
-                  style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
               )
             : Container(),
@@ -1131,14 +1209,16 @@ class _SearchScreenState extends State<SearchScreen> {
                               show: this.widget.show,
                               play: this.widget.play,
                               setListLinks: this.widget.setListLinks,
-                              insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
+                              insertRecentlyPlayed:
+                                  this.widget.insertRecentlyPlayed,
                               tapPause: this.widget.tapPause,
                               tapPlay: this.widget.tapPlay,
                               tapStop: this.widget.tapStop,
                               isPlaying: this.widget.isPlaying,
                               audioPlayer: this.widget.audioPlayer,
                               getLyrics: this.widget.getLyrics,
-                              setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
+                              setPropertiesForFullScreen:
+                                  this.widget.setPropertiesForFullScreen,
                               currentSong: this.widget.currentSong,
                             )));
               },
@@ -1192,10 +1272,14 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       SliverToBoxAdapter(
         child: Padding(
-          padding: EdgeInsets.only(left: maxWidth * 0.0555, top: maxHeight * 0.03108, bottom: maxHeight * 0.01351),
+          padding: EdgeInsets.only(
+              left: maxWidth * 0.0555,
+              top: maxHeight * 0.03108,
+              bottom: maxHeight * 0.01351),
           child: Text(
             "Tracks",
-            style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -1203,7 +1287,8 @@ class _SearchScreenState extends State<SearchScreen> {
         key: list2,
         delegate: SliverChildBuilderDelegate((BuildContext context, int i) {
           return Padding(
-            padding: EdgeInsets.only(top: maxHeight * 0.0135, left: maxWidth * 0.0555),
+            padding: EdgeInsets.only(
+                top: maxHeight * 0.0135, left: maxWidth * 0.0555),
             child: Stack(
               // alignment: Alignment.topCenter,
               children: <Widget>[
@@ -1251,7 +1336,9 @@ class _SearchScreenState extends State<SearchScreen> {
                             is_media: searchResults2[i].is_media,
                             author_id: searchResults2[i].author_id,
                           );
-                      this.widget.play(searchResults2[i].attachmentName, context);
+                      this
+                          .widget
+                          .play(searchResults2[i].attachmentName, context);
                       List links = [];
                       for (int t = i; t < searchResults2.length; t++) {
                         links.add(searchResults2[t]);
@@ -1266,7 +1353,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.only(
-                            top: maxHeight * 0.014,
+                            top: maxHeight * 0.01,
                             left: maxWidth * 0.159,
                           ),
                           child: Column(
@@ -1278,8 +1365,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                 child: Text(
                                   searchResults2[i].title,
                                   style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -1292,7 +1379,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                 width: maxWidth / 1.7,
                                 child: Text(
                                   searchResults2[i].author,
-                                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal, color: Colors.grey),
+                                  style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.grey),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -1324,22 +1414,26 @@ class _SearchScreenState extends State<SearchScreen> {
                       children: <Widget>[
                         Container(
                           // width: maxWidth * 0.138888,
-                          padding: EdgeInsets.only(top: maxHeight * 0.014, right: maxWidth * 0.0555),
+                          padding: EdgeInsets.only(
+                              top: maxHeight * 0.014, right: maxWidth * 0.0555),
                           child: Text(
                             searchResults2[i].duration,
-                            style: TextStyle(fontSize: 13),
+                            style: TextStyle(fontSize: 14),
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(PageRouteBuilder(
                               opaque: false,
-                              pageBuilder: (BuildContext context, animation, secondaryAnimation) => SongOptions(
+                              pageBuilder: (BuildContext context, animation,
+                                      secondaryAnimation) =>
+                                  SongOptions(
                                 indexOfSong: searchResults2[i].id,
                                 indexOfArtist: searchResults2[i].author_id,
                                 title: searchResults2[i].title,
                                 artistName: searchResults2[i].author,
-                                attachmentName: searchResults2[i].attachmentName,
+                                attachmentName:
+                                    searchResults2[i].attachmentName,
                                 id: searchResults2[i].id,
                                 author_id: searchResults2[i].author_id,
                                 image: searchResults2[i].image,
@@ -1349,18 +1443,24 @@ class _SearchScreenState extends State<SearchScreen> {
                                 show: this.widget.show,
                                 play: this.widget.play,
                                 setListLinks: this.widget.setListLinks,
-                                insertRecentlyPlayed: this.widget.insertRecentlyPlayed,
-                                setPropertiesForFullScreen: this.widget.setPropertiesForFullScreen,
+                                insertRecentlyPlayed:
+                                    this.widget.insertRecentlyPlayed,
+                                setPropertiesForFullScreen:
+                                    this.widget.setPropertiesForFullScreen,
                                 fromArtistPage: fromArtistPage,
                                 currentSong: this.widget.currentSong,
                               ),
                               // transitionDuration: Duration(seconds: 1),
-                              transitionsBuilder: (ontext, animation, secondaryAnimation, child) {
+                              transitionsBuilder: (ontext, animation,
+                                  secondaryAnimation, child) {
                                 var begin = Offset(0.0, -1.0);
-                                var end = this.widget.show == true ? Offset(0.0, -0.08) : Offset.zero;
+                                var end = this.widget.show == true
+                                    ? Offset(0.0, -0.08)
+                                    : Offset.zero;
                                 var curve = Curves.ease;
 
-                                var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
 
                                 return SlideTransition(
                                   position: animation.drive(tween),
@@ -1404,7 +1504,8 @@ class _SearchScreenState extends State<SearchScreen> {
     final textToLowerCase = text.toLowerCase();
 
     this.widget.songs.forEach((s) {
-      if (s.title.toLowerCase().contains(textToLowerCase)) searchResults2.add(s);
+      if (s.title.toLowerCase().contains(textToLowerCase))
+        searchResults2.add(s);
       // setState(() {});
     });
 
@@ -1449,8 +1550,10 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             onPressed: () {
               setState(() {
-                if ((searchkeyword.text != null) && (searchkeyword.text.length > 0)) {
-                  searchkeyword.text = searchkeyword.text.substring(0, searchkeyword.text.length - 1);
+                if ((searchkeyword.text != null) &&
+                    (searchkeyword.text.length > 0)) {
+                  searchkeyword.text = searchkeyword.text
+                      .substring(0, searchkeyword.text.length - 1);
                   searchKeyWord = searchkeyword.text;
                 }
               });
@@ -1494,7 +1597,10 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: EdgeInsets.all(1.0),
             child: Text(
               'space',
-              style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 17.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
             onPressed: () {
               buttonPressed(' ');

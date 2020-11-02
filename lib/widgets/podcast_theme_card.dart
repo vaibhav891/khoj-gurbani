@@ -408,7 +408,7 @@ class _PodcastThemeCardState extends State<PodcastThemeCard>
                         );
                         await DBProvider.db.newDownload(newDT);
                       },
-                      onError: () => print(
+                      onError: (_) => print(
                           'Something went wrong, download returned error'),
                     );
                   },

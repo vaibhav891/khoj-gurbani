@@ -313,7 +313,7 @@ class _PodcastThreeDotsState extends State<PodcastThreeDots> {
                                 // call api to notify server of new download
                                 podcastDownload(widget.id);
                               },
-                              onError: () => print(
+                              onError: (_) => print(
                                   'Something went wrong, download returned error'),
                             );
                             Navigator.of(context).pop();
